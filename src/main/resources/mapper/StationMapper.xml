@@ -4,7 +4,7 @@
 <mapper namespace="com.pingchuan.weather.Mapper.StationMapper">
 
     <select id="findAllByDepart" resultType="com.pingchuan.weather.entity.Station">
-        SELECT * FROM ForcastStationMap where DepartmentId = #{departmentId}
+        SELECT * FROM Station where DepartmentId = #{departmentId}
     </select>
 
 </mapper>

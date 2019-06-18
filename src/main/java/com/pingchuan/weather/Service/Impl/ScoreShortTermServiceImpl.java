@@ -167,32 +167,32 @@ public class ScoreShortTermServiceImpl implements ScoreShortTermService {
             CalcRate calcRate = new CalcRate();
             for (ScoreShortTerm scoreShortTerm : scoreShortTermList){
                 if (scoreShortTerm.getRainDay1() != 0){
-                    if (scoreShortTerm.getRainDay1() ==2 || scoreShortTerm.getRainDay1() == 4)
+                    if (scoreShortTerm.getRainDay1() ==1 || scoreShortTerm.getRainDay1() == 4)
                         calcRate.addSuccessCount();
                     calcRate.addCount();
                 }
                 if (scoreShortTerm.getRainDay2() != 0){
-                    if (scoreShortTerm.getRainDay2() ==2 || scoreShortTerm.getRainDay2() == 4)
+                    if (scoreShortTerm.getRainDay2() ==1 || scoreShortTerm.getRainDay2() == 4)
                         calcRate.addSuccessCount();
                     calcRate.addCount();
                 }
                 if (scoreShortTerm.getRainLevelValue1() != 0){
-                    if (scoreShortTerm.getRainLevelValue1() ==2 || scoreShortTerm.getRainLevelValue1() == 4)
+                    if (scoreShortTerm.getRainLevelValue1() ==1 || scoreShortTerm.getRainLevelValue1() == 4)
                         calcRate.addSuccessCount();
                     calcRate.addCount();
                 }
                 if (scoreShortTerm.getRainLevelValue2() != 0){
-                    if (scoreShortTerm.getRainLevelValue2() ==2 || scoreShortTerm.getRainLevelValue2() == 4)
+                    if (scoreShortTerm.getRainLevelValue2() ==1 || scoreShortTerm.getRainLevelValue2() == 4)
                         calcRate.addSuccessCount();
                     calcRate.addCount();
                 }
                 if (scoreShortTerm.getRainStormValue1() != 0){
-                    if (scoreShortTerm.getRainStormValue1() ==2 || scoreShortTerm.getRainStormValue1() == 4)
+                    if (scoreShortTerm.getRainStormValue1() ==1 || scoreShortTerm.getRainStormValue1() == 4)
                         calcRate.addSuccessCount();
                     calcRate.addCount();
                 }
                 if (scoreShortTerm.getRainStormValue2() != 0){
-                    if (scoreShortTerm.getRainStormValue2() ==2 || scoreShortTerm.getRainStormValue2() == 4)
+                    if (scoreShortTerm.getRainStormValue2() ==1 || scoreShortTerm.getRainStormValue2() == 4)
                         calcRate.addSuccessCount();
                     calcRate.addCount();
                 }

@@ -15,4 +15,15 @@ public class Station {
 
     private int stationCode;
 
+    private String stationName;
+
+    private float longitude;
+
+    private float latitude;
+
+    private float altitude;
+
+    private String county;
+
+    private int orderId;
 }
