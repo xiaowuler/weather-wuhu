@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge" >
+    <title>系统管理</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/laydate.css">
+    <link rel="stylesheet" href="css/system.css">
+</head>
+<body>
+<div class="box">
+    <div class="top">
+        <div class="top-logo">
+            <div class="width1200">
+                <img src="images/top-logo.png">
+            </div>
+        </div>
+        <div class="nav">
+            <div class="width1200 clearfix">
+                <ul class="clearfix fl">
+                    <li><a href="index.html">预警信号</a></li>
+                    <li><a href="short.html">短临预报</a></li>
+                    <li><a href="forecast.html">短期预报</a></li>
+                    <li class="action"><a href="system.html">系统管理</a></li>
+                </ul>
+                <div class="top-info fr">
+                    <div class="top-user">欢迎，<span id="name">罗小武</span>[ <span id="level">超级管理员</span> ]</div>
+                    <button class="quit-button">退出</button>
+                </div>
+            </div>
+        </div>
+        <div class="system width1200">
+            <table class="system-table">
+                <tr>
+                    <th>用户名</th>
+                    <th>姓名</th>
+                    <th>单位</th>
+                    <th>用户类型</th>
+                    <th>审核结果</th>
+                    <th>重置密码</th>
+                    <th>保存修改</th>
+                </tr>
+                <tr>
+                    <td>admin</td>
+                    <td>张山</td>
+                    <td width="172">
+                        <select>
+                            <option value="省气象局">省气象局</option>
+                            <option value="铜陵市气象局">铜陵市气象局</option>
+                            <option value="合肥市气象局">合肥市气象局</option>
+                        </select>
+                    </td>
+                    <td width="172">超级管理员</td>
+                    <td>
+                        <i class="result"></i>
+                    </td>
+                    <td><button class="system-btn reset">重置</button></td>
+                    <td><button class="system-btn save">保存</button></td>
+                </tr>
+                <tr>
+                    <td>admin123</td>
+                    <td>李四</td>
+                    <td width="172">
+                        <select>
+                            <option value="省气象局">省气象局</option>
+                            <option value="铜陵市气象局">铜陵市气象局</option>
+                            <option value="合肥市气象局">合肥市气象局</option>
+                        </select>
+                    </td>
+                    <td width="172">
+                        <select>
+                            <option value="管理员">管理员</option>
+                            <option value="普通用户">普通用户</option>
+                        </select>
+                    </td>
+                    <td><i class="result"></i></td>
+                    <td><button class="system-btn reset">重置</button></td>
+                    <td><button class="system-btn save">保存</button></td>
+                </tr>
+                <tr>
+                    <td>456789</td>
+                    <td>王二</td>
+                    <td width="172">
+                        <select>
+                            <option value="省气象局">省气象局</option>
+                            <option value="铜陵市气象局">铜陵市气象局</option>
+                            <option value="合肥市气象局">合肥市气象局</option>
+                        </select>
+                    </td>
+                    <td width="172">
+                        <select>
+                            <option value="管理员">管理员</option>
+                            <option value="普通用户">普通用户</option>
+                        </select>
+                    </td>
+                    <td><i class="result"></i></td>
+                    <td><button class="system-btn reset">重置</button></td>
+                    <td><button class="system-btn save">保存</button></td>
+                </tr>
+                <tr>
+                    <td>admin123</td>
+                    <td>李四</td>
+                    <td width="172">
+                        <select>
+                            <option value="省气象局">省气象局</option>
+                            <option value="铜陵市气象局">铜陵市气象局</option>
+                            <option value="合肥市气象局">合肥市气象局</option>
+                        </select>
+                    </td>
+                    <td width="172">
+                        <select>
+                            <option value="管理员">管理员</option>
+                            <option value="普通用户">普通用户</option>
+                        </select>
+                    </td>
+                    <td><i class="result"></i></td>
+                    <td><button class="system-btn reset">重置</button></td>
+                    <td><button class="system-btn save">保存</button></td>
+                </tr>
+                <tr>
+                    <td>456789</td>
+                    <td>王二</td>
+                    <td width="172">
+                        <select>
+                            <option value="省气象局">省气象局</option>
+                            <option value="铜陵市气象局">铜陵市气象局</option>
+                            <option value="合肥市气象局">合肥市气象局</option>
+                        </select>
+                    </td>
+                    <td width="172">
+                        <select>
+                            <option value="管理员">管理员</option>
+                            <option value="普通用户">普通用户</option>
+                        </select>
+                    </td>
+                    <td><i class="result"></i></td>
+                    <td><button class="system-btn reset">重置</button></td>
+                    <td><button class="system-btn save">保存</button></td>
+                </tr>
+                <tr>
+                    <td>admin123</td>
+                    <td>李四</td>
+                    <td width="172">
+                        <select>
+                            <option value="省气象局">省气象局</option>
+                            <option value="铜陵市气象局">铜陵市气象局</option>
+                            <option value="合肥市气象局">合肥市气象局</option>
+                        </select>
+                    </td>
+                    <td width="172">
+                        <select>
+                            <option value="管理员">管理员</option>
+                            <option value="普通用户">普通用户</option>
+                        </select>
+                    </td>
+                    <td><i class="result"></i></td>
+                    <td><button class="system-btn reset">重置</button></td>
+                    <td><button class="system-btn save">保存</button></td>
+                </tr>
+                <tr>
+                    <td>456789</td>
+                    <td>王二</td>
+                    <td width="172">
+                        <select>
+                            <option value="省气象局">省气象局</option>
+                            <option value="铜陵市气象局">铜陵市气象局</option>
+                            <option value="合肥市气象局">合肥市气象局</option>
+                        </select>
+                    </td>
+                    <td width="172">
+                        <select>
+                            <option value="管理员">管理员</option>
+                            <option value="普通用户">普通用户</option>
+                        </select>
+                    </td>
+                    <td><i class="result"></i></td>
+                    <td><button class="system-btn reset">重置</button></td>
+                    <td><button class="system-btn save">保存</button></td>
+                </tr>
+                <tr>
+                    <td>admin123</td>
+                    <td>李四</td>
+                    <td width="172">
+                        <select>
+                            <option value="省气象局">省气象局</option>
+                            <option value="铜陵市气象局">铜陵市气象局</option>
+                            <option value="合肥市气象局">合肥市气象局</option>
+                        </select>
+                    </td>
+                    <td width="172">
+                        <select>
+                            <option value="管理员">管理员</option>
+                            <option value="普通用户">普通用户</option>
+                        </select>
+                    </td>
+                    <td><i class="result"></i></td>
+                    <td><button class="system-btn reset">重置</button></td>
+                    <td><button class="system-btn save">保存</button></td>
+                </tr>
+                <tr>
+                    <td>456789</td>
+                    <td>王二</td>
+                    <td width="172">
+                        <select>
+                            <option value="省气象局">省气象局</option>
+                            <option value="铜陵市气象局">铜陵市气象局</option>
+                            <option value="合肥市气象局">合肥市气象局</option>
+                        </select>
+                    </td>
+                    <td width="172">
+                        <select>
+                            <option value="管理员">管理员</option>
+                            <option value="普通用户">普通用户</option>
+                        </select>
+                    </td>
+                    <td><i class="result"></i></td>
+                    <td><button class="system-btn reset">重置</button></td>
+                    <td><button class="system-btn save">保存</button></td>
+                </tr>
+                <tr>
+                    <td>admin123</td>
+                    <td>李四</td>
+                    <td width="172">
+                        <select>
+                            <option value="省气象局">省气象局</option>
+                            <option value="铜陵市气象局">铜陵市气象局</option>
+                            <option value="合肥市气象局">合肥市气象局</option>
+                        </select>
+                    </td>
+                    <td width="172">
+                        <select>
+                            <option value="管理员">管理员</option>
+                            <option value="普通用户">普通用户</option>
+                        </select>
+                    </td>
+                    <td><i class="result"></i></td>
+                    <td><button class="system-btn reset">重置</button></td>
+                    <td><button class="system-btn save">保存</button></td>
+                </tr>
+                <tr>
+                    <td>456789</td>
+                    <td>王二</td>
+                    <td width="172">
+                        <select>
+                            <option value="省气象局">省气象局</option>
+                            <option value="铜陵市气象局">铜陵市气象局</option>
+                            <option value="合肥市气象局">合肥市气象局</option>
+                        </select>
+                    </td>
+                    <td width="172">
+                        <select>
+                            <option value="管理员">管理员</option>
+                            <option value="普通用户">普通用户</option>
+                        </select>
+                    </td>
+                    <td><i class="result"></i></td>
+                    <td><button class="system-btn reset">重置</button></td>
+                    <td><button class="system-btn save">保存</button></td>
+                </tr>
+                <tr>
+                    <td>admin123</td>
+                    <td>李四</td>
+                    <td width="172">
+                        <select>
+                            <option value="省气象局">省气象局</option>
+                            <option value="铜陵市气象局">铜陵市气象局</option>
+                            <option value="合肥市气象局">合肥市气象局</option>
+                        </select>
+                    </td>
+                    <td width="172">
+                        <select>
+                            <option value="管理员">管理员</option>
+                            <option value="普通用户">普通用户</option>
+                        </select>
+                    </td>
+                    <td><i class="result"></i></td>
+                    <td><button class="system-btn reset">重置</button></td>
+                    <td><button class="system-btn save">保存</button></td>
+                </tr>
+                <tr>
+                    <td>456789</td>
+                    <td>王二</td>
+                    <td width="172">
+                        <select>
+                            <option value="省气象局">省气象局</option>
+                            <option value="铜陵市气象局">铜陵市气象局</option>
+                            <option value="合肥市气象局">合肥市气象局</option>
+                        </select>
+                    </td>
+                    <td width="172">
+                        <select>
+                            <option value="管理员">管理员</option>
+                            <option value="普通用户">普通用户</option>
+                        </select>
+                    </td>
+                    <td><i class="result"></i></td>
+                    <td><button class="system-btn reset">重置</button></td>
+                    <td><button class="system-btn save">保存</button></td>
+                </tr>
+                <tr>
+                    <td>admin123</td>
+                    <td>李四</td>
+                    <td width="172">
+                        <select>
+                            <option value="省气象局">省气象局</option>
+                            <option value="铜陵市气象局">铜陵市气象局</option>
+                            <option value="合肥市气象局">合肥市气象局</option>
+                        </select>
+                    </td>
+                    <td width="172">
+                        <select>
+                            <option value="管理员">管理员</option>
+                            <option value="普通用户">普通用户</option>
+                        </select>
+                    </td>
+                    <td><i class="result"></i></td>
+                    <td><button class="system-btn reset">重置</button></td>
+                    <td><button class="system-btn save">保存</button></td>
+                </tr>
+                <tr>
+                    <td>456789</td>
+                    <td>王二</td>
+                    <td width="172">
+                        <select>
+                            <option value="省气象局">省气象局</option>
+                            <option value="铜陵市气象局">铜陵市气象局</option>
+                            <option value="合肥市气象局">合肥市气象局</option>
+                        </select>
+                    </td>
+                    <td width="172">
+                        <select>
+                            <option value="管理员">管理员</option>
+                            <option value="普通用户">普通用户</option>
+                        </select>
+                    </td>
+                    <td><i class="result"></i></td>
+                    <td><button class="system-btn reset">重置</button></td>
+                    <td><button class="system-btn save">保存</button></td>
+                </tr>
+                <tr>
+                    <td>admin123</td>
+                    <td>李四</td>
+                    <td width="172">
+                        <select>
+                            <option value="省气象局">省气象局</option>
+                            <option value="铜陵市气象局">铜陵市气象局</option>
+                            <option value="合肥市气象局">合肥市气象局</option>
+                        </select>
+                    </td>
+                    <td width="172">
+                        <select>
+                            <option value="管理员">管理员</option>
+                            <option value="普通用户">普通用户</option>
+                        </select>
+                    </td>
+                    <td><i class="result"></i></td>
+                    <td><button class="system-btn reset">重置</button></td>
+                    <td><button class="system-btn save">保存</button></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td width="172"></td>
+                    <td width="172"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td width="172"></td>
+                    <td width="172"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td width="172"></td>
+                    <td width="172"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <div class="page fr">
+                <div class="pagination fl">
+                    <a href="javascript:;" class="arrow prev"><img src="images/prev.png"></a>
+                    <a href="javascript:;" class="arrow next"><img src="images/next.png"></a>
+                    <ul class="clearfix">
+                        <li class="action"><a href="javascript:;">1</a></li>
+                        <li><a href="javascript:;">2</a></li>
+                        <li><a href="javascript:;">3</a></li>
+                        <li><a href="javascript:;">4</a></li>
+                        <li><a href="javascript:;">5</a></li>
+                    </ul>
+                </div>
+                <div class="number fl">共<em>5</em>页</div>
+            </div>
+        </div>
+    </div>
+    <div class="dialog dialog-save">保存成功</div>
+    <div class="dialog dialog-reset">设置密码成功</div>
+    <div class="message">
+        <div class="message-content">
+            <div class="message-txt">
+                <h2>信息提示</h2>
+                <i class="cancel"></i>
+            </div>
+            <form>
+                <div class="sign-content">
+                    <label><img src="images/password.png"></label>
+                    <input type="password" class="password" placeholder="请输入密码">
+                    <i class="remove"></i>
+                </div>
+                <div class="sign-content">
+                    <label><img src="images/password.png"></label>
+                    <input type="password" class="password" placeholder="请再次输入密码">
+                    <i class="remove"></i>
+                </div>
+                <div class="set clearfix">
+                    <input type="button" class="btn-sure fl" value="确定">
+                    <input type="button" class="btn-cancel fr" value="取消">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="bg"></div>
+</div>
+</body>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/calendar.js"></script>
+</html>

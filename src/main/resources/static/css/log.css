@@ -1,0 +1,143 @@
+.log{
+    background: url("../images/bg.jpg") no-repeat center/cover;
+}
+.logo{
+    width: 100%;
+    position: absolute;
+    top:30px;
+    left:30px;
+}
+.logo-title{
+    position: absolute;
+    top:0;
+    left:70px;
+}
+.logo-title h2{
+    color: #fefefe;
+    font-size: 26px;
+}
+.logo-title h3{
+    color: #fefefe;
+    font-size: 13px;
+}
+.sign-up{
+    width: 500px;
+    position: absolute;
+    top:50%;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    background: #ffffff;
+}
+.sign-up form{
+    width: 360px;
+    margin: 0 auto;
+}
+.login{
+    height:445px;
+    margin-top: -222px;
+    padding-top: 60px;
+}
+.register{
+    height: 484px;
+    margin-top: -242px;
+    padding-top: 30px;
+    display: none;
+}
+.log-content{
+    width: 500px;
+    margin-right: 50px;
+    float: right;
+}
+.sign-content{
+    width: 100%;
+    height: 100%;
+    margin-top: 40px;
+    position: relative;
+    display: table;
+}
+.sign-content label{
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    background: #3268d2;
+}
+.sign-content input,
+.drop-down{
+    width: 320px;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 15px;
+    border:1px solid #e0e0e0;
+    border-left:0;
+    -webkit-box-shadow: 2px 0 5px rgba(0,0,0,0.04);
+    -moz-box-shadow:  2px 0 5px rgba(0,0,0,0.04);
+    box-shadow:  2px 0 5px rgba(0,0,0,0.04);
+    color: #666666;
+    font-size: 14px;
+}
+.remove{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top:10px;
+    right: 10px;
+    background: url("../images/close.png") no-repeat;
+}
+.sign-btn{
+    width: 100%;
+    height: 40px;
+    margin-top: 60px;
+    text-align: center;
+}
+.sign-btn input{
+    width: 100%;
+    height: 40px;
+    color: #ffffff;
+    font-size: 16px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    background: url("../images/btn-bg.jpg") repeat-x;
+}
+.switch{
+    margin-top: 6px;
+    color: #3269d0;
+    font-size: 14px;
+}
+.register .sign-content{
+    margin-top: 20px;
+}
+.register .sign-btn{
+    margin-top: 40px;
+}
+.drop-down{
+    position: relative;
+    padding-left: 0;
+}
+.drop-down .select-box{
+    width: 100%;
+    padding-left: 15px;
+}
+.drop-down .select-box:after{
+    height: 38px;
+    right: 30px;
+}
+.drop-down .select-show{
+    height: 38px;
+    padding-left: 0;
+    line-height: 38px;
+    border: 0;
+    position: relative;
+}
+.drop-down .select-show:after{
+    top: 15px;
+    right: 9px;
+}
+.drop-down .select-option{
+    top:38px;
+    left: 1px;
+}

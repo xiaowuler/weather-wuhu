@@ -1,0 +1,183 @@
+.system-table{
+    width: 100%;
+    text-align: center;
+}
+.system-table th{
+    height: 40px;
+    color: #ffffff;
+    background: url('../images/nav-bg.jpg') repeat-x;
+    background-size: 100% 40px;
+}
+.system-table td{
+    height: 43px;
+    border-width: 0 1px 1px 0;
+    border-style: solid;
+    border-color: #e0e0e0;
+    background: #f6f6f6;
+}
+.system-table tr td:first-child{
+    border-left: 1px solid #e0e0e0;
+}
+.system-table tr:nth-of-type(2n) td{
+    background: #ffffff;
+}
+.system-btn{
+    width: 46px;
+    height: 28px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    color: #ffffff;
+    cursor: pointer;
+    background: url("../images/system-bg.jpg") repeat-x;
+}
+.result{
+    width: 21px;
+    height: 21px;
+    margin: 0 auto;
+    display: block;
+    cursor: pointer;
+    background: url("../images/check.png") no-repeat;
+}
+.result-action{
+    background: url("../images/checked.png") no-repeat;
+}
+.page{
+    height: 22px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+.pagination{
+    width: 174px;
+    position: relative;
+}
+.pagination ul{
+    margin: 0 auto;
+    display: table;
+}
+.pagination ul li{
+    width: 22px;
+    height: 22px;
+    margin-right: 2px;
+    line-height: 22px;
+    float: left;
+    text-align: center;
+    background: url(../images/nav-bg.jpg) repeat-x;
+    background-size: 100% 22px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.pagination ul li.action{
+    background: url(../images/system-bg.jpg) repeat-x;
+}
+.pagination ul li a{
+    color: #ffffff;
+    font-size: 12px;
+}
+.arrow{
+    position: absolute;
+    top:4px;
+}
+.prev{
+    left:0;
+}
+.next{
+    right: 0;
+}
+.number{
+    margin-left: 10px;
+    line-height: 22px;
+    font-size: 12px;
+}
+.dialog{
+    width: 130px;
+    height: 40px;
+    margin: -20px 0 0 -65px;
+    line-height: 40px;
+    text-align: center;
+    position: fixed;
+    top:50%;
+    left: 50%;
+    z-index: 99;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    color: #ffffff;
+    background: rgba(0,0,0,0.6);
+}
+.dialog-save,
+.dialog-reset{
+    display: none;
+}
+.bg{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0;
+    left:0;
+    right: 0;
+    z-index: 90;
+    background: rgba(0,0,0,0.5);
+    display: none;
+}
+.message{
+    width: 418px;
+    height: 312px;
+    margin: -156px 0 0 -209px;
+    position: fixed;
+    top:50%;
+    left:50%;
+    z-index: 99;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    background: #ffffff;
+    display: none;
+}
+.message-content{
+    width: 358px;
+    margin: 15px auto 0 auto;
+}
+.message-content .sign-content{
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+.message-txt{
+    margin-bottom: 40px;
+    padding-bottom: 15px;
+    position: relative;
+    border-bottom: 1px solid #e0e0e0;
+}
+.message-txt h2{
+    font-size: 16px;
+}
+
+.cancel{
+    width: 18px;
+    height: 18px;
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    top:2px;
+    right: 0;
+    background: url("../images/cancel.png") no-repeat;
+}
+.set input{
+    width: 170px;
+    height: 40px;
+    margin-top: 20px;
+    display: block;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+}
+.set input.btn-sure{
+    background: url(../images/btn-bg.jpg) repeat-x;
+}
+.set input.btn-cancel{
+    background: #d8d8d8;
+}

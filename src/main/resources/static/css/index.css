@@ -1,0 +1,97 @@
+
+.sheet{
+    margin: 38px 0 20px 0;
+}
+.sheet-content{
+    margin-bottom: 40px;
+    text-align: center;
+}
+.sheet-content h2{
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+.download{
+    float: right;
+    color: #3269d0;
+    font-size: 16px;
+}
+.statement h2{
+    margin-bottom: 5px;
+    text-align: center;
+    color: #000000;
+    font-size: 20px;
+}
+.statement p{
+    text-align: center;
+    color: #000000;
+    font-size: 18px;
+}
+.table{
+    margin: 20px 0 25px 0;
+    border-top: 1px solid #cfcfcf;
+}
+.table td,
+.table th{
+    border-width: 0 1px 1px 0;
+    border-style: solid;
+    border-color: #cfcfcf;
+    vertical-align: middle;
+    text-align: center;
+}
+.table td{
+    height: 40px;
+}
+.table th{
+    height: 30px;
+}
+.table th,
+.table tr:nth-of-type(3) td:first-child{
+    color: #3a3a3a;
+    font-size: 16px;
+    font-weight: normal;
+    border-left: 1px solid #cfcfcf;
+}
+.audit{
+    margin-bottom: 90px;
+    color: #3a3a3a;
+    font-size: 16px;
+}
+.audit em{
+    margin: 0 10px 0 5px;
+    display: inline-block;
+}
+.audit span{
+    width: 70px;
+    height: 20px;
+    display: inline-block;
+    border-bottom: 1px solid #cfcfcf;
+}
+.score{
+    width: 100%;
+    margin-top: 35px;
+}
+.score img{
+    width: 100%;
+}
+.score-table{
+    width: 100%;
+    margin-top: 45px;
+    text-align: center;
+}
+.score-table th,
+.score-table td{
+    height: 40px;
+    border-width: 0 1px 1px 0;
+    border-style: solid;
+    border-color: #ffffff;
+    vertical-align: middle;
+}
+.score-table th{
+    color: #ffffff;
+    background: url(../images/nav-bg.jpg) repeat-x;
+    background-size: 100% 40px;
+}
+.score-table td{
+    background: #e2f2ff;
+}
+

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--客户映射 指定到dao接口 -->
+<mapper namespace="com.pingchuan.weather.Mapper.DepartmentMapper">
+
+    <select id="findOneById" resultType="com.pingchuan.weather.entity.Department">
+        SELECT ID as id, Name as name, ParentID as parentId, OrderId as orderId, Property as property, TimeClass as timeClass FROM Department where ID = #{id}
+    </select>
+
+    <select id="findAllByParentId" resultType="com.pingchuan.weather.entity.Department">
+        SELECT ID as id, Name as name, ParentID as parentId, OrderId as orderId, Property as property, TimeClass as timeClass FROM Department where ParentId = #{parentId}
+    </select>
+    
+</mapper>
