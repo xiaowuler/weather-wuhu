@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="IE=edge" >
     <title>短期预报</title>
+    <link rel="stylesheet" href="plug/easyui.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/laydate.css">
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
@@ -43,51 +43,59 @@
                 </div>
                 <div class="time fl">
                     <span class="subtitle">开始时间</span>
-                    <input class="laydate-icon" id="start-time" value="" onclick="laydate({istime: true,format:'YYYY/MM/DD'})" readonly="readonly">
+                    <input class="easyui-datebox" id="start-time" data-options="editable:false" value=" ">
                 </div>
                 <div class="time fl">
                     <span class="subtitle">结束时间</span>
-                    <input class="laydate-icon" id="end-time" value="" onclick="laydate({istime: true,format:'YYYY/MM/DD'})" readonly="readonly">
+                    <input class="easyui-datebox" id="end-time" data-options="editable:false" value=" ">
                 </div>
                 <div class="choose fl">
                     <span class="subtitle fl">时效</span>
-                    <div class="choose-content fl">
-                        <select>
-                            <option>请选择</option>
-                            <option value="暴雨">24小时</option>
-                            <option value="48小时">48小时</option>
-                            <option value="72小时">72小时</option>
+                    <div class="choose-content choose-aging fl">
+                        <select class="easyui-combobox" id="aging">
+                            <option value="24">24小时</option>
+                            <option value="48">48小时</option>
+                            <option value="72">72小时</option>
+                            <option value="96">96小时</option>
+                            <option value="120">120小时</option>
+                            <option value="144">144小时</option>
                         </select>
                     </div>
                 </div>
                 <div class="choose fl">
                     <span class="subtitle fl">考核对象</span>
-                    <div class="choose-content fl">
-                        <select>
-                            <option>请选择</option>
-                            <option value="省台指导">省台指导</option>
-                            <option value="地市订正">地市订正</option>
+                    <div class="choose-content choose-object fl">
+                        <select class="easyui-combobox" id="check-object">
+                            <option value="201">省台指导</option>
+                            <option value="202">地市订正</option>
                         </select>
                     </div>
                 </div>
                 <div class="choose fl">
                     <span class="subtitle fl">考核区域</span>
-                    <div class="choose-content fl">
-                        <select>
-                            <option>请选择</option>
-                            <option value="合肥市气象局">合肥市气象局</option>
-                            <option value="芜湖市气象局">芜湖市气象局</option>
-                            <option value="马鞍山市气象局">马鞍山市气象局</option>
-                        </select>
+                    <div class="choose-content choose-area fl">
+                        <select class="easyui-combobox" id="check-area"></select>
                     </div>
                 </div>
             </div>
             <div class="wrap">
                 <div class="wrap-content" style="display: block;">
-                    <div class="score">
-                        <img src="images/score34.png">
-                    </div>
+                    <div class="score" id="department-chart"></div>
                     <table class="score-table">
+                        <tr id="city">
+                            <th>单位</th>
+                        </tr>
+                        <tr id="score">
+                            <td>得分</td>
+                        </tr>
+                        <tr id="sample">
+                            <td>样本数</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="wrap-content">
+                    <div class="score" id="project-chart"></div>
+                    <table class="score-table" id="project-table">
                         <tr>
                             <th>时效</th>
                             <th>晴雨雪</th>
@@ -100,99 +108,11 @@
                             <th>高温≤2</th>
                             <th>综合评分</th>
                         </tr>
-                        <tr>
-                            <td>72时次</td>
-                            <td>74.72%</td>
-                            <td>74.72%</td>
-                            <td>74.72%</td>
-                            <td>74.72%</td>
-                            <td>74.72%</td>
-                            <td>74.72%</td>
-                            <td>74.72%</td>
-                            <td>74.72%</td>
-                            <td>74.72%</td>
+                        <tr id="number">
+                            <td class="table-title"><span id="time">24</span>时次</td>
                         </tr>
-                        <tr>
-                            <td>样本数</td>
-                            <td>3237/4332</td>
-                            <td>3237/4332</td>
-                            <td>3237/4332</td>
-                            <td>3237/4332</td>
-                            <td>3237/4332</td>
-                            <td>3237/4332</td>
-                            <td>3237/4332</td>
-                            <td>3237/4332</td>
-                            <td>3237/4332</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="wrap-content">
-                    <div class="score">
-                        <img src="images/score.png">
-                    </div>
-                    <table class="score-table">
-                        <tr>
-                            <th>单位</th>
-                            <th>芜湖</th>
-                            <th>马鞍山</th>
-                            <th>合肥</th>
-                            <th>六安</th>
-                            <th>滁州</th>
-                            <th>宿州</th>
-                            <th>淮南</th>
-                            <th>九华山处</th>
-                            <th>黄山处</th>
-                            <th>蚌埠</th>
-                            <th>亳州</th>
-                            <th>宣城</th>
-                            <th>铜陵</th>
-                            <th>池州</th>
-                            <th>安庆</th>
-                            <th>黄山</th>
-                            <th>阜阳</th>
-                            <th>淮北</th>
-                        </tr>
-                        <tr>
-                            <td>得分</td>
-                            <td>84.00</td>
-                            <td>84.00</td>
-                            <td>84.00</td>
-                            <td>84.00</td>
-                            <td>84.00</td>
-                            <td>84.00</td>
-                            <td>84.00</td>
-                            <td>84.00</td>
-                            <td>49.3</td>
-                            <td>84.00</td>
-                            <td>84.00</td>
-                            <td>84.00</td>
-                            <td>84.00</td>
-                            <td>84.00</td>
-                            <td>84.00</td>
-                            <td>84.00</td>
-                            <td>84.00</td>
-                            <td>84.00</td>
-                        </tr>
-                        <tr>
-                            <td>样本数</td>
-                            <td>215/280</td>
-                            <td>215/280</td>
-                            <td>215/280</td>
-                            <td>215/280</td>
-                            <td>215/280</td>
-                            <td>215/280</td>
-                            <td>215/280</td>
-                            <td>215/280</td>
-                            <td>215/280</td>
-                            <td>215/280</td>
-                            <td>215/280</td>
-                            <td>215/280</td>
-                            <td>215/280</td>
-                            <td>215/280</td>
-                            <td>215/280</td>
-                            <td>215/280</td>
-                            <td>215/280</td>
-                            <td>215/280</td>
+                        <tr id="project-sample">
+                            <td class="table-title">样本数</td>
                         </tr>
                     </table>
                 </div>
@@ -202,6 +122,12 @@
 </div>
 </body>
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
-<script type="text/javascript" src="js/calendar.js"></script>
+<script type="text/javascript" src="plug/moment.min.js"></script>
+<script type="text/javascript" src="plug/helper.js"></script>
+<script type="text/javascript" src="plug/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="plug/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="plug/highcharts.js"></script>
+<script type="text/javascript" src="js/forecast/forecast.js"></script>
+<script type="text/javascript" src="js/forecast/department.js"></script>
+<script type="text/javascript" src="js/forecast/project.js"></script>
 </html>

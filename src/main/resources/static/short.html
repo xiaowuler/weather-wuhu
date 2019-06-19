@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="IE=edge" >
     <title>短临预报</title>
+    <link rel="stylesheet" href="plug/easyui.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/laydate.css">
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
@@ -43,16 +43,16 @@
                 </div>
                 <div class="time fl">
                     <span class="subtitle">开始时间</span>
-                    <input class="laydate-icon" id="start-time" value="" onclick="laydate({istime: true,format:'YYYY/MM/DD'})" readonly="readonly">
+                    <input class="easyui-datebox" id="start-time" data-options="editable:false" value=" ">
                 </div>
                 <div class="time fl">
                     <span class="subtitle">结束时间</span>
-                    <input class="laydate-icon" id="end-time" value="" onclick="laydate({istime: true,format:'YYYY/MM/DD'})" readonly="readonly">
+                    <input class="easyui-datebox" id="end-time" data-options="editable:false" value=" ">
                 </div>
                 <div class="choose fr">
                     <span class="subtitle fl">单位</span>
                     <div class="choose-content fl">
-                        <select>
+                        <select class="easyui-combobox">
                             <option>请选择</option>
                             <option value="芜湖气象局">芜湖气象局</option>
                             <option value="马鞍山市气象局">马鞍山市气象局</option>
@@ -63,7 +63,7 @@
                 <div class="choose fr">
                     <span class="subtitle fl">天气类型</span>
                     <div class="choose-content fl">
-                        <select>
+                        <select class="easyui-combobox">
                             <option>请选择</option>
                             <option value="短时强降水">短时强降水</option>
                             <option value="大风冰雹">大风冰雹</option>
@@ -166,6 +166,10 @@
 </div>
 </body>
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="plug/moment.min.js"></script>
+<script type="text/javascript" src="plug/helper.js"></script>
+<script type="text/javascript" src="plug/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="plug/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="js/short.js"></script>
-<script type="text/javascript" src="js/calendar.js"></script>
 </html>
