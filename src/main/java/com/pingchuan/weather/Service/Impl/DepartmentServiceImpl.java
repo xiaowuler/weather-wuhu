@@ -24,7 +24,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public List<Department> findAllByCity() {
         Department department = departmentMapper.findOneById(1);
-        ArrayList<Department> departments = (ArrayList)departmentMapper.findAllByParentId(department.getId());
+        List<Department> departments = departmentMapper.findAllByParentId(department.getId());
         departments.add(0, department);
         return departments;
     }
