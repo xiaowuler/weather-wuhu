@@ -14,7 +14,7 @@ var Department = function (parent) {
     this.GetChartXMarks = function () {
         var marks = [];
 
-        this.result.departments.forEach(function (item, index) {
+        this.result.departmentDTOS.forEach(function (item, index) {
             var name = item.name;
             marks.push(name)
         }.bind(this));
@@ -25,7 +25,7 @@ var Department = function (parent) {
     this.GetChartElementValues = function () {
         var values = [];
 
-        this.result.departments.forEach(function (value) {
+        this.result.departmentDTOS.forEach(function (value) {
             values.push(value.totalRate);
         }.bind(this));
 
@@ -76,7 +76,7 @@ var Department = function (parent) {
 
     this.ShowDepartmentTable = function (data) {
         $('#department-table').find('tr th,tr td').not('.table-title').remove();
-        data.departments.forEach(function (item) {
+        data.departmentDTOS.forEach(function (item) {
 
             var name = '<th>{0}</th>';
             var score = '<td>{0}</td>';
