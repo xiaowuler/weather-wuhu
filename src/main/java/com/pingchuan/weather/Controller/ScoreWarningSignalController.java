@@ -1,5 +1,10 @@
 package com.pingchuan.weather.Controller;
 
+import com.pingchuan.weather.DTO.ScoreWarningSignalDTO;
+import com.pingchuan.weather.Service.ScoreWarningSignalService;
+import com.pingchuan.weather.entity.ScoreWarningSignal;
+import org.apache.ibatis.annotations.Arg;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,9 +21,17 @@ import java.util.Date;
 @RequestMapping("/ScoreWarningSignal")
 public class ScoreWarningSignalController {
 
-    @PostMapping("/findAllByTimeAndRegionByDepartment")
-    public void findAllByTimeAndRegionByDepartment(Date startTime, Date endTime, int fcstHours, int examId, int departmentId){
+    @Autowired
+    private ScoreWarningSignalService scoreWarningSignalService;
 
+    @PostMapping("/findAllByTimeAndRegionByDepartment")
+    public ScoreWarningSignalDTO findAllByTimeAndRegionByDepartment(Date startTime, Date endTime, String warningType, int departmentId){
+        return scoreWarningSignalService.findAllByTimeAndRegionByDepartment(startTime, endTime, warningType, departmentId);
+    }
+
+    @PostMapping("/findAllByTimeAndRegionByProduct")
+    public ScoreWarningSignalDTO findAllByTimeAndRegionByProduct(Date startTime, Date endTime, String warningType, int departmentId){
+        return scoreWarningSignalService.findAllByTimeAndRegionByProduct(startTime, endTime, warningType, departmentId);
     }
 
 }

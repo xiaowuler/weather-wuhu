@@ -1,4 +1,4 @@
-package com.pingchuan.weather.entity;
+package com.pingchuan.weather.Util;
 
 import lombok.Data;
 

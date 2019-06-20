@@ -6,7 +6,7 @@ import com.pingchuan.weather.Mapper.DepartmentMapper;
 import com.pingchuan.weather.Mapper.ScoreShortTermMapper;
 import com.pingchuan.weather.Mapper.StationMapper;
 import com.pingchuan.weather.Service.ScoreShortTermService;
-import com.pingchuan.weather.entity.CalcRate;
+import com.pingchuan.weather.Util.CalcRate;
 import com.pingchuan.weather.entity.Department;
 import com.pingchuan.weather.entity.ScoreShortTerm;
 import com.pingchuan.weather.entity.Station;
