@@ -8,6 +8,7 @@ var App = function () {
         this.SetCheckObjectCombobox();
         this.SetSecondaryUnitCombobox();
         $('.tab ul li').on('click', this.OnTabClick.bind(this));
+        $('#download').on('click', this.Project.OnDownloadButtonClick.bind(this));
     };
 
     this.ReloadDepartmentData = function () {
@@ -32,9 +33,9 @@ var App = function () {
             data: params,
             url: 'ScoreWarningSignal/findAllByTimeAndRegionByProduct',
             success: function (data) {
-                console.log(data);
+                //console.log(data);
                 this.Project.Reload(data);
-                //this.Project.ShowProjectTable(data);
+                this.Project.ShowProjectTable(data);
             }.bind(this)
         });
     };
@@ -64,12 +65,20 @@ var App = function () {
     this.SetCalendar = function () {
         $('#start-time').datebox({
             panelWidth: 180,
-            panelHeight: 260
+            panelHeight: 260,
+            onSelect: function () {
+                this.ReloadDepartmentData();
+                this.ReloadProjectData();
+            }.bind(this),
         }).datebox('setValue', '2019/03/01');
 
         $('#end-time').datebox({
             panelWidth: 180,
-            panelHeight: 260
+            panelHeight: 260,
+            onSelect: function () {
+                this.ReloadDepartmentData();
+                this.ReloadProjectData();
+            }.bind(this),
         }).datebox('setValue', '2019/05/01');
     };
 
@@ -78,7 +87,8 @@ var App = function () {
             panelHeight: 'auto',
             editable: false,
             onSelect: function () {
-                //this.ReloadDepartmentData();
+                this.ReloadDepartmentData();
+                this.ReloadProjectData();
             }.bind(this),
         });
     };
@@ -88,7 +98,8 @@ var App = function () {
             panelHeight: 'auto',
             editable: false,
             onSelect: function () {
-                //this.ReloadDepartmentData();
+                this.ReloadDepartmentData();
+                this.ReloadProjectData();
             }.bind(this),
         });
     };
@@ -110,6 +121,7 @@ var App = function () {
             }.bind(this),
             onSelect: function () {
                 this.ReloadDepartmentData();
+                this.ReloadProjectData();
             }.bind(this),
         });
     };

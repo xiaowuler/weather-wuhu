@@ -80,7 +80,7 @@
                 </div>
             </div>
             <div class="wrap">
-                <div class="wrap-content">
+                <div class="wrap-content" style="display: block;">
                     <div class="score" id="department-chart"></div>
                     <table class="score-table" id="department-table">
                         <tr id="city">
@@ -94,7 +94,7 @@
                         </tr>-->
                     </table>
                 </div>
-                <div class="wrap-content" style="display: block;">
+                <div class="wrap-content">
                     <div class="sheet clearfix">
                         <div class="sheet-content fl" type="blue" id="blue-chart"></div>
                         <div class="sheet-content fr" type="yellow" id="yellow-chart"></div>
@@ -102,16 +102,16 @@
                         <div class="sheet-content fr" type="red" id="red-chart"></div>
                         <div class="sheet-content fl" type="level" id="level-chart"></div>
                         <div class="sheet-content fr" type="no-level" id="no-level-chart"></div>
-                        <a href="javascript:;" class="download">下载报表</a>
+                        <a href="javascript:;" class="download" id="download">下载报表</a>
                     </div>
                     <div class="statement">
                         <h2>安徽省气象灾害预警信号质量检验报表</h2>
-                        <p>20.18年7月1号至2018年8月3号</p>
-                        <table class="table">
+                        <p><span id="from-time">2018年7月1号</span>至<span id="to-time">2018年8月3号</span></p>
+                        <table class="table" id="project-table">
                             <tr>
-                                <th rowspan="2" width="134">预警信号<br />类别</th>
-                                <th rowspan="2" width="134">预警信号<br />级别</th>
-                                <th rowspan="2" width="134">TS评分<br />（正确率）</th>
+                                <th rowspan="2" width="134">预警信号类别</th>
+                                <th rowspan="2" width="134">预警信号级别</th>
+                                <th rowspan="2" width="134">TS评分（正确率）</th>
                                 <th rowspan="2" width="134">命中率</th>
                                 <th rowspan="2" width="134">漏报率</th>
                                 <th rowspan="2" width="134">空报率</th>
@@ -122,66 +122,66 @@
                                 <th>T2</th>
                                 <th>T3</th>
                             </tr>
-                            <tr>
-                                <td rowspan="6">暴雨</td>
-                                <td>蓝色</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
+                            <tr id="blue">
+                                <td rowspan="6" id="type" class="table-title"></td>
+                                <td class="table-title">蓝色</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
-                            <tr>
-                                <td>黄色</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
+                            <tr id="yellow">
+                                <td class="table-title">黄色</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
-                            <tr>
-                                <td>橙色</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
+                            <tr id="orange">
+                                <td class="table-title">橙色</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
-                            <tr>
-                                <td>红色</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
+                            <tr id="red">
+                                <td class="table-title">红色</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
-                            <tr>
-                                <td>所有级别</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
+                            <tr id="all">
+                                <td class="table-title">所有级别</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
-                            <tr>
-                                <td>不分级别</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
-                                <td>27.5</td>
+                            <tr id="no-level">
+                                <td class="table-title">不分级别</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         </table>
                         <div class="audit clearfix">
@@ -205,6 +205,7 @@
 <script type="text/javascript" src="plug/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="plug/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="plug/highcharts.js"></script>
+<script type="text/javascript" src="plug/jquery.table2excel.js"></script>
 <script type="text/javascript" src="js/index/index.js"></script>
 <script type="text/javascript" src="js/index/department.js"></script>
 <script type="text/javascript" src="js/index/project.js"></script>

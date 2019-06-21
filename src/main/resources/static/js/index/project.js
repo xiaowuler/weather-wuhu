@@ -1,156 +1,83 @@
 var Project = function (parent) {
+    this.blueChart = $('#blue-chart');
+    this.yellowChart = $('#yellow-chart');
+    this.orangeChart = $('#orange-chart');
+    this.redChart = $('#red-chart');
+    this.levelChart = $('#level-chart');
+    this.noLevelChart = $('#no-level-chart');
+
     this.Reload = function (result) {
         this.result = result;
-        var type = this.ShowDepartmentChart();
-        console.log(type)
-        var BlueElementSeries = [];
-        var YellowElementSeries = [];
-        var OrangeElementSeries = [];
-        var RedElementSeries = [];
-        var LevelElementSeries = [];
-        var NoLevelBlueElementSeries = [];
 
-        var blueValues = this.GetBlueChartElementValues();
-        var blueSeries = this.GetChartElementSeries(blueValues);
-
-        var yellowValues = this.GetYellowChartElementValues();
-        var yellowSeries = this.GetChartElementSeries(yellowValues);
-
-        var OrangeValues = this.GetOrangeChartElementValues();
-        var orangeSeries = this.GetChartElementSeries(OrangeValues);
-
-        var redValues = this.GetRedChartElementValues();
-        var redSeries = this.GetChartElementSeries(redValues);
-
-        var levelValues = this.GetLevelChartElementValues();
-        var levelSeries = this.GetChartElementSeries(levelValues);
-
-        var NoLevelValues = this.GetNoLevelChartElementValues();
-        var NoLevelSeries = this.GetChartElementSeries(NoLevelValues);
-
-        BlueElementSeries.push(blueSeries);
-        YellowElementSeries.push(yellowSeries);
-        OrangeElementSeries.push(orangeSeries);
-        RedElementSeries.push(redSeries);
-        LevelElementSeries.push(levelSeries);
-        NoLevelBlueElementSeries.push(NoLevelSeries);
-        this.ShowBlueDepartmentChart(YellowElementSeries);
-        this.ShowYellowDepartmentChart(OrangeElementSeries);
-        this.ShowOrangeDepartmentChart(OrangeElementSeries);
-        this.ShowRedDepartmentChart(RedElementSeries);
-        this.ShowLevelDepartmentChart(LevelElementSeries);
-        this.ShowNoLevelDepartmentChart(NoLevelBlueElementSeries);
+        this.ShowDepartmentChart();
     };
 
-    this.GetBlueChartElementValues = function () {
-        var titles = ['蓝色', '黄色', '橙色', '红色', '分级检验', '不分级检验'];
+    this.GetChartElementValues = function () {
+        var types = [];
+        var correctRate = [];
+        var hitRate = [];
+        var emptyReportRate = [];
+        var missingReportRate = [];
+        var t1 = [];
+        var t2 = [];
+        var t3 = [];
+        var blueValue = [];
+        var yellowValue = [];
+        var orangeValue = [];
+        var redValue = [];
+        var levelValue = [];
+        var noLevelValue = [];
+        var blue = this.result.blueWarningType;
+        var yellow = this.result.yellowWarningType;
+        var orange = this.result.orangeWarningType;
+        var red = this.result.redWarningType;
+        var level = this.result.levelWarningType;
+        var noLevel = this.result.noLevelWarningType;
+        types.push(blue, yellow, orange, red, level, noLevel);
 
-    };
+        types.forEach(function (item) {
+            correctRate.push((item.correctRate) * 100);
+            hitRate.push((item.hitRate) * 100);
+            emptyReportRate.push((item.emptyReportRate) * 100);
+            missingReportRate.push((item.missingReportRate) * 100);
+            t1.push(item.t1);
+            t2.push(item.t2);
+            t3.push(item.t3);
+        }.bind(this));
 
-    this.GetBlueChartElementValues = function () {
-        var values = [];
+        blueValue.push(correctRate[0], hitRate[0], emptyReportRate[0], missingReportRate[0], t1[0], t2[0], t3[0]);
+        yellowValue.push(correctRate[1], hitRate[1], emptyReportRate[1], missingReportRate[1], t1[1], t2[1], t3[1]);
+        orangeValue.push(correctRate[2], hitRate[2], emptyReportRate[2], missingReportRate[2], t1[2], t2[2], t3[2]);
+        redValue.push(correctRate[3], hitRate[3], emptyReportRate[3], missingReportRate[3], t1[3], t2[3], t3[3]);
+        levelValue.push(correctRate[4], hitRate[4], emptyReportRate[4], missingReportRate[4], t1[4], t2[4], t3[4]);
+        noLevelValue.push(correctRate[5], hitRate[5], emptyReportRate[5], missingReportRate[5], t1[5], t2[5], t3[5]);
 
-        var value1 = (this.result.blueWarningType.correctRate) * 100;
-        var value2 = (this.result.blueWarningType.hitRate) * 100;
-        var value3 = (this.result.blueWarningType.emptyReportRate) * 100;
-        var value4 = (this.result.blueWarningType.missingReportRate) * 100;
-        var value5 = this.result.blueWarningType.t1;
-        var value6 = this.result.blueWarningType.t2;
-        var value7 = this.result.blueWarningType.t3;
-
-        values.push(value1, value2, value3, value4, value5, value6, value7);
-        return values;
-    };
-
-    this.GetYellowChartElementValues = function () {
-        var values = [];
-
-        var value1 = (this.result.yellowWarningType.correctRate) * 100;
-        var value2 = (this.result.yellowWarningType.hitRate) * 100;
-        var value3 = (this.result.yellowWarningType.emptyReportRate) * 100;
-        var value4 = (this.result.yellowWarningType.missingReportRate) * 100;
-        var value5 = this.result.yellowWarningType.t1;
-        var value6 = this.result.yellowWarningType.t2;
-        var value7 = this.result.yellowWarningType.t3;
-
-        values.push(value1, value2, value3, value4, value5, value6, value7);
-        return values;
-    };
-
-    this.GetOrangeChartElementValues = function () {
-        var values = [];
-
-        var value1 = (this.result.orangeWarningType.correctRate) * 100;
-        var value2 = (this.result.orangeWarningType.hitRate) * 100;
-        var value3 = (this.result.orangeWarningType.emptyReportRate) * 100;
-        var value4 = (this.result.orangeWarningType.missingReportRate) * 100;
-        var value5 = this.result.orangeWarningType.t1;
-        var value6 = this.result.orangeWarningType.t2;
-        var value7 = this.result.orangeWarningType.t3;
-
-        values.push(value1, value2, value3, value4, value5, value6, value7);
-        return values;
-    };
-
-    this.GetRedChartElementValues = function () {
-        var values = [];
-
-        var value1 = (this.result.redWarningType.correctRate) * 100;
-        var value2 = (this.result.redWarningType.hitRate) * 100;
-        var value3 = (this.result.redWarningType.emptyReportRate) * 100;
-        var value4 = (this.result.redWarningType.missingReportRate) * 100;
-        var value5 = this.result.redWarningType.t1;
-        var value6 = this.result.redWarningType.t2;
-        var value7 = this.result.redWarningType.t3;
-
-        values.push(value1, value2, value3, value4, value5, value6, value7);
-        return values;
-    };
-
-    this.GetLevelChartElementValues = function () {
-        var values = [];
-
-        var value1 = (this.result.levelWarningType.correctRate) * 100;
-        var value2 = (this.result.levelWarningType.hitRate) * 100;
-        var value3 = (this.result.levelWarningType.emptyReportRate) * 100;
-        var value4 = (this.result.levelWarningType.missingReportRate) * 100;
-        var value5 = this.result.levelWarningType.t1;
-        var value6 = this.result.levelWarningType.t2;
-        var value7 = this.result.levelWarningType.t3;
-
-        values.push(value1, value2, value3, value4, value5, value6, value7);
-        return values;
-    };
-
-    this.GetNoLevelChartElementValues = function () {
-        var values = [];
-
-        var value1 = (this.result.noLevelWarningType.correctRate) * 100;
-        var value2 = (this.result.noLevelWarningType.hitRate) * 100;
-        var value3 = (this.result.noLevelWarningType.emptyReportRate) * 100;
-        var value4 = (this.result.noLevelWarningType.missingReportRate) * 100;
-        var value5 = this.result.noLevelWarningType.t1;
-        var value6 = this.result.noLevelWarningType.t2;
-        var value7 = this.result.noLevelWarningType.t3;
-
-        values.push(value1, value2, value3, value4, value5, value6, value7);
-        return values;
-    };
-
-    this.GetChartElementSeries = function (values) {
         return {
-            data: values,
-            pointWidth: 30,
+            blueValue: blueValue,
+            yellowValue: yellowValue,
+            orangeValue: orangeValue,
+            redValue: redValue,
+            levelValue: levelValue,
+            noLevelValue: noLevelValue,
         }
     };
 
-    this.ShowDepartmentChart = function (elementSeries) {
+    this.ShowDepartmentChart = function () {
         var title = {
             text: '颜色'
         };
         var subtitle = {
             text: null
         };
+
+        var credits = {
+            enabled: false
+        };
+
+        var chart = {
+            type: 'column'
+        };
+
         var xAxis = {
             categories: ['准确率', '命中率', '空报率', '漏报率', 'T1', 'T2', 'T3']
         };
@@ -161,263 +88,105 @@ var Project = function (parent) {
             },
         };
 
+        var colors = ['#00fff5', '#899ff5', '#00b7ee', '#ffc36a', '#f19ec2', '#aa89bd', '#54aefa'];
+
         var tooltip = {
             headerFormat: '{point.x}<br>',
             pointFormat: '分值：{point.y:.2f}'
+        };
+
+        var plotOptions = {
+            pointWidth: 30,
         };
 
         var legend = {
             enabled: false
         };
 
-        var series =  elementSeries;
+        var series = {
+            data: [],
+            color: 'red'
+        };
 
-        var titles = ['蓝色', '黄色', '橙色', '红色', '分级检验', '不分级检验'];
         var json = {};
 
-        for (var i = 0; i < titles.length; i++){
-            json.title = titles[i];
-        }
-        //json.title = title;
+        var params = this.GetChartElementValues();
+
+        json.title = title;
         json.subtitle = subtitle;
+        json.credits = credits;
+        json.chart = chart;
         json.xAxis = xAxis;
         json.yAxis = yAxis;
+        json.colors = colors;
         json.tooltip = tooltip;
+        json.plotOptions = plotOptions;
         json.legend = legend;
         json.series = series;
 
-        $('#blue-chart').highcharts(json);
-        $('#yellow-chart').highcharts(json);
-        $('#orange-chart').highcharts(json);
-        $('#red-chart').highcharts(json);
-        $('#level-chart').highcharts(json);
-        $('#no-level-chart').highcharts(json);
-    };
+        console.log(json)
 
-    this.ShowBlueDepartmentChart = function (elementSeries) {
-        $('#blue-chart').highcharts({
-            title: {
-                text: '蓝色'
-            },
-            chart: {
-                type: 'column'
-            },
-            subtitle: {
-                text: null
-            },
-            credits: {
-                enabled: false
-            },
-            colors: ['#00fff5', '#899ff5', '#00b7ee', '#ffc36a', '#f19ec2', '#aa89bd', '#54aefa'],
-            xAxis: {
-                categories: ['准确率', '命中率', '空报率', '漏报率', 'T1', 'T2', 'T3'],
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: null
-                },
-            },
-            legend: {
-                enabled: false
-            },
+        this.blueChart.highcharts(json);
+        this.yellowChart.highcharts(json);
+        this.orangeChart.highcharts(json);
+        this.redChart.highcharts(json);
+        this.levelChart.highcharts(json);
+        this.noLevelChart.highcharts(json);
 
-            tooltip: {
-                headerFormat: '{point.x}<br>',
-                pointFormat: '分值：{point.y:.2f}'
-            },
-            series: elementSeries
+        this.blueChart.highcharts().setTitle( {text: '蓝色'});
+        this.yellowChart.highcharts().setTitle( {text: '黄色'});
+        this.orangeChart.highcharts().setTitle( {text: '橙色'});
+        this.redChart.highcharts().setTitle( {text: '红色'});
+        this.levelChart.highcharts().setTitle( {text: '分级检验'});
+        this.noLevelChart.highcharts().setTitle( {text: '不分级检验'});
+
+        this.blueChart.highcharts().addSeries({
+            data: params.blueValue
         });
-    };
 
-    this.ShowYellowDepartmentChart = function (elementSeries) {
-        $('#yellow-chart').highcharts({
-            title: {
-                text: '黄色'
-            },
-            chart: {
-                type: 'column'
-            },
-            subtitle: {
-                text: null
-            },
-            credits: {
-                enabled: false
-            },
-            colors: ['#00fff5', '#899ff5', '#00b7ee', '#ffc36a', '#f19ec2', '#aa89bd', '#54aefa'],
-            xAxis: {
-                categories: ['准确率', '命中率', '空报率', '漏报率', 'T1', 'T2', 'T3'],
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: null
-                },
-            },
-            legend: {
-                enabled: false
-            },
-
-            tooltip: {
-                headerFormat: '{point.x}<br>',
-                pointFormat: '分值：{point.y:.2f}'
-            },
-            series: elementSeries
+        this.yellowChart.highcharts().addSeries({
+            data: params.yellowValue
         });
-    };
 
-    this.ShowOrangeDepartmentChart = function (elementSeries) {
-        $('#orange-chart').highcharts({
-            title: {
-                text: '橙色'
-            },
-            chart: {
-                type: 'column'
-            },
-            subtitle: {
-                text: null
-            },
-            credits: {
-                enabled: false
-            },
-            colors: ['#00fff5', '#899ff5', '#00b7ee', '#ffc36a', '#f19ec2', '#aa89bd', '#54aefa'],
-            xAxis: {
-                categories: ['准确率', '命中率', '空报率', '漏报率', 'T1', 'T2', 'T3'],
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: null
-                },
-            },
-            legend: {
-                enabled: false
-            },
-
-            tooltip: {
-                headerFormat: '{point.x}<br>',
-                pointFormat: '分值：{point.y:.2f}'
-            },
-            series: elementSeries
+        this.orangeChart.highcharts().addSeries({
+            data: params.orangeValue
         });
-    };
 
-    this.ShowRedDepartmentChart = function (elementSeries) {
-        $('#red-chart').highcharts({
-            title: {
-                text: '红色'
-            },
-            chart: {
-                type: 'column'
-            },
-            subtitle: {
-                text: null
-            },
-            credits: {
-                enabled: false
-            },
-            colors: ['#00fff5', '#899ff5', '#00b7ee', '#ffc36a', '#f19ec2', '#aa89bd', '#54aefa'],
-            xAxis: {
-                categories: ['准确率', '命中率', '空报率', '漏报率', 'T1', 'T2', 'T3'],
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: null
-                },
-            },
-            legend: {
-                enabled: false
-            },
-
-            tooltip: {
-                headerFormat: '{point.x}<br>',
-                pointFormat: '分值：{point.y:.2f}'
-            },
-            series: elementSeries
+        this.redChart.highcharts().addSeries({
+            data: params.redValue
         });
-    };
 
-    this.ShowLevelDepartmentChart = function (elementSeries) {
-        $('#level-chart').highcharts({
-            title: {
-                text: '分级检验'
-            },
-            chart: {
-                type: 'column'
-            },
-            subtitle: {
-                text: null
-            },
-            credits: {
-                enabled: false
-            },
-            colors: ['#00fff5', '#899ff5', '#00b7ee', '#ffc36a', '#f19ec2', '#aa89bd', '#54aefa'],
-            xAxis: {
-                categories: ['准确率', '命中率', '空报率', '漏报率', 'T1', 'T2', 'T3'],
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: null
-                },
-            },
-            legend: {
-                enabled: false
-            },
-
-            tooltip: {
-                headerFormat: '{point.x}<br>',
-                pointFormat: '分值：{point.y:.2f}'
-            },
-            series: elementSeries
+        this.levelChart.highcharts().addSeries({
+            data: params.levelValue
         });
-    };
 
-    this.ShowNoLevelDepartmentChart = function (elementSeries) {
-        $('#no-level-chart').highcharts({
-            title: {
-                text: '不分级检验'
-            },
-            chart: {
-                type: 'column'
-            },
-            subtitle: {
-                text: null
-            },
-            credits: {
-                enabled: false
-            },
-            colors: ['#00fff5', '#899ff5', '#00b7ee', '#ffc36a', '#f19ec2', '#aa89bd', '#54aefa'],
-            xAxis: {
-                categories: ['准确率', '命中率', '空报率', '漏报率', 'T1', 'T2', 'T3'],
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: null
-                },
-            },
-            legend: {
-                enabled: false
-            },
-
-            tooltip: {
-                headerFormat: '{point.x}<br>',
-                pointFormat: '分值：{point.y:.2f}'
-            },
-            series: elementSeries
+        this.noLevelChart.highcharts().addSeries({
+            data: params.noLevelValue
         });
+
     };
 
     this.ShowProjectTable = function (data) {
-        $('#time').text($('#aging').combobox('getValue'));
+        $('#type').text($('#warn-type').combobox('getText'));
+        $('#from-time').text(moment($("#start-time").datebox('getValue')).format('YYYY年MM月DD日'));
+        $('#to-time').text(moment($("#end-time").datebox('getValue')).format('YYYY年MM月DD日'));
         $('#project-table').find('tr td').not('.table-title').remove();
 
-        var number = '<td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td><td>{8}</td>';
-        var sample = '<td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td><td>{8}</td>';
+        var param = '<td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td>';
 
-        $('#number').append(number.format(data.rainAndSnowRate, data.rainfallGradeRate, data.heavyRainAndSnowRate, data.normalRainRate, data.minTempOneRate, data.minTempTwoRate, data.maxTempOneRate, data.maxTempTwoRate, data.totalRate));
-        $('#project-sample').append(sample.format(data.rainAndSnowSample, data.rainfallGradeSample, data.heavyRainAndSnowSample, data.normalRainSample, data.minTempOneSample, data.minTempTwoSample, data.maxTempOneSample, data.maxTempTwoSample, data.totalSample));
+        $('#blue').append(param.format(data.blueWarningType.correctRate, data.blueWarningType.hitRate, data.blueWarningType.emptyReportRate, data.blueWarningType.missingReportRate, data.blueWarningType.t1, data.blueWarningType.t2, data.blueWarningType.t3));
+        $('#yellow').append(param.format(data.yellowWarningType.correctRate, data.yellowWarningType.hitRate, data.yellowWarningType.emptyReportRate, data.yellowWarningType.missingReportRate, data.yellowWarningType.t1, data.yellowWarningType.t2, data.yellowWarningType.t3));
+        $('#orange').append(param.format(data.orangeWarningType.correctRate, data.orangeWarningType.hitRate, data.orangeWarningType.emptyReportRate, data.orangeWarningType.missingReportRate, data.orangeWarningType.t1, data.orangeWarningType.t2, data.orangeWarningType.t3));
+        $('#red').append(param.format(data.redWarningType.correctRate, data.redWarningType.hitRate, data.redWarningType.emptyReportRate, data.redWarningType.missingReportRate, data.redWarningType.t1, data.redWarningType.t2, data.redWarningType.t3));
+        $('#all').append(param.format(data.levelWarningType.correctRate, data.levelWarningType.hitRate, data.levelWarningType.emptyReportRate, data.levelWarningType.missingReportRate, data.levelWarningType.t1, data.levelWarningType.t2, data.levelWarningType.t3));
+        $('#no-level').append(param.format(data.noLevelWarningType.correctRate, data.noLevelWarningType.hitRate, data.noLevelWarningType.emptyReportRate, data.noLevelWarningType.missingReportRate, data.noLevelWarningType.t1, data.noLevelWarningType.t2, data.noLevelWarningType.t3));
+    };
+
+    this.OnDownloadButtonClick = function () {
+        $("#project-table").table2excel({
+            exclude: ".noExl",
+            name: "Excel Document Name",
+            filename: "安徽省气象灾害预警信号质量检验报表.xls"
+        });
     };
 };
