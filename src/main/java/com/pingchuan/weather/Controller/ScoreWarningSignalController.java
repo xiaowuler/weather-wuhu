@@ -25,13 +25,13 @@ public class ScoreWarningSignalController {
     private ScoreWarningSignalService scoreWarningSignalService;
 
     @PostMapping("/findAllByTimeAndRegionByDepartment")
-    public ScoreWarningSignalDTO findAllByTimeAndRegionByDepartment(Date startTime, Date endTime, String warningType, int departmentId){
-        return scoreWarningSignalService.findAllByTimeAndRegionByDepartment(startTime, endTime, warningType, departmentId);
+    public ScoreWarningSignalDTO findAllByTimeAndRegionByDepartment(Date startTime, Date endTime, String warningType, int departmentId, int childDepartmentId){
+        return scoreWarningSignalService.findAllByTimeAndRegionByDepartment(startTime, endTime, warningType, departmentId, childDepartmentId);
     }
 
     @PostMapping("/findAllByTimeAndRegionByProduct")
-    public ScoreWarningSignalDTO findAllByTimeAndRegionByProduct(Date startTime, Date endTime, String warningType, int departmentId){
-        return scoreWarningSignalService.findAllByTimeAndRegionByProduct(startTime, endTime, warningType, departmentId);
+    public ScoreWarningSignalDTO findAllByTimeAndRegionByProduct(Date startTime, Date endTime, String warningType, int departmentId, int childDepartmentId){
+        return scoreWarningSignalService.findAllByTimeAndRegionByProduct(startTime, endTime, warningType, departmentId, childDepartmentId);
     }
 
 }

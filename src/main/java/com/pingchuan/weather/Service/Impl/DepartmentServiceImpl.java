@@ -22,11 +22,21 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentMapper departmentMapper;
 
     @Override
+    public List<Department> findAll() {
+        return departmentMapper.findAll();
+    }
+
+    @Override
     public List<Department> findAllByCity() {
         Department department = departmentMapper.findOneById(1);
-        List<Department> departments = departmentMapper.findAllByParentId(department.getId());
+        List<Department> departments = departmentMapper.findAllByParentId(department.getDepartId());
         departments.add(0, department);
         return departments;
+    }
+
+    @Override
+    public List<Department> findAllByParentDepartId(int parentDepartId) {
+        return departmentMapper.findAllByParentId(parentDepartId);
     }
 
 }

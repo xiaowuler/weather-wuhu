@@ -42,14 +42,18 @@ public class ScoreShortTermServiceImpl implements ScoreShortTermService {
     public ScoreShortTermDTO findAllByTimeAndRegionByProduct(Date startTime, Date endTime, int rescription, int departmentId, int examId) {
 
         List<ScoreShortTerm> scoreShortTermList = new ArrayList<>();
-        Department department = departmentMapper.findOneById(departmentId);
-        List<Department> departments = departmentMapper.findAllByParentId(department.getId());
+        List<Department> departments;
+
+        if ("58000".equals(departmentId)){
+            departments = departmentMapper.findAll();
+        }else {
+            departments = departmentMapper.findAllByParentId(departmentId);
+            departments.add(departmentMapper.findOneById(departmentId));
+        }
+
         for (Department part : departments){
-            List<Station> stations = stationMapper.findAllByDepart(part.getId());
-            for (Station station : stations){
-                List<ScoreShortTerm> scoreShortTerms = scoreShortTermMapper.findAllByTimeAndRegionByDepartment(startTime, endTime, rescription, station.getStationCode(), examId);
+                List<ScoreShortTerm> scoreShortTerms = scoreShortTermMapper.findAllByTimeAndRegionByDepartment(startTime, endTime, rescription, part.getDepartId(), examId);
                 scoreShortTermList.addAll(scoreShortTerms);
-            }
         }
 
         if (scoreShortTermList.size() == 0)
@@ -150,16 +154,23 @@ public class ScoreShortTermServiceImpl implements ScoreShortTermService {
     @Override
     public ScoreShortTermDTO findAllByTimeAndRegionByDepartment(Date startTime, Date endTime, int fcstHours, int departmentId, int examId) {
         List<DepartmentDTO> departmentDTOS = new ArrayList<>();
-        List<ScoreShortTerm> scoreShortTermList;
-        Department department = departmentMapper.findOneById(departmentId);
-        List<Department> departments = departmentMapper.findAllByParentId(department.getId());
+        //List<ScoreShortTerm> scoreShortTermList;
+        List<Department> departments;
+
+        if ("58000".equals(departmentId)){
+            departments = departmentMapper.findAllCity();
+        }else {
+            departments = departmentMapper.findAllByParentId(departmentId);
+            departments.add(departmentMapper.findOneById(departmentId));
+        }
+
         for (Department part : departments){
-            scoreShortTermList = new ArrayList<>();
-            List<Station> stations = stationMapper.findAllByDepart(part.getId());
-            for (Station station : stations){
-                List<ScoreShortTerm> scoreShortTerms = scoreShortTermMapper.findAllByTimeAndRegionByDepartment(startTime, endTime, fcstHours, station.getStationCode(), examId);
+            List<ScoreShortTerm> scoreShortTermList = new ArrayList<>();
+            for (Department depart : departmentMapper.findAllByParentId(part.getParentDepartId())){
+                List<ScoreShortTerm> scoreShortTerms = scoreShortTermMapper.findAllByTimeAndRegionByDepartment(startTime, endTime, fcstHours, depart.getDepartId(), examId);
                 scoreShortTermList.addAll(scoreShortTerms);
             }
+            scoreShortTermList.addAll(scoreShortTermMapper.findAllByTimeAndRegionByDepartment(startTime, endTime, fcstHours, part.getDepartId(), examId));
 
             if (scoreShortTermList.size() == 0)
                 continue;
@@ -200,7 +211,7 @@ public class ScoreShortTermServiceImpl implements ScoreShortTermService {
             if (calcRate.getCount() > 0)
             {
                 DepartmentDTO departmentDTO = new DepartmentDTO();
-                departmentDTO.setName(part.getName());
+                departmentDTO.setDepartName(part.getDepartName());
                 departmentDTO.setTotalRate(Float.parseFloat(new DecimalFormat("0.00").format((float)calcRate.getSuccessCount()/calcRate.getCount())));
                 departmentDTO.setTotalSample(calcRate.getTotalSample());
                 departmentDTOS.add(departmentDTO);

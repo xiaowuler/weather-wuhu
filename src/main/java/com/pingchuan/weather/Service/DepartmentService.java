@@ -6,5 +6,10 @@ import java.util.List;
 
 public interface DepartmentService {
 
+    List<Department> findAll();
+
     List<Department> findAllByCity();
+
+    List<Department> findAllByParentDepartId(int parentDepartId);
+
 }

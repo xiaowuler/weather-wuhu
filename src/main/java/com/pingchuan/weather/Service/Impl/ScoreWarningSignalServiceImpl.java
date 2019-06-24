@@ -13,6 +13,7 @@ import com.pingchuan.weather.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -40,18 +41,30 @@ public class ScoreWarningSignalServiceImpl implements ScoreWarningSignalService 
     private StationMapper stationMapper;
 
     @Override
-    public ScoreWarningSignalDTO findAllByTimeAndRegionByDepartment(Date startTime, Date endTime, String warningType, int departmentId) {
-        List<ScoreWarningSignal> scoreWarningSignalList;
+    public ScoreWarningSignalDTO findAllByTimeAndRegionByDepartment(Date startTime, Date endTime, String warningType, int departmentId, int childDepartId) {
+
         List<DepartmentDTO> departmentDTOS = new ArrayList<>();
-        Department department = departmentMapper.findOneById(departmentId);
-        List<Department> departments = departmentMapper.findAllByParentId(department.getId());
-        for (Department part : departments){
-            scoreWarningSignalList = new ArrayList<>();
-            List<Station> stations = stationMapper.findAllByDepart(part.getId());
-            for (Station station : stations){
-                List<ScoreWarningSignal> scoreWarningSignals = scoreWarningSignalMapper.findAllByTime(startTime, endTime, warningType, station.getStationCode());
-                scoreWarningSignalList.addAll(scoreWarningSignals);
+        List<Department> departments;
+
+        if (StringUtils.isEmpty(childDepartId)){
+            if ("58000".equals(departmentId)){
+                departments = departmentMapper.findAllCity();
+            }else {
+                departments = departmentMapper.findAllByParentId(departmentId);
+                departments.add(departmentMapper.findOneById(departmentId));
             }
+        }else {
+            departments = new ArrayList<>();
+            departments.add(departmentMapper.findOneById(departmentId));
+        }
+
+        for (Department part : departments){
+            List<ScoreWarningSignal> scoreWarningSignalList = new ArrayList<>();
+                for (Department depart : departmentMapper.findAllByParentId(part.getParentDepartId())){
+                    List<ScoreWarningSignal> scoreWarningSignals = scoreWarningSignalMapper.findAllByTime(startTime, endTime, warningType, depart.getDepartId());
+                    scoreWarningSignalList.addAll(scoreWarningSignals);
+                }
+                scoreWarningSignalList.addAll(scoreWarningSignalMapper.findAllByTime(startTime, endTime, warningType, part.getDepartId()));
 
             if (scoreWarningSignalList.size() == 0)
                 continue;
@@ -76,7 +89,7 @@ public class ScoreWarningSignalServiceImpl implements ScoreWarningSignalService 
             if (calcRate.getCount() > 0)
             {
                 DepartmentDTO departmentDTO = new DepartmentDTO();
-                departmentDTO.setName(part.getName());
+                departmentDTO.setDepartName(part.getDepartName());
                 departmentDTO.setTotalRate(Float.parseFloat(new DecimalFormat("0.00").format((float)calcRate.getSuccessCount()/calcRate.getCount())));
                 departmentDTO.setTotalSample(calcRate.getTotalSample());
                 departmentDTOS.add(departmentDTO);
@@ -91,19 +104,25 @@ public class ScoreWarningSignalServiceImpl implements ScoreWarningSignalService 
     }
 
     @Override
-    public ScoreWarningSignalDTO findAllByTimeAndRegionByProduct(Date startTime, Date endTime, String warningType, int departmentId) {
+    public ScoreWarningSignalDTO findAllByTimeAndRegionByProduct(Date startTime, Date endTime, String warningType, int departmentId, int childDepartmentId) {
         List<ScoreWarningSignal> scoreWarningSignalList = new ArrayList<>();
-        List<DepartmentDTO> departmentDTOS = new ArrayList<>();
-        Department department = departmentMapper.findOneById(departmentId);
-        List<Department> departments = departmentMapper.findAllByParentId(department.getId());
-        for (Department part : departments){
-            List<Station> stations = stationMapper.findAllByDepart(part.getId());
-            for (Station station : stations){
-                List<ScoreWarningSignal> scoreWarningSignals = scoreWarningSignalMapper.findAllByTime(startTime, endTime, warningType, station.getStationCode());
-                scoreWarningSignalList.addAll(scoreWarningSignals);
+        List<Department> departments;
+
+        if (StringUtils.isEmpty(childDepartmentId)){
+            if ("58000".equals(departmentId)){
+                departments = departmentMapper.findAll();
+            }else {
+                departments = departmentMapper.findAllByParentId(departmentId);
+                departments.add(departmentMapper.findOneById(departmentId));
             }
+        }else {
+            departments = new ArrayList<>();
+            departments.add(departmentMapper.findOneById(departmentId));
+        }
 
-
+        for (Department part : departments){
+            List<ScoreWarningSignal> scoreWarningSignals = scoreWarningSignalMapper.findAllByTime(startTime, endTime, warningType, part.getDepartId());
+            scoreWarningSignalList.addAll(scoreWarningSignals);
         }
 
         if (scoreWarningSignalList.size() == 0)

@@ -9,7 +9,11 @@ import java.util.List;
 @Mapper
 public interface DepartmentMapper {
 
-    Department findOneById(@Param("id") int id);
+    Department findOneById(@Param("departId") int departId);
 
     List<Department> findAllByParentId(@Param("parentId") Integer parentId);
+
+    List<Department> findAllCity();
+
+    List<Department> findAll();
 }

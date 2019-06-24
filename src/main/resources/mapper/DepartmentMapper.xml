@@ -4,11 +4,19 @@
 <mapper namespace="com.pingchuan.weather.Mapper.DepartmentMapper">
 
     <select id="findOneById" resultType="com.pingchuan.weather.entity.Department">
-        SELECT ID as id, Name as name, ParentID as parentId, OrderId as orderId, Property as property, TimeClass as timeClass FROM Department where ID = #{id}
+        SELECT DepartID as departId, DepartName as departName, ParentDepartID as parentDepartId, County as county FROM Department where DepartID = #{departId}
+    </select>
+
+    <select id="findAll" resultType="com.pingchuan.weather.entity.Department">
+        SELECT DepartID as departId, DepartName as departName, ParentDepartID as parentDepartId, County as county FROM Department;
+    </select>
+
+    <select id="findAllCity" resultType="com.pingchuan.weather.entity.Department">
+        SELECT DepartID as departId, DepartName as departName, ParentDepartID as parentDepartId, County as county FROM Department where Property = 2;
     </select>
 
     <select id="findAllByParentId" resultType="com.pingchuan.weather.entity.Department">
-        SELECT ID as id, Name as name, ParentID as parentId, OrderId as orderId, Property as property, TimeClass as timeClass FROM Department where ParentId = #{parentId}
+        SELECT DepartID as departId, DepartName as departName, ParentDepartID as parentDepartId, County as county FROM Department where ParentDepartID = #{parentId}
     </select>
     
 </mapper>

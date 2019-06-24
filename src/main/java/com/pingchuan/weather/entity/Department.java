@@ -11,15 +11,14 @@ import lombok.Data;
 @Data
 public class Department {
 
-    private Integer id;
+    private Integer departId;
 
-    private String name;
+    private String departName;
 
-    private Integer parentId;
+    private Integer parentDepartId;
 
-    private Integer orderId;
+    private String county;
 
     private int property;
 
-    private String timeClass;
 }

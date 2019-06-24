@@ -27,4 +27,9 @@ public class DepartmentController {
         return departmentService.findAllByCity();
     }
 
+    @PostMapping("/findAllByParentDepartId")
+    public List<Department> findAllByParentDepartId(int parentDepartId){
+        return departmentService.findAllByParentDepartId(parentDepartId);
+    }
+
 }
