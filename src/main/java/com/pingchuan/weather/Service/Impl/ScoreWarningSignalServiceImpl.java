@@ -41,7 +41,7 @@ public class ScoreWarningSignalServiceImpl implements ScoreWarningSignalService 
     private StationMapper stationMapper;
 
     @Override
-    public ScoreWarningSignalDTO findAllByTimeAndRegionByDepartment(Date startTime, Date endTime, String warningType, int departmentId, int childDepartId) {
+    public ScoreWarningSignalDTO findAllByTimeAndRegionByDepartment(Date startTime, Date endTime, String warningType, int departmentId, Integer childDepartId) {
 
         List<DepartmentDTO> departmentDTOS = new ArrayList<>();
         List<Department> departments;
@@ -104,7 +104,7 @@ public class ScoreWarningSignalServiceImpl implements ScoreWarningSignalService 
     }
 
     @Override
-    public ScoreWarningSignalDTO findAllByTimeAndRegionByProduct(Date startTime, Date endTime, String warningType, int departmentId, int childDepartmentId) {
+    public ScoreWarningSignalDTO findAllByTimeAndRegionByProduct(Date startTime, Date endTime, String warningType, int departmentId, Integer childDepartmentId) {
         List<ScoreWarningSignal> scoreWarningSignalList = new ArrayList<>();
         List<Department> departments;
 
