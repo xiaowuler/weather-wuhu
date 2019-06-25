@@ -44,7 +44,7 @@ public class ScoreShortTermServiceImpl implements ScoreShortTermService {
         List<ScoreShortTerm> scoreShortTermList = new ArrayList<>();
         List<Department> departments;
 
-        if ("58000".equals(departmentId)){
+        if (departmentId == 58000){
             departments = departmentMapper.findAll();
         }else {
             departments = departmentMapper.findAllByParentId(departmentId);
@@ -157,7 +157,7 @@ public class ScoreShortTermServiceImpl implements ScoreShortTermService {
         //List<ScoreShortTerm> scoreShortTermList;
         List<Department> departments;
 
-        if ("58000".equals(departmentId)){
+        if (departmentId == 58000){
             departments = departmentMapper.findAllCity();
         }else {
             departments = departmentMapper.findAllByParentId(departmentId);

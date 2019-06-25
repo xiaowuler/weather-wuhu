@@ -19,8 +19,8 @@ var App = function () {
             data: params,
             url: 'ScoreWarningSignal/findAllByTimeAndRegionByDepartment',
             success: function (data) {
-                this.Department.Reload(data);
-                this.Department.ShowDepartmentTable(data);
+                //this.Department.Reload(data);
+                //this.Department.ShowDepartmentTable(data);
             }.bind(this)
         });
     };
@@ -33,9 +33,8 @@ var App = function () {
             data: params,
             url: 'ScoreWarningSignal/findAllByTimeAndRegionByProduct',
             success: function (data) {
-                //console.log(data);
-                this.Project.Reload(data);
-                this.Project.ShowProjectTable(data);
+                //this.Project.Reload(data);
+                //this.Project.ShowProjectTable(data);
             }.bind(this)
         });
     };
@@ -44,13 +43,15 @@ var App = function () {
         var startTime = $("#start-time").datebox('getValue');
         var endTime = $("#end-time").datebox('getValue');
         var warningType = $('#warn-type').combobox('getValue');
+        var childDepartmentId = $('#check-object').combobox('getValue');
         var departmentId = $('#secondary-units').combobox('getValue');
 
         return {
             startTime: startTime,
             endTime: endTime,
             warningType: warningType,
-            departmentId: 1
+            departmentId: 58000,
+            /*childDepartmentId: 58334*/
         };
     };
 
@@ -95,6 +96,7 @@ var App = function () {
 
     this.SetCheckObjectCombobox = function () {
         $('#check-object').combobox({
+            url:'Department/findAllByParentDepartId',
             panelHeight: 'auto',
             editable: false,
             onSelect: function () {
