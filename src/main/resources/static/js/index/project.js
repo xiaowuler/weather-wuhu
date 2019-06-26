@@ -124,8 +124,6 @@ var Project = function (parent) {
         json.legend = legend;
         json.series = series;
 
-        console.log(json)
-
         this.blueChart.highcharts(json);
         this.yellowChart.highcharts(json);
         this.orangeChart.highcharts(json);

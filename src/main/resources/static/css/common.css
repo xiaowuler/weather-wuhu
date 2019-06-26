@@ -151,6 +151,7 @@
 }
 .choose{
     margin-left: 10px;
+    position: relative;
 }
 .choose .textbox{
     width: 138px!important;
@@ -187,6 +188,16 @@
 .choose-area,
 .choose-area .textbox{
     width: 180px!important;
+}
+.forbid{
+    width: 138px;
+    height: 30px;
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: no-drop;
+    border: 1px solid #f1f1f1;
 }
 .select{
     display: none;

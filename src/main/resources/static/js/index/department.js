@@ -2,6 +2,7 @@ var Department = function (parent) {
 
     this.Reload = function (result) {
         this.result = result;
+        //this.ShowDepartmentChart.Highcharts.categories.remove();
         var elementSeries = [];
         var xMarks = this.GetChartXMarks();
 
@@ -13,9 +14,10 @@ var Department = function (parent) {
 
     this.GetChartXMarks = function () {
         var marks = [];
+        console.log(this.result);
 
         this.result.departmentDTOS.forEach(function (item, index) {
-            var name = item.name;
+            var name = item.departName;
             marks.push(name)
         }.bind(this));
 
@@ -82,7 +84,7 @@ var Department = function (parent) {
             var score = '<td>{0}</td>';
             var sample = '<td>{0}</td>';
 
-            $('#city').append(name.format(item.name));
+            $('#city').append(name.format(item.departName));
             $('#score').append(score.format(item.totalRate));
             $('#sample').append(sample.format(item.totalSample));
 
