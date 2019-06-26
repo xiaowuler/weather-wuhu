@@ -27,6 +27,9 @@ var Project = function (parent) {
         var redValue = [];
         var levelValue = [];
         var noLevelValue = [];
+        if (this.result === null)
+            return;
+
         var blue = this.result.blueWarningType;
         var yellow = this.result.yellowWarningType;
         var orange = this.result.orangeWarningType;
@@ -36,13 +39,15 @@ var Project = function (parent) {
         types.push(blue, yellow, orange, red, level, noLevel);
 
         types.forEach(function (item) {
-            correctRate.push((item.correctRate) * 100);
-            hitRate.push((item.hitRate) * 100);
-            emptyReportRate.push((item.emptyReportRate) * 100);
-            missingReportRate.push((item.missingReportRate) * 100);
-            t1.push(item.t1);
-            t2.push(item.t2);
-            t3.push(item.t3);
+            if (item !== null){
+                correctRate.push((item.correctRate) * 100);
+                hitRate.push((item.hitRate) * 100);
+                emptyReportRate.push((item.emptyReportRate) * 100);
+                missingReportRate.push((item.missingReportRate) * 100);
+                t1.push(item.t1);
+                t2.push(item.t2);
+                t3.push(item.t3);
+            }
         }.bind(this));
 
         blueValue.push(correctRate[0], hitRate[0], emptyReportRate[0], missingReportRate[0], t1[0], t2[0], t3[0]);
@@ -172,12 +177,24 @@ var Project = function (parent) {
 
         var param = '<td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td>';
 
-        $('#blue').append(param.format(data.blueWarningType.correctRate, data.blueWarningType.hitRate, data.blueWarningType.emptyReportRate, data.blueWarningType.missingReportRate, data.blueWarningType.t1, data.blueWarningType.t2, data.blueWarningType.t3));
-        $('#yellow').append(param.format(data.yellowWarningType.correctRate, data.yellowWarningType.hitRate, data.yellowWarningType.emptyReportRate, data.yellowWarningType.missingReportRate, data.yellowWarningType.t1, data.yellowWarningType.t2, data.yellowWarningType.t3));
-        $('#orange').append(param.format(data.orangeWarningType.correctRate, data.orangeWarningType.hitRate, data.orangeWarningType.emptyReportRate, data.orangeWarningType.missingReportRate, data.orangeWarningType.t1, data.orangeWarningType.t2, data.orangeWarningType.t3));
-        $('#red').append(param.format(data.redWarningType.correctRate, data.redWarningType.hitRate, data.redWarningType.emptyReportRate, data.redWarningType.missingReportRate, data.redWarningType.t1, data.redWarningType.t2, data.redWarningType.t3));
+        if (data.blueWarningType !== null)
+            $('#blue').append(param.format(data.blueWarningType.correctRate, data.blueWarningType.hitRate, data.blueWarningType.emptyReportRate, data.blueWarningType.missingReportRate, data.blueWarningType.t1, data.blueWarningType.t2, data.blueWarningType.t3));
+
+
+        if (data.yellowWarningType !== null)
+            $('#yellow').append(param.format(data.yellowWarningType.correctRate, data.yellowWarningType.hitRate, data.yellowWarningType.emptyReportRate, data.yellowWarningType.missingReportRate, data.yellowWarningType.t1, data.yellowWarningType.t2, data.yellowWarningType.t3));
+
+        if (data.orangeWarningType !== null)
+            $('#orange').append(param.format(data.orangeWarningType.correctRate, data.orangeWarningType.hitRate, data.orangeWarningType.emptyReportRate, data.orangeWarningType.missingReportRate, data.orangeWarningType.t1, data.orangeWarningType.t2, data.orangeWarningType.t3));
+
+        if (data.redWarningType !== null)
+            $('#red').append(param.format(data.redWarningType.correctRate, data.redWarningType.hitRate, data.redWarningType.emptyReportRate, data.redWarningType.missingReportRate, data.redWarningType.t1, data.redWarningType.t2, data.redWarningType.t3));
+
+        if (data.levelWarningType !== null)
         $('#all').append(param.format(data.levelWarningType.correctRate, data.levelWarningType.hitRate, data.levelWarningType.emptyReportRate, data.levelWarningType.missingReportRate, data.levelWarningType.t1, data.levelWarningType.t2, data.levelWarningType.t3));
-        $('#no-level').append(param.format(data.noLevelWarningType.correctRate, data.noLevelWarningType.hitRate, data.noLevelWarningType.emptyReportRate, data.noLevelWarningType.missingReportRate, data.noLevelWarningType.t1, data.noLevelWarningType.t2, data.noLevelWarningType.t3));
+
+        if (data.noLevelWarningType !== null)
+            $('#no-level').append(param.format(data.noLevelWarningType.correctRate, data.noLevelWarningType.hitRate, data.noLevelWarningType.emptyReportRate, data.noLevelWarningType.missingReportRate, data.noLevelWarningType.t1, data.noLevelWarningType.t2, data.noLevelWarningType.t3));
     };
 
     this.OnDownloadButtonClick = function () {

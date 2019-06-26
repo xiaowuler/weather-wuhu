@@ -53,8 +53,8 @@ public class ScoreShortTermServiceImpl implements ScoreShortTermService {
         }
 
         for (Department part : departments){
-                List<ScoreShortTerm> scoreShortTerms = scoreShortTermMapper.findAllByTimeAndRegionByDepartment(startTime, endTime, rescription, part.getDepartId(), examId);
-                scoreShortTermList.addAll(scoreShortTerms);
+            List<ScoreShortTerm> scoreShortTerms = scoreShortTermMapper.findAllByTimeAndRegionByDepartment(startTime, endTime, rescription, part.getDepartId(), examId);
+            scoreShortTermList.addAll(scoreShortTerms);
         }
 
         if (scoreShortTermList.size() == 0)
@@ -167,7 +167,7 @@ public class ScoreShortTermServiceImpl implements ScoreShortTermService {
 
         for (Department part : departments){
             List<ScoreShortTerm> scoreShortTermList = new ArrayList<>();
-            for (Department depart : departmentMapper.findAllByParentId(part.getParentDepartId())){
+            for (Department depart : departmentMapper.findAllByParentId(part.getDepartId())){
                 List<ScoreShortTerm> scoreShortTerms = scoreShortTermMapper.findAllByTimeAndRegionByDepartment(startTime, endTime, fcstHours, depart.getDepartId(), examId);
                 scoreShortTermList.addAll(scoreShortTerms);
             }

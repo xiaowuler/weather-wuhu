@@ -60,7 +60,7 @@ public class ScoreWarningSignalServiceImpl implements ScoreWarningSignalService 
 
         for (Department part : departments){
             List<ScoreWarningSignal> scoreWarningSignalList = new ArrayList<>();
-                for (Department depart : departmentMapper.findAllByParentId(part.getParentDepartId())){
+                for (Department depart : departmentMapper.findAllByParentId(part.getDepartId())){
                     List<ScoreWarningSignal> scoreWarningSignals = scoreWarningSignalMapper.findAllByTime(startTime, endTime, warningType, depart.getDepartId());
                     scoreWarningSignalList.addAll(scoreWarningSignals);
                 }
@@ -94,6 +94,7 @@ public class ScoreWarningSignalServiceImpl implements ScoreWarningSignalService 
                 departmentDTO.setTotalRate(Float.parseFloat(new DecimalFormat("0.00").format((float)calcRate.getSuccessCount()/calcRate.getCount())));
                 departmentDTO.setTotalSample(calcRate.getTotalSample());
                 departmentDTO.setCounty(part.getCounty());
+                departmentDTO.setDepartId(part.getDepartId());
                 departmentDTOS.add(departmentDTO);
             }
         }
