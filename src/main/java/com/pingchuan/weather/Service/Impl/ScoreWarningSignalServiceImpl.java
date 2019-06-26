@@ -92,6 +92,7 @@ public class ScoreWarningSignalServiceImpl implements ScoreWarningSignalService 
                 departmentDTO.setDepartName(part.getDepartName());
                 departmentDTO.setTotalRate(Float.parseFloat(new DecimalFormat("0.00").format((float)calcRate.getSuccessCount()/calcRate.getCount())));
                 departmentDTO.setTotalSample(calcRate.getTotalSample());
+                departmentDTO.setCounty(part.getCounty());
                 departmentDTOS.add(departmentDTO);
             }
         }

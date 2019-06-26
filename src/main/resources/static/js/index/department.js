@@ -17,7 +17,7 @@ var Department = function (parent) {
         console.log(this.result);
 
         this.result.departmentDTOS.forEach(function (item, index) {
-            var name = item.departName;
+            var name = item.county;
             marks.push(name)
         }.bind(this));
 
@@ -84,7 +84,7 @@ var Department = function (parent) {
             var score = '<td>{0}</td>';
             var sample = '<td>{0}</td>';
 
-            $('#city').append(name.format(item.departName));
+            $('#city').append(name.format(item.county));
             $('#score').append(score.format(item.totalRate));
             $('#sample').append(sample.format(item.totalSample));
 

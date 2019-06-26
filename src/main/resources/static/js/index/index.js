@@ -51,7 +51,7 @@ var App = function () {
         var departmentId = $('#check-object').combobox('getValue');
         var childDepartmentId = $('#secondary-units').combobox('getValue');
 
-        if (departmentId !== '' && departmentId !== '全部单位')
+        if (departmentId !== '' && departmentId !== '全部单位' && childDepartmentId !== '全部单位')
         {
             return {
                 startTime: startTime,
@@ -110,12 +110,12 @@ var App = function () {
             panelHeight: 300,
             editable: false,
             valueField:'departId',
-            textField:'departName',
+            textField:'county',
             queryParams: { parentDepartId: 58000 },
             loadFilter:function(data){
                 var obj={};
                 obj.departId = 58000;
-                obj.departName ='全部单位';
+                obj.county ='全部单位';
                 data.splice(0,0,obj);
                 return data;
             },
@@ -133,11 +133,14 @@ var App = function () {
                 this.ReloadProjectData();
 
             }.bind(this),
+            /*onChange: function(){
+
+            },*/
             onLoadSuccess: function (data) {
                 console.log(data);
                 var item = $('#check-object').combobox('getData');
                 if (item.length > 0) {
-                    $('#check-object').combobox('select',data[0].departName);
+                    $('#check-object').combobox('select',data[0].county);
                     $('#check-object').combobox('setValue',data[0].departId);
                 }
 
@@ -153,16 +156,16 @@ var App = function () {
             panelHeight: 'auto',
             editable: false,
             valueField:'departId',
-            textField:'departName',
+            textField:'county',
             queryParams: { parentDepartId: departId },
             loadFilter:function(data){
                 var obj={};
                 obj.departId = '';
-                obj.departName ='全部单位';
+                obj.county ='全部单位';
                 data.splice(0,0,obj);
                 return data;
             },
-            onSelect: function (row) {
+            onChange: function (row) {
                 this.ReloadDepartmentData();
                 this.ReloadProjectData();
             }.bind(this),
@@ -170,7 +173,7 @@ var App = function () {
                 console.log(data);
                 var item = $('#secondary-units').combobox('getData');
                 if (item.length > 0) {
-                    $('#secondary-units').combobox('select',data[0].departName);
+                    $('#secondary-units').combobox('select',data[0].county);
                     $('#secondary-units').combobox('setValue',data[0].departId);
                 }
                 this.ReloadDepartmentData();
