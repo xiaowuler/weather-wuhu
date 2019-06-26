@@ -55,7 +55,7 @@ public class ScoreWarningSignalServiceImpl implements ScoreWarningSignalService 
             }
         }else {
             departments = new ArrayList<>();
-            departments.add(departmentMapper.findOneById(departmentId));
+            departments.add(departmentMapper.findOneById(childDepartId));
         }
 
         for (Department part : departments){
@@ -64,6 +64,7 @@ public class ScoreWarningSignalServiceImpl implements ScoreWarningSignalService 
                     List<ScoreWarningSignal> scoreWarningSignals = scoreWarningSignalMapper.findAllByTime(startTime, endTime, warningType, depart.getDepartId());
                     scoreWarningSignalList.addAll(scoreWarningSignals);
                 }
+
                 scoreWarningSignalList.addAll(scoreWarningSignalMapper.findAllByTime(startTime, endTime, warningType, part.getDepartId()));
 
             if (scoreWarningSignalList.size() == 0)

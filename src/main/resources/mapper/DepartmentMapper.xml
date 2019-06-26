@@ -16,7 +16,7 @@
     </select>
 
     <select id="findAllByParentId" resultType="com.pingchuan.weather.entity.Department">
-        SELECT DepartID as departId, DepartName as departName, ParentDepartID as parentDepartId, County as county FROM Department where ParentDepartID = #{parentId}
+        SELECT  DepartID as departId, DepartName as departName, ParentDepartID as parentDepartId, County as county FROM Department where ParentDepartID = #{parentId}
     </select>
     
 </mapper>
