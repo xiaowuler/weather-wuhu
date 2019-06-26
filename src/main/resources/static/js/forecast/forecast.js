@@ -45,15 +45,13 @@ var App = function () {
         var startTime = $("#start-time").datebox('getValue');
         var endTime = $("#end-time").datebox('getValue');
         var aging = parseInt($('#aging').combobox('getValue'));
-        var object = parseInt($('#check-object').combobox('getValue'));
-        var area = parseInt($('#check-area').combobox('getValue'));
 
         return {
             startTime: startTime,
             endTime: endTime,
             fcstHours: aging,
             examId: 202,
-            departmentId: area
+            departmentId: 58000
         };
     };
 
@@ -107,14 +105,15 @@ var App = function () {
     this.SetCheckArea = function () {
         $('#check-area').combobox({
             editable: false,
-            url:"Department/findAllByCity",
-            valueField:'id',
-            textField:'name',
+            url:"Department/findAllByParentDepartId",
+            valueField:'departId',
+            textField:'county',
+            queryParams: { parentDepartId: 58000 },
             onLoadSuccess: function (data) {
                 var item = $('#check-area').combobox('getData');
                 if (item.length > 0) {
-                    $('#check-area').combobox('select',data[0].name);
-                    $('#check-area').combobox('setValue',data[0].id);
+                    $('#check-area').combobox('select',data[0].county);
+                    $('#check-area').combobox('setValue',data[0].departId);
                 }
                 this.ReloadDepartmentData();
                 this.ReloadProjectData();
