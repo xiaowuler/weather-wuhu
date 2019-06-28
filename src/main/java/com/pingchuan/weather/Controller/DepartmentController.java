@@ -22,8 +22,8 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
-    @PostMapping("/findAllByCity")
-    public List<Department> findAllByCity(){
+    @PostMapping("/findAll")
+    public List<Department> findAll(){
         return departmentService.findAllByCity();
     }
 
