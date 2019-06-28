@@ -24,4 +24,19 @@ public class UserController {
     public PageResult<User> findAllByPage(int page, int rows){
         return userService.findAllByPage(page, rows);
     }
+
+    @RequestMapping("updatePassword")
+    public void updatePassword(int userId, String password){
+        userService.updatePassword(userId, password);
+    }
+
+    @RequestMapping("findOneById")
+    public User findOneById(int userId){
+        return userService.findOneById(userId);
+    }
+
+    @RequestMapping("updateAll")
+    public void updateAll(int userId, String departId){
+        userService.updateAll(userId, departId);
+    }
 }

@@ -33,4 +33,19 @@ public class UserServiceImpl implements UserService {
         return pageResult;
     }
 
+    @Override
+    public void updatePassword(int userId, String password) {
+        userMapper.updatePassword(userId, password);
+    }
+
+    @Override
+    public User findOneById(int userId) {
+        return userMapper.findOneById(userId);
+    }
+
+    @Override
+    public void updateAll(int userId, String departId) {
+        userMapper.updateAll(userId, departId);
+    }
+
 }

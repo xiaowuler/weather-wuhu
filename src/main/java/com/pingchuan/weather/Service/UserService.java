@@ -4,6 +4,11 @@ import com.pingchuan.weather.entity.PageResult;
 import com.pingchuan.weather.entity.User;
 public interface UserService {
 
-    PageResult<User> findAllByPage(int page, int rows);
+    User findOneById(int userId);
 
+    void updateAll(int userId, String departId);
+
+    void updatePassword(int userId, String password);
+
+    PageResult<User> findAllByPage(int page, int rows);
 }
