@@ -2,6 +2,7 @@ package com.pingchuan.weather.Service.Impl;
 
 import com.pingchuan.weather.Mapper.UserMapper;
 import com.pingchuan.weather.Service.UserService;
+import com.pingchuan.weather.entity.PageResult;
 import com.pingchuan.weather.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,13 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public List<User> findAllByPage(int page, int rows) {
-        return userMapper.findAllByPage((page - 1) * page, page * rows);
+    public PageResult<User> findAllByPage(int page, int rows) {
+
+        PageResult<User> pageResult = new PageResult<>();
+        pageResult.setRows(userMapper.findAllByPage((page - 1) * rows + 1, page * rows));
+        pageResult.setTotal(userMapper.findCount());
+
+        return pageResult;
     }
 
 }

@@ -1,12 +1,11 @@
 package com.pingchuan.weather.Controller;
 
 import com.pingchuan.weather.Service.UserService;
+import com.pingchuan.weather.entity.PageResult;
 import com.pingchuan.weather.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * @description: 用户控制类
@@ -22,7 +21,7 @@ public class UserControl {
     private UserService userService;
 
     @RequestMapping("/findAllByPage")
-    public List<User> findAllByPage(int page, int rows){
+    public PageResult<User> findAllByPage(int page, int rows){
         return userService.findAllByPage(page, rows);
     }
 }

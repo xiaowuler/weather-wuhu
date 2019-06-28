@@ -19,5 +19,12 @@
             Id BETWEEN #{page}
             AND #{rows}
     </select>
+    <select id="findCount" resultType="int">
+        SELECT
+            count(*)
+        FROM
+            [User] u
+            LEFT JOIN Department d ON u.DepartmentId = d.DepartID
+    </select>
 
 </mapper>

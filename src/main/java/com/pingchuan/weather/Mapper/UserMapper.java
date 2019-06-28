@@ -8,5 +8,8 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
-    public List<User> findAllByPage(@Param("page") int page, @Param("rows") int rows);
+
+    List<User> findAllByPage(@Param("page") int page, @Param("rows") int rows);
+
+    int findCount();
 }
