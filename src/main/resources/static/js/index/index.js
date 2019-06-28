@@ -126,16 +126,14 @@ var App = function () {
                     this.SetChildDepart(row.departId);
                 } else{
                     $('.forbid').show();
+                    this.SetChildDepart();
                     //$("#secondary-units").combobox('setValue',null);
                 }
-
+            }.bind(this),
+            onChange: function () {
                 this.ReloadDepartmentData();
                 this.ReloadProjectData();
-
             }.bind(this),
-            /*onChange: function(){
-
-            },*/
             onLoadSuccess: function (data) {
                 console.log(data);
                 var item = $('#check-object').combobox('getData');
