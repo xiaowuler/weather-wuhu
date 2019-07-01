@@ -1717,13 +1717,13 @@
 }
 .datagrid-header-row,
 .datagrid-row {
-  height: 32px;
+  height: 40px;
 }
 .datagrid-header td,
 .datagrid-body td,
 .datagrid-footer td {
   border-width: 0 1px 1px 0;
-  border-style: dotted;
+  border-style: solid;
   margin: 0;
   padding: 0;
 }
@@ -1890,7 +1890,7 @@
 .datagrid-header td,
 .datagrid-body td,
 .datagrid-footer td {
-  border-color: #ccc;
+  border-color: #e0e0e0;
 }
 .datagrid-htable,
 .datagrid-btable,
@@ -1899,12 +1899,10 @@
   border-collapse: separate;
 }
 .datagrid-row-alt {
-  background: #fafafa;
+  background: #f6f6f6;
 }
 .datagrid-row-over,
 .datagrid-header td.datagrid-header-over {
-  background: #eaf2ff;
-  color: #000000;
   cursor: default;
 }
 .datagrid-row-selected {
@@ -2098,22 +2096,22 @@
   min-width: 28px;
 }
 .pagination-first {
-  background: url('images/pagination_icons.png') no-repeat 0 center;
+  background: url('../images/pagination_icons.png') no-repeat 0 center;
 }
 .pagination-prev {
-  background: url('images/pagination_icons.png') no-repeat -16px center;
+  background: url('../images/pagination_icons.png') no-repeat -16px center;
 }
 .pagination-next {
-  background: url('images/pagination_icons.png') no-repeat -32px center;
+  background: url('../images/pagination_icons.png') no-repeat -32px center;
 }
 .pagination-last {
-  background: url('images/pagination_icons.png') no-repeat -48px center;
+  background: url('../images/pagination_icons.png') no-repeat -48px center;
 }
 .pagination-load {
-  background: url('images/pagination_icons.png') no-repeat -64px center;
+  background: url('../images/pagination_icons.png') no-repeat -64px center;
 }
 .pagination-loading {
-  background: url('images/loading.gif') no-repeat center center;
+  background: url('../images/loading.gif') no-repeat center center;
 }
 .pagination-page-list,
 .pagination .pagination-num {

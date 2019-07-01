@@ -153,20 +153,27 @@
     margin-left: 10px;
     position: relative;
 }
-.choose .textbox{
+.choose .textbox,
+drop-down .textbox{
     width: 138px!important;
     color: #666666;
 }
 .choose .textbox .textbox-text{
     padding: 0 4px 0 10px;
 }
-.choose .textbox-addon{
+.drop-down .textbox .textbox-text{
+    text-align: center;
+    padding: 0 5px;
+}
+.choose .textbox-addon,
+.drop-down .textbox-addon{
     border-left: 1px solid #e0e0e0;
 }
 .combo-panel {
     border: 1px solid #e0e0e0;
 }
-.choose .combo-arrow{
+.choose .combo-arrow,
+.drop-down .combo-arrow{
     background: url("../images/drop-down.png") no-repeat center;
 }
 .combobox-item{

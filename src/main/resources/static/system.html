@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="IE=edge" >
     <title>系统管理</title>
+    <link rel="stylesheet" href="plug/easyui.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/laydate.css">
     <link rel="stylesheet" href="css/system.css">
 </head>
 <body>
@@ -31,8 +31,9 @@
                 </div>
             </div>
         </div>
-        <div class="system width1200">
-            <table class="system-table">
+        <div class="system drop-down width1200">
+            <table class="system-table" id="system-table"></table>
+            <!--<table class="system-table">
                 <tr>
                     <th>用户名</th>
                     <th>姓名</th>
@@ -400,7 +401,7 @@
                     </ul>
                 </div>
                 <div class="number fl">共<em>5</em>页</div>
-            </div>
+            </div>-->
         </div>
     </div>
     <div class="dialog dialog-save">保存成功</div>
@@ -412,12 +413,12 @@
                 <i class="cancel"></i>
             </div>
             <form>
-                <div class="sign-content">
+                <div class="sign-content clearfix">
                     <label><img src="images/password.png"></label>
                     <input type="password" class="password" placeholder="请输入密码">
                     <i class="remove"></i>
                 </div>
-                <div class="sign-content">
+                <div class="sign-content clearfix">
                     <label><img src="images/password.png"></label>
                     <input type="password" class="password" placeholder="请再次输入密码">
                     <i class="remove"></i>
@@ -433,6 +434,8 @@
 </div>
 </body>
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="js/index/index.js"></script>
-<script type="text/javascript" src="js/calendar.js"></script>
+<script type="text/javascript" src="plug/helper.js"></script>
+<script type="text/javascript" src="plug/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="plug/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/system.js"></script>
 </html>

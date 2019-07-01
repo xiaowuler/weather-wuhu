@@ -2,28 +2,33 @@
     width: 100%;
     text-align: center;
 }
-.system-table th{
-    height: 40px;
-    color: #ffffff;
+.system .datagrid-body,
+.datagrid .datagrid-pager{
+    border: 1px solid #e0e0e0;
+    border-top: 0;
+}
+.system .datagrid-body{
+    border-bottom: 0;
+}
+.datagrid .panel-body{
+    border: 0;
+}
+.datagrid-header{
     background: url('../images/nav-bg.jpg') repeat-x;
     background-size: 100% 40px;
 }
-.system-table td{
-    height: 43px;
-    border-width: 0 1px 1px 0;
-    border-style: solid;
-    border-color: #e0e0e0;
-    background: #f6f6f6;
+.datagrid-header td{
+    color: #ffffff;
+    border: 0;
 }
-.system-table tr td:first-child{
-    border-left: 1px solid #e0e0e0;
-}
-.system-table tr:nth-of-type(2n) td{
-    background: #ffffff;
+.textbox{
+    width: 90%!important;
 }
 .system-btn{
     width: 46px;
     height: 28px;
+    margin: 0 auto;
+    line-height: 28px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
@@ -41,39 +46,6 @@
 }
 .result-action{
     background: url("../images/checked.png") no-repeat;
-}
-.page{
-    height: 22px;
-    margin-top: 20px;
-    margin-bottom: 50px;
-}
-.pagination{
-    width: 174px;
-    position: relative;
-}
-.pagination ul{
-    margin: 0 auto;
-    display: table;
-}
-.pagination ul li{
-    width: 22px;
-    height: 22px;
-    margin-right: 2px;
-    line-height: 22px;
-    float: left;
-    text-align: center;
-    background: url(../images/nav-bg.jpg) repeat-x;
-    background-size: 100% 22px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-}
-.pagination ul li.action{
-    background: url(../images/system-bg.jpg) repeat-x;
-}
-.pagination ul li a{
-    color: #ffffff;
-    font-size: 12px;
 }
 .arrow{
     position: absolute;
@@ -142,6 +114,34 @@
 .message-content .sign-content{
     margin-top: 0;
     margin-bottom: 20px;
+    position: relative;
+}
+.message-content .sign-content label{
+    width: 40px;
+    height: 40px;
+    display: block;
+    float: left;
+    text-align: center;
+    background: url("../images/btn-bg.jpg") repeat-x;
+}
+.message-content .sign-content label img{
+    margin-top: 6px;
+}
+.message-content .sign-content input{
+    width: 317px;
+    padding: 0 15px;
+    line-height: 38px;
+    border: 1px solid #e0e0e0;
+    border-left: 0;
+}
+.message-content .sign-content .remove{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    background: url("../images/close.png") no-repeat center/cover;
 }
 .message-txt{
     margin-bottom: 40px;

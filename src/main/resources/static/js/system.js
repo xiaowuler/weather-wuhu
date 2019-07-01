@@ -1,136 +1,160 @@
 var App = function () {
+    this.editIndex  = undefined;
+    this.table = $('#system-table');
     this.Startup = function () {
-        this.Relayout();
-        this.LocalDate();
-        this.OnButtonClick();
-        this.CreateSelect();
-        window.onresize = this.Relayout.bind(this);
+        this.InitPortGrid();
+        this.ReloadData();
+        this.Reload();
+        $('.sign-content .remove').on('click', this.RemoveInputValue.bind(this));
+        $('.cancel').on('click', this.HideDialog.bind(this));
+        $('.btn-cancel').on('click', this.HideDialog.bind(this));
+        $('.btn-sure').on('click', this.OnSureButtonClick.bind(this));
     };
 
-    this.Relayout = function () {
-        var width = $(window).width();
-        var height = $(window).height();
+    this.Reload = function () {
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: 'Department/findAll',
+            success: function (result) {
+                console.log(result);
+            }.bind(this)
+        });
     };
 
-    this.LocalDate = function () {
-        var date = new Date();
-        var year = date.getFullYear();
-        var month = date.getMonth() + 1;
-        var day = date.getDate();
-        if (month < 10) {
-            month = "0" + month;
-        }
-        if (day < 10) {
-            day = "0" + day;
-        }
-        var nowDate = year + "/" + month + "/" + day;
-        var nextDate = year + "/" +month + "/" + (day + 1);
-        console.log(nowDate);
-        $("#start-time").val(nowDate);
-        $("#end-time").val(nextDate);
+    this.ReloadData = function () {
+        this.table.datagrid({
+            method: "POST",
+            url: 'User/findAllByPage',
+            onLoadSuccess: function (row) {
+                console.log(row)
+            }
+        });
     };
 
-    this.OnButtonClick = function () {
-        $(".save").each(function(){
-            $(this).click(function(){
-                $(".dialog-save").show();
-                setTimeout(function(){
-                    $(".dialog-save").hide();
-                },3000)
-            })
+    this.InitPortGrid = function () {
+        this.table.datagrid({
+            striped: true,
+            singleSelect: true,
+            //fitColumns: true,
+            //fit: true,
+            scrollbarSize: 0,
+            pagination: true,
+            pageNumber: 1,
+            pageSize: 10,
+            pageList: [10, 20, 30],
+            loadMsg: '正在加载数据，请稍后...',
+            columns: [[
+                { field: 'loginName', title: '用户名', width: 240, align: 'center'},
+                { field: 'name', title: '姓名', width: 240, align: 'center'},
+                { field: 'departName', title: '单位', width: 240, align: 'center', formatter: this.SetComboBox.bind(this),
+                    editor:{
+                        type:'combobox',
+                        options:{
+                            valueField:'departId',
+                            textField:'departName',
+                            url:'Department/findAll',
+                            required:true,
+                            editable:false
+                        }
+                    }
+                },
+                //{ field: 'type', title: '用户类型', align: 'center'},
+                //{ field: 'state', title: '审核结果', align: 'center'},
+                { field: 'loginPwdd', title: '重置密码', width: 240, align: 'center', formatter: this.GetResetPasswordButton.bind(this)},
+                { field: 'saved', title: '保存修改', width: 238, align: 'center', formatter: this.GetSaveButton.bind(this)}
+            ]],
+            onBeforeLoad: this.OnTableGridBeforeLoad.bind(this),
+            // onClickCell: function (rowIndex, rowData) {
+            //      $("#system-table").datagrid('selectRow', rowIndex);
+            //      $("#system-table").datagrid('beginEdit', rowIndex);
+            // },
+            onClickRow: this.OnClickRow.bind(this)
         });
-        $(".reset").each(function(){
-            $(this).click(function(){
-                $(".message").show();
-                $(".bg").show();
-            })
-        });
-        $(".btn-sure").click(function(){
-            $(this).parents(".message").hide();
-            $(".bg").hide();
-            $(".dialog-reset").show();
-            setTimeout(function(){
-                $(".dialog-reset").hide();
-            },1500)
-        });
-        $(".cancel,.btn-cancel").click(function(){
-            $(this).parents(".message").hide();
-            $(".bg").hide();
-        });
-        $(".result").each(function(){
-            $(this).click(function(){
-                $(this).toggleClass("result-action");
-            })
-        })
     };
 
-    this.CreateSelect = function () {
-        var selects=$('select');//获取select
-        selects.attr('class','select');
-        for(var i=0;i<selects.length;i++){
-            createSelect(selects[i],i);
-        }
-        function createSelect(container,index){
-            //创建select容器，class为select-box，插入到select标签前
-            var wrap=$('<div></div>');//div相当于select标签
-            wrap.attr('class','select-box');
-            wrap.insertBefore(container);
-
-            //显示框class为select-show,插入到创建的wrap中
-            var show=$('<div></div>');//显示框
-            show.css('cursor','pointer').attr('class','select-show').appendTo(wrap);
-
-            //创建option容器，class为select-option，插入到创建的wrap中
-            var option=$('<ul></ul>');//创建option列表
-            option.attr('class','select-option');
-            option.appendTo(wrap);
-            createOptions(index,option);//创建option
-
-            //点击显示框
-            wrap.toggle(function(){
-                option.show();
-                $(this).addClass('select-action');
-            },function(){
-                option.hide();
-                $(this).removeClass('select-action');
-            });
-
-            var tag=option.find('li');
-            tag.on('click',function(){
-                $(this).addClass('selected').siblings().removeClass('selected');
-                var value=$(this).text();
-                show.text(value);
-                option.hide();
-            });
-
-            tag.hover(function(){
-                $(this).addClass('hover').siblings().removeClass('hover');
-            },function(){
-                tag.removeClass('hover');
-            });
-
-        }
-
-        function createOptions(index,list){
-            //获取被选中的元素并将其值赋值到显示框中
-            var options=selects.eq(index).find('option'),
-                selected=options.filter(':selected'),
-                index=selected.index(),
-                showBox=list.prev();
-            showBox.text(selected.text());
-
-            //为每个option建立个li并赋值
-            for(var n=0;n<options.length;n++){
-                var tag_option=$('<li></li>'),//li相当于option
-                    txt_option=options.eq(n).text();
-                tag_option.text(txt_option).css('cursor','pointer').appendTo(list);
-
-                //为被选中的元素添加class为selected
-                if(n==index){
-                    tag_option.attr('class','selected');
-                }
+    this.OnClickRow = function (index) {
+        var editIndex = this.editIndex;
+        if (editIndex !== index){
+            if (this.EndEditing()){
+                this.table.datagrid('selectRow', index)
+                    .datagrid('beginEdit', index);
+                editIndex = index;
+            } else {
+                this.table.datagrid('selectRow', editIndex);
             }
         }
+    };
+
+    this.EndEditing = function () {
+        var editIndex = this.editIndex;
+        if (editIndex === undefined){return true}
+        if (this.table.datagrid('validateRow', editIndex)){
+            this.table.datagrid('endEdit',editIndex);
+            editIndex = undefined;
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    this.OnTableGridBeforeLoad = function () {
+        this.table.datagrid('getPager').pagination({
+            beforePageText: '第',
+            afterPageText: '页&nbsp;&nbsp;&nbsp;共{pages}页',
+            displayMsg: '当前显示{from}-{to}条记录&nbsp;&nbsp;&nbsp;共{total}条记录',
+            layout: ['list', 'sep', 'first', 'prev', 'sep', 'manual', 'sep', 'next', 'last', 'sep', 'refresh', 'info']
+        });
+    };
+
+    this.GetResetPasswordButton = function (value, row, index) {
+        return '<a class="system-btn reset" href="javascript:void(0)" onclick="ResetPasswordDialog(\''+index+'\')">重置</a>';
+    };
+
+    ResetPasswordDialog = function(index) {
+        $('#system-table').datagrid('selectRow',index);
+        var row = $('#system-table').datagrid('getSelected');
+        if (row){
+            $('.message').show();
+            $('.bg').show();
+        }
+    };
+
+    this.GetSaveButton = function (value, row, index) {
+        return '<a class="system-btn save" href="javascript:void(0)" onclick="SaveDialog(\''+index+'\')">保存</a>';
+    };
+
+    SaveDialog = function (index) {
+        $('#system-table').datagrid('selectRow',index);
+        var row = $('#system-table').datagrid('getSelected');
+        if (row){
+            $(".dialog-save").show();
+            setTimeout(function(){
+                $(".dialog-save").hide();
+            },2000)
+        }
+    };
+
+    this.SetComboBox = function (val,row) {
+        return row.departName;
+    };
+
+    this.RemoveInputValue = function (event) {
+        $(event.target).prev().val('');
+    };
+
+    this.HideDialog = function () {
+        $(".message").hide();
+        $(".bg").hide();
+    };
+
+    this.OnSureButtonClick = function () {
+        this.HideDialog();
+        $(".dialog-reset").show();
+        setTimeout(function(){
+            $(".dialog-reset").hide();
+        },1500)
+
     }
 };
 $(document).ready(function () {
