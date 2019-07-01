@@ -117,6 +117,10 @@ var App = function () {
         if (row){
             $('.message').show();
             $('.bg').show();
+
+            var selected = $('#system-table').datagrid('getSelected');
+            $('#password').attr("value",selected.loginPwd);
+            $('#rePassword').attr("value",selected.loginPwd);
         }
     };
 
@@ -131,7 +135,22 @@ var App = function () {
             $(".dialog-save").show();
             setTimeout(function(){
                 $(".dialog-save").hide();
-            },2000)
+            },2000);
+
+            var selected = this.table.datagrid('getSelected');
+            console.log(selected);
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                data: {
+                    userId: selected.id,
+                    departId: selected.departId
+                },
+                url: 'User/updateAll',
+                success: function (result) {
+                    //this.ReloadData();
+                }.bind(this)
+            });
         }
     };
 
@@ -149,12 +168,26 @@ var App = function () {
     };
 
     this.OnSureButtonClick = function () {
+        var selected = this.table.datagrid('getSelected');
+
         this.HideDialog();
         $(".dialog-reset").show();
         setTimeout(function(){
             $(".dialog-reset").hide();
-        },1500)
+        },1500);
 
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            data: {
+                userId: selected.id,
+                password: $('#password').val()
+            },
+            url: 'User/updatePassword',
+            success: function (result) {
+                this.ReloadData();
+            }.bind(this)
+        });
     }
 };
 $(document).ready(function () {
