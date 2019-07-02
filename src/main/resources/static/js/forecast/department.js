@@ -75,6 +75,7 @@ var Department = function (parent) {
     };
 
     this.ShowDepartmentTable = function (data) {
+        console.log(data);
         $('#department-table').find('tr th,tr td').not('.table-title').remove();
         data.departments.forEach(function (item) {
 

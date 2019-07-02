@@ -6,7 +6,7 @@ public interface UserService {
 
     User findOneById(int userId);
 
-    void updateAll(int userId, String departId);
+    void updateAll(int userId, int departId);
 
     void updatePassword(int userId, String password);
 

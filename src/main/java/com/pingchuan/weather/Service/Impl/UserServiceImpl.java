@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateAll(int userId, String departId) {
+    public void updateAll(int userId, int departId) {
         userMapper.updateAll(userId, departId);
     }
 

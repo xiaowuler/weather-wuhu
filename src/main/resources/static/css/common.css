@@ -118,30 +118,12 @@
     background: url("../images/circled.png") no-repeat left;
 }
 .time{
-    width: 202px;
+    width: 200px;
     margin-left: 10px;
     position: relative;
 }
-/*.time input{
-    width: 140px;
-    background: url("../images/calendar.png") no-repeat right;
-}
-.time:after{
-    content: "";
-    width: 120px;
-    height: 30px;
-    display: block;
-    position: absolute;
-    right:20px;
-    bottom: 0;
-    z-index: -1;
-    border: 1px solid #e0e0e0;
-    -webkit-box-shadow: 2px 0 5px rgba(0,0,0,0.04);
-    -moz-box-shadow: 2px 0 5px rgba(0,0,0,0.04);
-    box-shadow: 2px 0 5px rgba(0,0,0,0.04);
-}*/
 .time .textbox{
-    width: 140px!important;
+    width: 138px!important;
 }
 .time .combo-arrow{
     background: url("../images/calendar.png") no-repeat center;
@@ -155,8 +137,11 @@
 }
 .choose .textbox,
 drop-down .textbox{
-    width: 138px!important;
+    width: 120px!important;
     color: #666666;
+}
+.choose-type .textbox{
+    width: 110px!important;
 }
 .choose .textbox .textbox-text{
     padding: 0 4px 0 10px;
@@ -180,9 +165,12 @@ drop-down .textbox{
     padding: 6px 0 6px 10px;
 }
 .choose-content{
-    width: 138px;
+    width: 120px;
     height: 30px;
     margin-left: 8px;
+}
+.choose-type .choose-content {
+    width: 110px;
 }
 .choose-aging,
 .choose-aging .textbox{
@@ -194,10 +182,10 @@ drop-down .textbox{
 }
 .choose-area,
 .choose-area .textbox{
-    width: 180px!important;
+    width: 135px!important;
 }
 .forbid{
-    width: 138px;
+    width: 120px;
     height: 30px;
     display: none;
     position: absolute;

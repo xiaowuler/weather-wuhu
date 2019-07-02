@@ -9,6 +9,13 @@ var App = function () {
         this.SetCheckObject();
         this.SetCheckArea();
         $('.tab ul li').on('click', this.OnTabClick.bind(this));
+        $('#query-btn').on('click', this.OnQueryButtonClick.bind(this));
+        $('#query-btn').trigger("click");
+    };
+
+    this.OnQueryButtonClick = function () {
+        this.ReloadDepartmentData();
+        this.ReloadProjectData();
     };
 
     this.ReloadDepartmentData = function () {
@@ -19,7 +26,6 @@ var App = function () {
             data: params,
             url: 'ScoreShortTerm/findAllByTimeAndRegionByDepartment',
             success: function (data) {
-                //console.log(data);
                 this.Department.Reload(data);
                 this.Department.ShowDepartmentTable(data);
             }.bind(this)
@@ -66,39 +72,26 @@ var App = function () {
     this.SetCalendar = function () {
         $('#start-time').datebox({
             panelWidth: 180,
-            panelHeight: 260,
-            onSelect: function () {
-                this.ReloadDepartmentData();
-            }.bind(this),
+            panelHeight: 260
         }).datebox('setValue', '2019/03/01');
 
         $('#end-time').datebox({
             panelWidth: 180,
-            panelHeight: 260,
-            onSelect: function () {
-                this.ReloadDepartmentData();
-            }.bind(this),
+            panelHeight: 260
         }).datebox('setValue', '2019/04/01');
     };
 
     this.SetAging = function () {
         $('#aging').combobox({
             panelHeight: 'auto',
-            editable: false,
-            onSelect: function () {
-                this.ReloadDepartmentData();
-                this.ReloadProjectData();
-            }.bind(this),
+            editable: false
         });
     };
 
     this.SetCheckObject = function () {
         $('#check-object').combobox({
             panelHeight: 'auto',
-            editable: false,
-            onSelect: function () {
-                this.ReloadDepartmentData();
-            }.bind(this),
+            editable: false
         });
     };
 
@@ -115,12 +108,7 @@ var App = function () {
                     $('#check-area').combobox('select',data[0].county);
                     $('#check-area').combobox('setValue',data[0].departId);
                 }
-                this.ReloadDepartmentData();
-                this.ReloadProjectData();
-            }.bind(this),
-            onSelect: function () {
-                this.ReloadDepartmentData();
-            }.bind(this),
+            }.bind(this)
         });
     };
 };

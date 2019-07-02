@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @RequestMapping("updateAll")
-    public void updateAll(int userId, String departId){
+    public void updateAll(int userId, int departId){
         userService.updateAll(userId, departId);
     }
 }
