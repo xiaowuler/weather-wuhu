@@ -7,9 +7,12 @@ import com.pingchuan.weather.entity.PageResult;
 import com.pingchuan.weather.service.UserService;
 
 import org.springframework.http.HttpRequest;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -20,13 +23,14 @@ import java.util.Map;
  * @author: XW
  * @create: 2019-06-28 09:44
  **/
-@RestController
+@Controller
 @RequestMapping("User")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
+    //@ResponseBody
     @RequestMapping("/findAllByPage")
     public PageResult<User> findAllByPage(int page, int rows){
         return userService.findAllByPage(page, rows);
@@ -55,8 +59,12 @@ public class UserController {
     }
 
     @RequestMapping("test")
-    public String test(){
-        return "index.html";
+    @ResponseBody
+    public ModelAndView test(){
+        System.out.println("ssss");
+        ModelAndView mode = new ModelAndView();
+        mode.setViewName("static/index.html");
+        return mode;
     }
 
 
