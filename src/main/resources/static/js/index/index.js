@@ -29,7 +29,6 @@ var App = function () {
             data: params,
             url: 'ScoreWarningSignal/findAllByTimeAndRegionByDepartment',
             success: function (data) {
-                console.log(data);
                 this.Department.Reload(data);
                 this.Department.ShowDepartmentTable(data);
             }.bind(this)
@@ -47,6 +46,7 @@ var App = function () {
             data: params,
             url: 'ScoreWarningSignal/findAllByTimeAndRegionByProduct',
             success: function (data) {
+                console.log(data);
                 if (data === null)
                     return;
 
@@ -63,8 +63,7 @@ var App = function () {
         var departmentId = $('#check-object').combobox('getValue');
         var childDepartmentId = $('#secondary-units').combobox('getValue');
 
-        if (departmentId !== '' && departmentId !== '全部单位' && childDepartmentId !== '全部单位')
-        {
+        if (departmentId !== '' || childDepartmentId !== ''){
             return {
                 startTime: startTime,
                 endTime: endTime,
@@ -127,7 +126,6 @@ var App = function () {
                 } else{
                     $('.forbid').show();
                     this.SetChildDepart();
-                    //$("#secondary-units").combobox('setValue',null);
                 }
             }.bind(this),
             onLoadSuccess: function (data) {
@@ -171,8 +169,8 @@ var App = function () {
         });
     };
 };
+
 $(document).ready(function () {
     var app = new App();
     app.Startup();
 });
-

@@ -10,13 +10,13 @@ import lombok.Data;
 
 @Data
 public class WarningTypeDTO {
-
+    // 准确率
     private float correctRate;
-
+    // 命中率
     private float hitRate;
-
+    // 空报率
     private float emptyReportRate;
-
+    // 漏报率
     private float missingReportRate;
 
     private float t1;
@@ -24,5 +24,4 @@ public class WarningTypeDTO {
     private float t2;
 
     private float t3;
-
 }

@@ -5,6 +5,7 @@ var App = function () {
         this.OnSelectClick();
         this.OnFormClick();
         this.CreateSelect();
+        this.OnLoginButtonClick();
     };
     this.Relayout = function () {
         var width = $(window).width();
@@ -98,6 +99,42 @@ var App = function () {
                 }
             }
         }
+
+        this.OnLoginButtonClick = function () {
+          $("#loginButton").click(function () {
+              var loginName = $(".user").val();
+              var loginPwd = $(".password").val();
+              if (loginName == ""){
+                  alert("请输入用户名");
+                  return;
+              }
+              if (loginPwd == ""){
+                  alert("请输入密码");
+                  return;
+              }
+
+              $.ajax({
+                  type: "POST",
+                  url: "/User/doLogin",
+                  data: {"loginName": loginName, "loginPwd": loginPwd},
+                  success: function (result) {
+                      var data = JSON.parse(result);
+                      if (data.user == null){
+                          alert("用户名或密码错误")
+                      } else {
+                          alert("登录成功");
+                          window.location.href = "http://localhost:9000/index.html?"+data.user.name+"";
+                      }
+                  }
+
+              });
+
+
+
+          });
+        };
+
+        
     }
 };
 $(document).ready(function () {

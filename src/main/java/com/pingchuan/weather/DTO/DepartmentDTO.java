@@ -1,7 +1,7 @@
 package com.pingchuan.weather.DTO;
 
-import com.pingchuan.weather.entity.Department;
 import lombok.Data;
+import com.pingchuan.weather.entity.Department;
 
 /**
  * @description: 单位 dto
@@ -12,8 +12,6 @@ import lombok.Data;
 @Data
 public class DepartmentDTO extends Department {
 
-    private float totalRate;
-
-    private String totalSample;
-
+    private float totalRate;  // 总比率
+    private String totalSample;  // 总样品
 }

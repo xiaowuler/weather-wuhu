@@ -1,7 +1,6 @@
 package com.pingchuan.weather.DTO;
 
 import lombok.Data;
-
 import java.util.List;
 
 /**
@@ -13,18 +12,19 @@ import java.util.List;
 @Data
 public class ScoreWarningSignalDTO {
 
+    // 蓝色预警
     private WarningTypeDTO blueWarningType;
-
+    // 黄色预警
     private WarningTypeDTO yellowWarningType;
-
+    // 橙色预警
     private WarningTypeDTO orangeWarningType;
-
+    // 红色预警
     private WarningTypeDTO redWarningType;
-
+    // 分级检验
     private WarningTypeDTO levelWarningType;
-
+    // 不分级检验
     private WarningTypeDTO noLevelWarningType;
-
+    // 按单位
     List<DepartmentDTO> departmentDTOS;
 
 }

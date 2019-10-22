@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pingchuan.weather.Mapper.ScoreWarningSignalMapper">
-
+<mapper namespace="com.pingchuan.weather.mapper.ScoreWarningSignalMapper">
+    <!-- 根据时间、单位Id、预警类型查询预警信号 -->
     <select id="findAllByTime" resultType="com.pingchuan.weather.entity.ScoreWarningSignal">
-        select DepartmentId as departmentId, IssueTime as issueTime, IsWarningSignal as isWarningSignal, OperationTime as operationTime, WarningType as warningType, WarningAction as warningAction, WarningLevel_Class as warningLevelClass, GradeVaue_Class as gradeValueClass, LeadTime_Class as leadTimeClass, GradeVaue_NoClass as gradeValueNoClass, LeadTime_NoClass as leadTimeNoClass, IsOverTime as isOverTime from ScoreWarningSignal where IssueTime &gt;= #{startTime} and IssueTime &lt;= #{endTime} and DepartmentId = #{stationId} and warningType = #{warningType}
+        select DepartmentId as departmentId, IssueTime as issueTime, IsWarningSignal as isWarningSignal, OperationTime as operationTime, WarningType as warningType, WarningAction as warningAction, WarningLevel_Class as warningLevelClass, GradeValue_Class as gradeValueClass, LeadTime_Class as leadTimeClass, GradeValue_NoClass as gradeValueNoClass, LeadTime_NoClass as leadTimeNoClass, IsOverTime as isOverTime
+        from ScoreWarningSignal
+        where IssueTime &gt;= #{startTime} and IssueTime &lt;= #{endTime} and DepartmentId = #{stationId} and warningType = #{warningType}
     </select>
 
 </mapper>

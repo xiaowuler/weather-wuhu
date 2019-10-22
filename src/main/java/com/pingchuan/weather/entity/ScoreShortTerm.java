@@ -1,9 +1,8 @@
 package com.pingchuan.weather.entity;
 
 import lombok.Data;
-
-import java.math.BigDecimal;
 import java.util.Date;
+import java.math.BigDecimal;
 
 /**
  * @description: 分数查询实体类
@@ -45,5 +44,4 @@ public class ScoreShortTerm {
     private int rainStormKey2;
 
     private int rainStormValue2;
-
 }

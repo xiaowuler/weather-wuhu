@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--客户映射 指定到dao接口 -->
-<mapper namespace="com.pingchuan.weather.Mapper.UserMapper">
+<mapper namespace="com.pingchuan.weather.mapper.UserMapper">
 
     <select id="findAllByPage" resultType="com.pingchuan.weather.entity.User">
         SELECT
@@ -55,4 +55,8 @@
             Id = #{userId}
     </update>
 
+    <!-- 用户登录 -->
+    <select id="userLogin" resultType="com.pingchuan.weather.entity.User">
+        SELECT * FROM [User] WHERE LoginName = #{loginName} AND LoginPwd = #{loginPwd}
+    </select>
 </mapper>

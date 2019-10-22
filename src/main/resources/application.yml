@@ -6,8 +6,6 @@ spring:
     url: jdbc:sqlserver://10.129.2.152;DatabaseName=FCSTASSESSMENT
     username: sa
     password: AMO2.255
-
-#mybatis配置mapper.xml文件位置以及包扫描
 mybatis:
-   mapper-locations: classpath*:mapper/*.xml #mapper文件扫描
-   type-aliases-package: com.pingchuan.weather.entity #别名扫描
+   mapper-locations: classpath*:mapper/*.xml
+   type-aliases-package: com.pingchuan.weather.entity

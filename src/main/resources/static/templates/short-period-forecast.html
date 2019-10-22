@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge" >
+    <title>短期预报</title>
+    <link rel="stylesheet" href="../plug/easyui.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+<div class="box">
+    <div class="top">
+        <div class="top-logo">
+            <div class="width1200">
+                <img src="../images/top-logo.png">
+            </div>
+        </div>
+        <div class="nav">
+            <div class="width1200 clearfix">
+                <ul class="clearfix fl">
+                    <li><a href="index.html">预警信号</a></li>
+                    <li><a href="short-near-forecast.html">短临预报</a></li>
+                    <li class="action"><a href="short-period-forecast.html">短期预报</a></li>
+                    <li><a href="system.html">系统管理</a></li>
+                </ul>
+                <div class="top-info fr">
+                    <div class="top-user">欢迎，<span id="name">罗小武</span>[ <span id="level">超级管理员</span> ]</div>
+                    <button class="quit-button">退出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content warn-sign">
+        <div class="width1200">
+            <div class="navigation clearfix">
+                <div class="tab fl">
+                    <ul>
+                        <li class="action">按单位</li>
+                        <li>按项目</li>
+                    </ul>
+                </div>
+                <div class="time fl">
+                    <span class="subtitle">开始时间</span>
+                    <input class="easyui-datebox" id="start-time" data-options="editable:false" value=" ">
+                </div>
+                <div class="time fl">
+                    <span class="subtitle">结束时间</span>
+                    <input class="easyui-datebox" id="end-time" data-options="editable:false" value=" ">
+                </div>
+                <div class="choose fl">
+                    <span class="subtitle fl">时效</span>
+                    <div class="choose-content choose-aging fl">
+                        <select class="easyui-combobox" id="aging">
+                            <option value="24">24小时</option>
+                            <option value="48">48小时</option>
+                            <option value="72">72小时</option>
+                            <option value="96">96小时</option>
+                            <option value="120">120小时</option>
+                            <option value="144">144小时</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="choose fl">
+                    <span class="subtitle fl">考核对象</span>
+                    <div class="choose-content choose-object fl">
+                        <select class="easyui-combobox" id="check-object">
+                            <option value="201">省台指导</option>
+                            <option value="202">地市订正</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="choose fl">
+                    <span class="subtitle fl">考核区域</span>
+                    <div class="choose-content choose-area fl">
+                        <select class="easyui-combobox" id="check-area"></select>
+                    </div>
+                </div>
+                <button id="query-btn" class="query-btn fr">查询</button>
+            </div>
+            <div class="wrap">
+                <div class="wrap-content" style="display: block;">
+                    <div class="score" id="department-chart"></div>
+                    <table class="score-table" id="department-table">
+                        <tr id="city">
+                            <th class="table-title">单位</th>
+                        </tr>
+                        <tr id="score">
+                            <td class="table-title">得分</td>
+                        </tr>
+                        <tr id="sample">
+                            <td class="table-title">样本数</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="wrap-content">
+                    <div class="score" id="project-chart"></div>
+                    <table class="score-table" id="project-table">
+                        <tr>
+                            <th>时效</th>
+                            <th>晴雨雪</th>
+                            <th>降水分级检验</th>
+                            <th>暴雨雪</th>
+                            <th>一般性降水</th>
+                            <th>低温≤1</th>
+                            <th>低温≤2</th>
+                            <th>高温≤1</th>
+                            <th>高温≤2</th>
+                            <th>综合评分</th>
+                        </tr>
+                        <tr id="number">
+                            <td class="table-title"><span id="time">24</span>时次</td>
+                        </tr>
+                        <tr id="project-sample">
+                            <td class="table-title">样本数</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../plug/moment.min.js"></script>
+<script type="text/javascript" src="../plug/helper.js"></script>
+<script type="text/javascript" src="../plug/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../plug/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../plug/highcharts.js"></script>
+<script type="text/javascript" src="../js/forecast/forecast.js"></script>
+<script type="text/javascript" src="../js/forecast/department.js"></script>
+<script type="text/javascript" src="../js/forecast/project.js"></script>
+</html>

@@ -24,5 +24,4 @@ public class User {
     private int state;
 
     private String departName;
-
 }

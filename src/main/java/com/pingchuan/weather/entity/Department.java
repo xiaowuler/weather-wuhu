@@ -10,15 +10,14 @@ import lombok.Data;
 
 @Data
 public class Department {
-
+    // 单位Id
     private Integer departId;
-
+    // 单位名称
     private String departName;
-
+    // 父单位Id
     private Integer parentDepartId;
-
+    // 县
     private String county;
-
+    // 单位属性
     private int property;
-
 }

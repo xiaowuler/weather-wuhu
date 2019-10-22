@@ -2,19 +2,20 @@ var Department = function (parent) {
 
     this.Reload = function (result) {
         this.result = result;
-        //this.ShowDepartmentChart.Highcharts.categories.remove();
-        var elementSeries = [];
-        var xMarks = this.GetChartXMarks();
 
+        var elementSeries = [];
+
+        var xMarks = this.GetChartXMarks();
         var values = this.GetChartElementValues();
         var series = this.GetChartElementSeries(values);
+
         elementSeries.push(series);
+
         this.ShowDepartmentChart(xMarks, elementSeries);
     };
 
     this.GetChartXMarks = function () {
         var marks = [];
-        console.log(this.result);
 
         this.result.departmentDTOS.forEach(function (item, index) {
             var name = item.county;

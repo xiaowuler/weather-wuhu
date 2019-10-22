@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge" >
+    <title>预警信号</title>
+    <link rel="stylesheet" href="../plug/easyui.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+<div class="box">
+    <div class="top">
+        <div class="top-logo">
+            <div class="width1200">
+                <img src="../images/top-logo.png">
+            </div>
+        </div>
+        <div class="nav">
+            <div class="width1200 clearfix">
+                <ul class="clearfix fl">
+                    <li class="action"><a href="index.html">预警信号</a></li>
+                    <li><a href="short-near-forecast.html">短临预报</a></li>
+                    <li><a href="short-period-forecast.html">短期预报</a></li>
+                    <li><a href="system.html">系统管理</a></li>
+                </ul>
+                <div class="top-info fr">
+                    <div class="top-user">欢迎，<span id="name">罗小武</span>[ <span id="level">超级管理员</span> ]</div>
+                    <button class="quit-button">退出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content warn-sign">
+        <div class="width1200">
+            <div class="navigation clearfix">
+                <div class="tab fl">
+                    <ul>
+                        <li class="action">按单位</li>
+                        <li>按项目</li>
+                    </ul>
+                </div>
+                <div class="time fl">
+                    <span class="subtitle">开始时间</span>
+                    <input  class="easyui-datebox" id="start-time" data-options="editable:false" value=" ">
+                </div>
+                <div class="time fl">
+                    <span class="subtitle">结束时间</span>
+                    <input  class="easyui-datebox" id="end-time" data-options="editable:false" value=" ">
+                </div>
+                <div class="choose choose-type fl">
+                    <span class="subtitle fl">预警类型</span>
+                    <div class="choose-content fl">
+                        <select class="easyui-combobox" id="warn-type">
+                            <option value="Rainstorm">暴雨</option>
+                            <option value="Snowstorm">暴雪</option>
+                            <option value="Gale">大风</option>
+                            <option value="Typhoon">台风</option>
+                            <option value="Fog" selected>大雾</option>
+                            <option value="haze">霾</option>
+                            <option value="Thunder">雷电</option>
+                            <option value="Hail">冰雹</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="choose fl">
+                    <span class="subtitle fl">考核对象</span>
+                    <div class="choose-content fl">
+                        <select class="easyui-combobox" id="check-object"></select>
+                    </div>
+                </div>
+                <div class="choose fl">
+                    <span class="subtitle fl">二级单位</span>
+                    <div class="choose-content fl">
+                        <select class="easyui-combobox" id="secondary-units"></select>
+                    </div>
+                    <div class="forbid"></div>
+                </div>
+                <button id="query-btn" class="query-btn fr">查询</button>
+            </div>
+            <div class="wrap">
+                <div class="wrap-content" style="display: block;">
+                    <div class="score" id="department-chart"></div>
+                    <table class="score-table" id="department-table">
+                        <tr id="city">
+                            <th class="table-title">单位</th>
+                        </tr>
+                        <tr id="score">
+                            <td class="table-title">成绩</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="wrap-content">
+                    <div class="sheet clearfix">
+                        <div class="sheet-content fl" type="blue" id="blue-chart"></div>
+                        <div class="sheet-content fr" type="yellow" id="yellow-chart"></div>
+                        <div class="sheet-content fl" type="orange" id="orange-chart"></div>
+                        <div class="sheet-content fr" type="red" id="red-chart"></div>
+                        <div class="sheet-content fl" type="level" id="level-chart"></div>
+                        <div class="sheet-content fr" type="no-level" id="no-level-chart"></div>
+                        <a href="javascript:;" class="download" id="download">下载报表</a>
+                    </div>
+                    <div class="statement">
+                        <h2>安徽省气象灾害预警信号质量检验报表</h2>
+                        <p><span id="from-time">2018年7月1号</span>至<span id="to-time">2018年8月3号</span></p>
+                        <table class="table" id="project-table">
+                            <tr>
+                                <th rowspan="2" width="134">预警信号类别</th>
+                                <th rowspan="2" width="134">预警信号级别</th>
+                                <th rowspan="2" width="134">TS评分（正确率）</th>
+                                <th rowspan="2" width="134">命中率</th>
+                                <th rowspan="2" width="134">漏报率</th>
+                                <th rowspan="2" width="134">空报率</th>
+                                <th colspan="3">时间提前量 </th>
+                            </tr>
+                            <tr>
+                                <th>T1</th>
+                                <th>T2</th>
+                                <th>T3</th>
+                            </tr>
+                            <tr id="blue">
+                                <td rowspan="6" id="type" class="table-title"></td>
+                                <td class="table-title">蓝色</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr id="yellow">
+                                <td class="table-title">黄色</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr id="orange">
+                                <td class="table-title">橙色</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr id="red">
+                                <td class="table-title">红色</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr id="all">
+                                <td class="table-title">所有级别</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr id="no-level">
+                                <td class="table-title">不分级别</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <div class="audit clearfix">
+                            <div class="audit-name fl">
+                                审核<em>:</em><span></span>
+                            </div>
+                            <div class="audit-date fr">
+                                审核<em>:</em><span></span>年<span></span>月<span></span>日
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../plug/moment.min.js"></script>
+<script type="text/javascript" src="../plug/helper.js"></script>
+<script type="text/javascript" src="../plug/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../plug/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../plug/highcharts.js"></script>
+<script type="text/javascript" src="../plug/jquery.table2excel.js"></script>
+<script type="text/javascript" src="../js/index/index.js"></script>
+<script type="text/javascript" src="../js/index/department.js"></script>
+<script type="text/javascript" src="../js/index/project.js"></script>
+</html>
