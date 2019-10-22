@@ -56,8 +56,8 @@ var App = function () {
             startTime: startTime,
             endTime: endTime,
             fcstHours: aging,
-            examId: 202,
-            departmentId: 58000
+            examId: $('#check-object').combobox('getValue'),
+            departmentId: $('#check-area').combobox('getValue') == "" ? "58000" : $('#check-area').combobox('getValue')
         };
     };
 
@@ -105,8 +105,10 @@ var App = function () {
             onLoadSuccess: function (data) {
                 var item = $('#check-area').combobox('getData');
                 if (item.length > 0) {
-                    $('#check-area').combobox('select',data[0].county);
-                    $('#check-area').combobox('setValue',data[0].departId);
+                    /*$('#check-area').combobox('select',data[0].county);
+                    $('#check-area').combobox('setValue',data[0].departId);*/
+                    $('#check-area').combobox('select', "58000");
+                    $('#check-area').combobox('setValue',"省气象台");
                 }
             }.bind(this)
         });

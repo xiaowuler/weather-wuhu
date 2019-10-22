@@ -12,6 +12,9 @@ var Project = function (parent) {
     this.GetChartElementValues = function () {
         var values = [];
 
+        if (this.result == null)
+            return;
+
         var value1 = this.result.rainAndSnowRate;
         var value2 = this.result.rainfallGradeRate;
         var value3 = this.result.heavyRainAndSnowRate;
@@ -68,6 +71,9 @@ var Project = function (parent) {
     };
 
     this.ShowProjectTable = function (data) {
+        if (data == null)
+            return;
+
         $('#time').text($('#aging').combobox('getValue'));
         $('#project-table').find('tr td').not('.table-title').remove();
 

@@ -23,7 +23,7 @@ import java.util.Map;
  * @author: XW
  * @create: 2019-06-28 09:44
  **/
-@Controller
+@RestController
 @RequestMapping("User")
 public class UserController {
 
@@ -59,11 +59,11 @@ public class UserController {
     }
 
     @RequestMapping("test")
-    @ResponseBody
+    //@ResponseBody
     public ModelAndView test(){
-        System.out.println("ssss");
+
         ModelAndView mode = new ModelAndView();
-        mode.setViewName("static/index.html");
+        mode.setViewName("index.html");
         return mode;
     }
 
