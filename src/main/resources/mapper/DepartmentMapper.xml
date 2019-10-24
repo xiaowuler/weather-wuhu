@@ -21,7 +21,7 @@
         where DepartID = #{departId}
     </select>
     <!-- 查询所有的单位 -->
-    <select id="findAll" resultType="Department">
+    <select id="getAllDepartment" resultType="Department">
         SELECT DepartID as departId, DepartName as departName, ParentDepartID as parentDepartId, County as county FROM Department;
     </select>
 

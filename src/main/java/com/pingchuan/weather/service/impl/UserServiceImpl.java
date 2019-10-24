@@ -24,14 +24,14 @@ public class UserServiceImpl implements UserService {
 
         PageResult<User> pageResult = new PageResult<>();
         pageResult.setRows(userMapper.getUserByPage(pageIndex, pageSize));
-        pageResult.setTotal(userMapper.findCount());
+        pageResult.setTotal(userMapper.getUserTotalCount());
 
         return pageResult;
     }
 
     @Override
-    public void updatePassword(int userId, String password) {
-        userMapper.updatePassword(userId, password);
+    public void updatePasswordById(int userId, String password) {
+        userMapper.updatePasswordById(userId, password);
     }
 
     @Override
@@ -40,8 +40,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateAll(int userId, int departId) {
-        userMapper.updateAll(userId, departId);
+    public void updateDepartmentIdById(int userId, int departmentId) {
+        userMapper.updateDepartmentIdById(userId, departmentId);
     }
 
     @Override

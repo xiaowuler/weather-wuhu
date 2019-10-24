@@ -1,10 +1,10 @@
 package com.pingchuan.weather.mapper;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import com.pingchuan.weather.entity.Department;
 
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface DepartmentMapper {
@@ -16,5 +16,5 @@ public interface DepartmentMapper {
     // 根据单位Id查询单位信息
     Department findOneById(@Param("departId") int departId);
 
-    List<Department> findAll();
+    List<Department> getAllDepartment();
 }

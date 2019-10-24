@@ -9,12 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @description: 单位 控制类
- * @author: XW
- * @create: 2019-06-18 17:49
- **/
-
 @RestController
 @RequestMapping("/Department")
 public class DepartmentController {
@@ -22,9 +16,9 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
-    @PostMapping("/findAll")
-    public List<Department> findAll(){
-        return departmentService.findAllByCity();
+    @PostMapping("/getAllDepartment")
+    public List<Department> getAllDepartment(){
+        return departmentService.getAllDepartment();
     }
 
     @PostMapping("/findAllByParentDepartId")

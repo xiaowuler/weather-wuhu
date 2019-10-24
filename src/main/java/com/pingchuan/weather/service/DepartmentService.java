@@ -5,10 +5,7 @@ import com.pingchuan.weather.entity.Department;
 
 public interface DepartmentService {
 
-    List<Department> findAll();
-
-    List<Department> findAllByCity();
+    List<Department> getAllDepartment();
 
     List<Department> findAllByParentDepartId(int parentDepartId);
-
 }

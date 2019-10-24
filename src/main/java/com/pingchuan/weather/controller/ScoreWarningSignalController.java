@@ -9,12 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @description: 预警信号 控制类
- * @author: XW
- * @create: 2019-06-18 17:13
- **/
-
 @RestController
 @RequestMapping("/ScoreWarningSignal")
 public class ScoreWarningSignalController {

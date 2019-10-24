@@ -24,9 +24,9 @@ public class UserController {
         return userService.getUserByPage(page, rows);
     }
 
-    @RequestMapping("updatePassword")
-    public void updatePassword(int userId, String password){
-        userService.updatePassword(userId, password);
+    @RequestMapping("updatePasswordById")
+    public void updatePasswordById(int userId, String password){
+        userService.updatePasswordById(userId, password);
     }
 
     @RequestMapping("findOneById")
@@ -34,9 +34,10 @@ public class UserController {
         return userService.findOneById(userId);
     }
 
-    @RequestMapping("updateAll")
-    public void updateAll(int userId, int departId){
-        userService.updateAll(userId, departId);
+    @RequestMapping("updateDepartmentIdById")
+    public void updateDepartmentIdById(int userId, int departmentId){
+        System.out.println("userId：" + userId + "-----departmentId：" + departmentId);
+        userService.updateDepartmentIdById(userId, departmentId);
     }
 
     @RequestMapping("doLogin")

@@ -45,7 +45,7 @@ public class ScoreShortTermServiceImpl implements ScoreShortTermService {
         List<Department> departments;
 
         if (departmentId == 58000){
-            departments = departmentMapper.findAll();
+            departments = departmentMapper.getAllDepartment();
         }else {
             departments = departmentMapper.findAllByParentId(departmentId);
             departments.add(departmentMapper.findOneById(departmentId));

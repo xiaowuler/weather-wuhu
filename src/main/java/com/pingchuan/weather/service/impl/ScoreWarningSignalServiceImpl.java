@@ -24,12 +24,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * @description: 预警信号 服务类
- * @author: XW
- * @create: 2019-06-19 09:57
- **/
-
 @Service
 @Transactional
 public class ScoreWarningSignalServiceImpl implements ScoreWarningSignalService {
@@ -112,7 +106,7 @@ public class ScoreWarningSignalServiceImpl implements ScoreWarningSignalService 
 
         if (StringUtils.isEmpty(childDepartmentId)){
             if (departmentId == 58000){
-                departments = departmentMapper.findAll();
+                departments = departmentMapper.getAllDepartment();
             }else {
                 departments = departmentMapper.findAllByParentId(departmentId);
                 departments.add(departmentMapper.findOneById(departmentId));

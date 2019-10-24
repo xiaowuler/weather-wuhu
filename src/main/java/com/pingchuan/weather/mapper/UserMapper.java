@@ -9,15 +9,15 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
 
-    int findCount();
+    int getUserTotalCount();
 
     User findOneById(@Param("userId") int userId);
 
     List<User> getUserByPage(@Param("pageIndex") int pageIndex, @Param("pageSize") int pageSize);
 
-    void updatePassword(@Param("userId") int userId, @Param("password") String password);
+    void updatePasswordById(@Param("userId") int userId, @Param("password") String password);
 
-    void updateAll(@Param("userId") int userId, @Param("departId") int departId);
+    void updateDepartmentIdById(@Param("userId") int userId, @Param("departmentId") int departmentId);
 
     User userLogin(@Param("loginName") String loginName, @Param("loginPwd") String loginPwd);
 }

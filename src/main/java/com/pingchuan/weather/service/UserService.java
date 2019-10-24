@@ -8,9 +8,9 @@ public interface UserService {
 
     User findOneById(int userId);
 
-    void updateAll(int userId, int departId);
+    void updateDepartmentIdById(int userId, int departmentId);
 
-    void updatePassword(int userId, String password);
+    void updatePasswordById(int userId, String password);
 
     PageResult<User> getUserByPage(int pageIndex, int pageSize);
 

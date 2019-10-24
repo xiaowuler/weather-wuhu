@@ -4,17 +4,13 @@
 <mapper namespace="com.pingchuan.weather.mapper.UserMapper">
 
     <select id="getUserByPage" resultType="User">
-        SELECT *
-        FROM(SELECT *, ROW_NUMBER() OVER( ORDER BY Id ASC) AS RowNumber FROM  [User] WHERE 1=1) AS U
+        SELECT U.Id id, U.Name name, D.DepartName departmentName, U.LoginName loginName, U.LoginPwd loginPwd, U.State state, U.PROVINCE province, U.CITY city, U.COUNTY county
+        FROM(SELECT *, ROW_NUMBER() OVER( ORDER BY Id ASC) AS RowNumber FROM  [User] WHERE 1=1) AS U LEFT JOIN Department D ON U.DepartmentId = D.DepartID
         WHERE U.RowNumber > (#{pageSize} *(#{pageIndex}-1)) AND (#{pageSize} * #{pageIndex}) >= U.RowNumber
     </select>
 
-    <select id="findCount" resultType="int">
-        SELECT
-            count(*)
-        FROM
-            [User] u
-            LEFT JOIN Department d ON u.DepartmentId = d.DepartID
+    <select id="getUserTotalCount" resultType="int">
+        SELECT COUNT(*) Number FROM [User] U  LEFT JOIN Department D ON U.DepartmentId = D.DepartID
     </select>
 
     <select id="findOneById" resultType="User">
@@ -33,16 +29,11 @@
     </select>
 
     <update id="updatePassword">
-        UPDATE [User]
-        SET LoginPwd = #{password}
-        WHERE
-            Id = #{userId}
+        UPDATE [User] SET LoginPwd = #{password} WHERE Id = #{userId}
     </update>
-    <update id="updateAll">
-        UPDATE [User]
-        SET DepartmentId = #{departId}
-        WHERE
-            Id = #{userId}
+
+    <update id="updateDepartmentIdById">
+        UPDATE [User] SET DepartmentId = #{departmentId} WHERE Id = #{userId}
     </update>
 
     <!-- 用户登录 -->
