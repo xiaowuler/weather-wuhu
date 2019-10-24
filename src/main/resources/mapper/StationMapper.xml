@@ -3,7 +3,7 @@
 <!--客户映射 指定到dao接口 -->
 <mapper namespace="com.pingchuan.weather.mapper.StationMapper">
 
-    <select id="findAllByDepart" resultType="com.pingchuan.weather.entity.Station">
+    <select id="findAllByDepart" resultType="Station">
         SELECT * FROM Station where DepartmentId = #{departmentId}
     </select>
 

@@ -86,9 +86,6 @@
   border: 0;
   overflow: hidden;
 }
-.panel-loading {
-  background: url('images/loading.gif') no-repeat 10px 10px;
-}
 .panel-tool-close {
   background: url('images/panel_tools.png') no-repeat -16px 0px;
 }
@@ -1852,9 +1849,6 @@
 .datagrid-row-expand {
   background: url('images/datagrid_icons.png') no-repeat -32px center;
 }
-.datagrid-mask-msg {
-  background: #ffffff url('images/loading.gif') no-repeat scroll 5px center;
-}
 .datagrid-header,
 .datagrid-td-rownumber {
   background-color: #efefef;
@@ -2109,9 +2103,6 @@
 }
 .pagination-load {
   background: url('../images/pagination_icons.png') no-repeat -64px center;
-}
-.pagination-loading {
-  background: url('../images/loading.gif') no-repeat center center;
 }
 .pagination-page-list,
 .pagination .pagination-num {
@@ -3013,9 +3004,6 @@
 }
 .tree-file {
   background: url('images/tree_icons.png') no-repeat -240px 0;
-}
-.tree-loading {
-  background: url('images/loading.gif') no-repeat center center;
 }
 .tree-checkbox0 {
   background: url('images/tree_icons.png') no-repeat -208px -18px;

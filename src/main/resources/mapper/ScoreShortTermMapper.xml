@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pingchuan.weather.mapper.ScoreShortTermMapper">
 
-    <select id="findAllByTimeAndRegion" resultType="com.pingchuan.weather.entity.ScoreShortTerm">
+    <select id="findAllByTimeAndRegion" resultType="ScoreShortTerm">
         select * from ScoreShortTerm
     </select>
 
-    <select id="findAllByTimeAndRegionByDepartment" resultType="com.pingchuan.weather.entity.ScoreShortTerm">
+    <select id="findAllByTimeAndRegionByDepartment" resultType="ScoreShortTerm">
         select * from ScoreShortTerm where IssueTime &gt;= #{startTime} and IssueTime &lt;= #{endTime} and StationId = #{stationId} and FcstHours = #{rescription} and UserId = #{examId}
     </select>
 

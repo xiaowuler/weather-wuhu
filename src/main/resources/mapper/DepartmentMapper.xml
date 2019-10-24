@@ -3,25 +3,25 @@
 
 <mapper namespace="com.pingchuan.weather.mapper.DepartmentMapper">
     <!-- 查询所有的市级单位 -->
-    <select id="findAllCity" resultType="com.pingchuan.weather.entity.Department">
+    <select id="findAllCity" resultType="Department">
         SELECT DepartID as departId, DepartName as departName, ParentDepartID as parentDepartId, County as county
         FROM Department
         where Property = 2;
     </select>
     <!--根据父单位Id查询子单位-->
-    <select id="findAllByParentId" resultType="com.pingchuan.weather.entity.Department">
+    <select id="findAllByParentId" resultType="Department">
         SELECT  DepartID as departId, DepartName as departName, ParentDepartID as parentDepartId, County as county
         FROM Department
         where ParentDepartID = #{parentId}
     </select>
     <!-- 根据单位Id查询单位 -->
-    <select id="findOneById" resultType="com.pingchuan.weather.entity.Department">
+    <select id="findOneById" resultType="Department">
         SELECT DepartID as departId, DepartName as departName, ParentDepartID as parentDepartId, County as county
         FROM Department
         where DepartID = #{departId}
     </select>
     <!-- 查询所有的单位 -->
-    <select id="findAll" resultType="com.pingchuan.weather.entity.Department">
+    <select id="findAll" resultType="Department">
         SELECT DepartID as departId, DepartName as departName, ParentDepartID as parentDepartId, County as county FROM Department;
     </select>
 
