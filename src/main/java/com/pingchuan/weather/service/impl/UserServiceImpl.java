@@ -1,22 +1,16 @@
 package com.pingchuan.weather.service.impl;
 
+import java.util.Map;
+import java.util.HashMap;
+
 import com.pingchuan.weather.entity.User;
 import com.pingchuan.weather.entity.PageResult;
+import com.pingchuan.weather.mapper.UserMapper;
 import com.pingchuan.weather.service.UserService;
 
-import com.pingchuan.weather.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.HashMap;
-import java.util.Map;
-
-/**
- * @description: 用户 服务层
- * @author: XW
- * @create: 2019-06-28 09:52
- **/
 
 @Service
 @Transactional
@@ -26,10 +20,10 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public PageResult<User> findAllByPage(int page, int rows) {
+    public PageResult<User> getUserByPage(int pageIndex, int pageSize) {
 
         PageResult<User> pageResult = new PageResult<>();
-        pageResult.setRows(userMapper.findAllByPage((page - 1) * rows + 1, page * rows));
+        pageResult.setRows(userMapper.getUserByPage(pageIndex, pageSize));
         pageResult.setTotal(userMapper.findCount());
 
         return pageResult;

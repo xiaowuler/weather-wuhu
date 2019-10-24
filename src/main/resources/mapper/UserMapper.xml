@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--客户映射 指定到dao接口 -->
+
 <mapper namespace="com.pingchuan.weather.mapper.UserMapper">
 
-    <select id="findAllByPage" resultType="User">
-        SELECT
-            Id AS id,
-            Name AS name,
-            DepartId AS departId,
-            LoginName AS loginName,
-            LoginPwd AS loginPwd,
-            State AS state,
-            DepartName AS departName
-        FROM
-            [User] u
-            LEFT JOIN Department d ON u.DepartmentId = d.DepartID
-        WHERE
-            Id BETWEEN #{page}
-            AND #{rows}
+    <select id="getUserByPage" resultType="User">
+        SELECT *
+        FROM(SELECT *, ROW_NUMBER() OVER( ORDER BY Id ASC) AS RowNumber FROM  [User] WHERE 1=1) AS U
+        WHERE U.RowNumber > (#{pageSize} *(#{pageIndex}-1)) AND (#{pageSize} * #{pageIndex}) >= U.RowNumber
     </select>
+
     <select id="findCount" resultType="int">
         SELECT
             count(*)

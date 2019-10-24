@@ -1,28 +1,17 @@
 package com.pingchuan.weather.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Map;
 import com.pingchuan.weather.entity.User;
 import com.pingchuan.weather.entity.PageResult;
 import com.pingchuan.weather.service.UserService;
 
-import org.springframework.http.HttpRequest;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ResponseBody;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Map;
-
-/**
- * @description: 用户控制类
- * @author: XW
- * @create: 2019-06-28 09:44
- **/
 @RestController
 @RequestMapping("User")
 public class UserController {
@@ -30,10 +19,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    //@ResponseBody
-    @RequestMapping("/findAllByPage")
-    public PageResult<User> findAllByPage(int page, int rows){
-        return userService.findAllByPage(page, rows);
+    @RequestMapping("/getUserByPage")
+    public PageResult<User> getUserByPage(int page, int rows){
+        return userService.getUserByPage(page, rows);
     }
 
     @RequestMapping("updatePassword")
@@ -57,15 +45,4 @@ public class UserController {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(userMap);
     }
-
-    @RequestMapping("test")
-    //@ResponseBody
-    public ModelAndView test(){
-
-        ModelAndView mode = new ModelAndView();
-        mode.setViewName("index.html");
-        return mode;
-    }
-
-
 }

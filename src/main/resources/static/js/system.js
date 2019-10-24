@@ -25,7 +25,7 @@ var App = function () {
     this.ReloadData = function () {
         this.table.datagrid({
             method: "POST",
-            url: 'User/findAllByPage',
+            url: 'User/getUserByPage',
             onLoadSuccess: function (row) {
                 console.log(row)
             }
@@ -36,8 +36,6 @@ var App = function () {
         this.table.datagrid({
             striped: true,
             singleSelect: true,
-            //fitColumns: true,
-            //fit: true,
             scrollbarSize: 0,
             pagination: true,
             pageNumber: 1,
@@ -59,16 +57,10 @@ var App = function () {
                         }
                     }
                 },
-                //{ field: 'type', title: '用户类型', align: 'center'},
-                //{ field: 'state', title: '审核结果', align: 'center'},
                 { field: 'loginPwdd', title: '重置密码', width: 240, align: 'center', formatter: this.GetResetPasswordButton.bind(this)},
                 { field: 'saved', title: '保存修改', width: 238, align: 'center', formatter: this.GetSaveButton.bind(this)}
             ]],
             onBeforeLoad: this.OnTableGridBeforeLoad.bind(this),
-            // onClickCell: function (rowIndex, rowData) {
-            //      $("#system-table").datagrid('selectRow', rowIndex);
-            //      $("#system-table").datagrid('beginEdit', rowIndex);
-            // },
             onClickRow: this.OnClickRow.bind(this)
         });
     };
@@ -148,7 +140,6 @@ var App = function () {
                 },
                 url: 'User/updateAll',
                 success: function (result) {
-                    //this.ReloadData();
                 }.bind(this)
             });
         }
