@@ -20,22 +20,22 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/getUserByPage")
-    public PageResult<User> getUserByPage(int page, int rows){
+    public PageResult<User> getUserByPage(int page, int rows) {
         return userService.getUserByPage(page, rows);
     }
 
     @RequestMapping("updatePasswordById")
-    public void updatePasswordById(int userId, String password){
+    public void updatePasswordById(int userId, String password) {
         userService.updatePasswordById(userId, password);
     }
 
     @RequestMapping("findOneById")
-    public User findOneById(int userId){
+    public User findOneById(int userId) {
         return userService.findOneById(userId);
     }
 
     @RequestMapping("updateDepartmentIdById")
-    public void updateDepartmentIdById(int userId, int departmentId){
+    public void updateDepartmentIdById(int userId, int departmentId) {
         System.out.println("userId：" + userId + "-----departmentId：" + departmentId);
         userService.updateDepartmentIdById(userId, departmentId);
     }
@@ -46,4 +46,7 @@ public class UserController {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(userMap);
     }
+
+    @RequestMapping("test")
+    public void test(){}
 }
