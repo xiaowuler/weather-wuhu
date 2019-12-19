@@ -1,4 +1,4 @@
-.log{
+.container{
     background: url("../images/bg.jpg") no-repeat center/cover;
 }
 .logo{
@@ -41,10 +41,11 @@
 .register{
     height: 484px;
     margin-top: -242px;
-    padding-top: 30px;
+    padding-top: 60px;
+    margin-left: 650px;
     display: none;
 }
-.log-content{
+.container-content{
     width: 500px;
     margin-right: 50px;
     float: right;

@@ -36,10 +36,6 @@
         UPDATE [User] SET DepartmentId = #{departmentId} WHERE Id = #{userId}
     </update>
 
-    <select id="userLogin" resultType="User">
-        SELECT * FROM [User] WHERE LoginName = #{username} AND LoginPwd = #{password}
-    </select>
-
     <select id="findUserByLoginName" resultType="User">
         SELECT Id AS id, Name AS name, DepartmentId AS departId, LoginName AS loginName, LoginPwd AS loginPwd, State AS state
         FROM [User]

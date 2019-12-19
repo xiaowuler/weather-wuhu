@@ -54,19 +54,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public Map<String, User> userLogin(String loginName, String loginPwd) {
-        User user = userMapper.userLogin(loginName, loginPwd);
-        Map<String, User> userMap = new HashMap<String, User>();
-
-        if (user == null)
-            userMap.put("user", null);
-        else
-            userMap.put("user", user);
-
-        return userMap;
-    }
-
-    @Override
     public User findUserByLoginName(String username) {
         return userMapper.findUserByLoginName(username);
     }

@@ -15,7 +15,5 @@ public interface UserService {
 
     PageResult<User> getUserByPage(int pageIndex, int pageSize);
 
-    Map<String, User> userLogin(String username, String password);
-
     User findUserByLoginName(String username);
 }

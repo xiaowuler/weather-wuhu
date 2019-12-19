@@ -5,12 +5,12 @@ import com.pingchuan.weather.entity.User;
 import com.pingchuan.weather.entity.PageResult;
 import com.pingchuan.weather.service.UserService;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @RestController
 @RequestMapping("User")
@@ -40,10 +40,14 @@ public class UserController {
         userService.updateDepartmentIdById(userId, departmentId);
     }
 
-    @RequestMapping("doLogin")
-    public String userLogin(String username, String password) throws JsonProcessingException {
-        Map<String, User> userMap = userService.userLogin(username, password);
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.writeValueAsString(userMap);
+    @RequestMapping("/getError")
+    public String getError(){
+        ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        Object exception = sra.getRequest().getSession().getAttribute("SPRING_SECURITY_LAST_EXCEPTION");
+        if (exception == null){
+            return null;
+        }
+
+        return "用户名或密码错误";
     }
 }

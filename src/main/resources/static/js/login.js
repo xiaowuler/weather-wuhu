@@ -3,37 +3,57 @@ var App = function () {
     this.Startup = function () {
         window.onresize = this.Relayout.bind(this);
         this.Relayout();
+        this.RemoveUserInputInfo();
+        this.SwitchRegisterOrLogin();
+        this.getSecurityError();
         this.OnSelectClick();
-        this.OnFormClick();
         this.CreateSelect();
-        $('#login-button').on('click', this.CheckUserInputInfo.bind(this));
+        $('#login-button').on('click', this.OnLoginButtonClick.bind(this));
     };
 
     this.Relayout = function () {
-        var width = $(window).width();
-        var height = $(window).height();
-        $(".log").width(width);
-        $(".log").height(height);
+        $(".container").width($(window).width());
+        $(".container").height($(window).height());
     };
+
+    this.RemoveUserInputInfo = function () {
+        $('.remove').click(function(){
+            $(this).prev().val('');
+            $(this).prev().focus();
+        });
+    };
+
+    this.SwitchRegisterOrLogin = function () {
+        var login = $('.login');
+        var register = $('.register');
+
+        $('.switch-register').click(function(){
+            login.hide();
+            register.show();
+        });
+
+        $('.switch-login').click(function(){
+            register.hide();
+            login.show();
+        });
+    };
+
+    this.getSecurityError = function () {
+        $.ajax({
+            type: 'POST',
+            url: '/User/getError',
+            success: function (result) {
+                $('#error-message').text(result).show();
+            }
+        });
+    };
+
     this.OnSelectClick = function () {
         $('.select').change(function () {
             $(this).prev().html($('.select').find('option:selected').html());
         })
     };
-    this.OnFormClick = function () {
-        $(".switch-register").click(function(){
-            $(this).parents(".login").hide();
-            $(this).parents(".login").next().show();
-        });
-        $(".switch-logo").click(function(){
-            $(this).parents(".register").hide();
-            $(this).parents(".register").prev().show();
-        });
-        $(".remove").click(function(){
-            $(this).prev().val('');
-            $(this).prev().focus();
-        })
-    };
+
     this.CreateSelect = function () {
         var selects=$('select');//获取select
         selects.attr('class','select');
@@ -102,28 +122,42 @@ var App = function () {
             }
         }
 
-        this.CheckUserInputInfo = function () {
-            var errorMessage = '';
+        this.OnLoginButtonClick = function () {
+            $('#user-form').submit(function () {
+                return this.CheckUserInput();
+            }.bind(this));
+        };
 
-            if ($("#username").val() === ""){
-                $('#username').css('borderColor','#ff0000');
+        this.CheckUserInput = function () {
+            var errorMessage = '';
+            var $username = $('#username');
+            var $password = $('#password');
+            var $errorMessage = $('#error-message');
+
+            if ($username.val() === ''){
+                $username.css('borderColor','#ff0000');
                 errorMessage += '用户名不能为空 ';
             } else {
-                $('#username').css('borderColor','#e0e0e0');
+                $username.css('borderColor','#e0e0e0');
             }
 
-            if ($("#password").val() === ""){
-                $('#password').css('borderColor','#ff0000');
+            if ($password.val() === ''){
+                $password.css('borderColor','#ff0000');
                 errorMessage += '密码不能为空';
             } else {
-                $('#password').css('borderColor','#e0e0e0');
+                $password.css('borderColor','#e0e0e0');
             }
 
-            if (errorMessage === ''){
-                this.UserLogin();
-            }else {
-                $('#error-message').text(errorMessage).show();
+            if ($username.val() !== '' && $password.val() !== ''){
+                errorMessage = '';
             }
+
+            if (errorMessage !== ''){
+                $errorMessage.text(errorMessage).show();
+                return false;
+            }
+
+            return true;
         };
     }
 };
