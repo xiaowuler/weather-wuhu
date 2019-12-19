@@ -1,12 +1,14 @@
 var App = function () {
+
     this.Startup = function () {
         window.onresize = this.Relayout.bind(this);
         this.Relayout();
         this.OnSelectClick();
         this.OnFormClick();
         this.CreateSelect();
-        this.OnLoginButtonClick();
+        $('#login-button').on('click', this.CheckUserInputInfo.bind(this));
     };
+
     this.Relayout = function () {
         var width = $(window).width();
         var height = $(window).height();
@@ -100,43 +102,32 @@ var App = function () {
             }
         }
 
-        this.OnLoginButtonClick = function () {
-          $("#loginButton").click(function () {
-              var loginName = $(".user").val();
-              var loginPwd = $(".password").val();
-              if (loginName == ""){
-                  alert("请输入用户名");
-                  return;
-              }
-              if (loginPwd == ""){
-                  alert("请输入密码");
-                  return;
-              }
+        this.CheckUserInputInfo = function () {
+            var errorMessage = '';
 
-              $.ajax({
-                  type: "POST",
-                  url: "/User/doLogin",
-                  data: {"loginName": loginName, "loginPwd": loginPwd},
-                  success: function (result) {
-                      var data = JSON.parse(result);
-                      if (data.user == null){
-                          alert("用户名或密码错误")
-                      } else {
-                          alert("登录成功");
-                          window.location.href = "http://localhost:9000/index.html?"+data.user.name+"";
-                      }
-                  }
+            if ($("#username").val() === ""){
+                $('#username').css('borderColor','#ff0000');
+                errorMessage += '用户名不能为空 ';
+            } else {
+                $('#username').css('borderColor','#e0e0e0');
+            }
 
-              });
+            if ($("#password").val() === ""){
+                $('#password').css('borderColor','#ff0000');
+                errorMessage += '密码不能为空';
+            } else {
+                $('#password').css('borderColor','#e0e0e0');
+            }
 
-
-
-          });
+            if (errorMessage === ''){
+                this.UserLogin();
+            }else {
+                $('#error-message').text(errorMessage).show();
+            }
         };
-
-        
     }
 };
+
 $(document).ready(function () {
     var app = new App();
     app.Startup();

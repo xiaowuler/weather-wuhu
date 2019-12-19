@@ -12,12 +12,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 @Service
 @Transactional
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public PageResult<User> getUserByPage(int pageIndex, int pageSize) {
@@ -55,5 +64,17 @@ public class UserServiceImpl implements UserService {
             userMap.put("user", user);
 
         return userMap;
+    }
+
+    @Override
+    public User findUserByLoginName(String username) {
+        return userMapper.findUserByLoginName(username);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = findUserByLoginName(username);
+        String encodePassword = passwordEncoder.encode(user.getLoginPwd());
+        return new org.springframework.security.core.userdetails.User(user.getLoginName(), encodePassword, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }
 }

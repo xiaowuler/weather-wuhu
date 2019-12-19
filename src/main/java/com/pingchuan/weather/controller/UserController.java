@@ -41,12 +41,9 @@ public class UserController {
     }
 
     @RequestMapping("doLogin")
-    public String doUserLogin(String loginName, String loginPwd) throws JsonProcessingException {
-        Map<String, User> userMap = userService.userLogin(loginName, loginPwd);
+    public String userLogin(String username, String password) throws JsonProcessingException {
+        Map<String, User> userMap = userService.userLogin(username, password);
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(userMap);
     }
-
-    @RequestMapping("test")
-    public void test(){}
 }

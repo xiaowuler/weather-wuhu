@@ -1,6 +1,7 @@
 package com.pingchuan.weather.service;
 
 import java.util.Map;
+
 import com.pingchuan.weather.entity.User;
 import com.pingchuan.weather.entity.PageResult;
 
@@ -14,5 +15,7 @@ public interface UserService {
 
     PageResult<User> getUserByPage(int pageIndex, int pageSize);
 
-    Map<String, User> userLogin(String loginName, String loginPwd);
+    Map<String, User> userLogin(String username, String password);
+
+    User findUserByLoginName(String username);
 }

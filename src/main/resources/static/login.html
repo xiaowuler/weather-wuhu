@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="x-ua-compatible" content="IE=edge" >
-
-    <title>Title</title>
+    <meta charset="UTF-8" http-equiv="x-ua-compatible" content="IE=edge" >
+    <title>登录</title>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/login.css">
@@ -17,21 +15,24 @@
     <div class="width1200 clearfix">
         <div class="log-content">
             <div class="sign-up login">
-            <form>
+            <form action="/userLogin" method="post">
                 <div class="sign-content">
                     <label><img src="../images/user.png"></label>
-                    <input type="text" class="user" placeholder="请输入用户名">
+                    <input type="text" id="username" name="username" placeholder="请输入用户名">
                     <i class="remove"></i>
                 </div>
                 <div class="sign-content">
                     <label><img src="../images/password.png"></label>
-                    <input type="password" class="password" placeholder="请输入密码">
+                    <input type="password" id="password" name="password" placeholder="请输入密码">
                     <i class="remove"></i>
                 </div>
                 <div class="sign-btn login-btn">
-                    <input type="button" id="loginButton" value="登录">
+                    <input type="submit" id="login-button" value="登录">
+                    <p style="display: none;color: red" id="error-message"></p>
                 </div>
-                <a href="javascript:;" class="switch switch-register">还没有账号?</a>
+                <div>
+                    <a href="javascript:;" class="switch switch-register">还没有账号?</a>
+                </div>
             </form>
         </div>
             <div class="sign-up register">
@@ -80,5 +81,5 @@
 </div>
 </body>
 <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="../js/log.js"></script>
+<script type="text/javascript" src="../js/login.js"></script>
 </html>

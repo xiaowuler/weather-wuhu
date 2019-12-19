@@ -30,9 +30,9 @@ var App = function () {
                     editor:{
                         type:'combobox',
                         options:{
-                            valueField:'departmentId',
-                            textField:'departmentName',
-                            url:'Department/getAllDepartment',
+                            valueField:'departId',
+                            textField:'departName',
+                            url:'/Department/getAllDepartment',
                             required:true,
                             editable:false
                         }
@@ -150,7 +150,7 @@ var App = function () {
 
             var selected = $('#system-table').datagrid('getSelected');
 
-            alert(selected.id + "======" + selected.departId)
+            alert(selected.id + "======" + selected.departmentName);
 
             $.ajax({
                 type: "POST",
