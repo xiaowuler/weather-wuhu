@@ -64,4 +64,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         String encodePassword = passwordEncoder.encode(user.getLoginPwd());
         return new org.springframework.security.core.userdetails.User(user.getLoginName(), encodePassword, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }
+
+    @Override
+    public void userRegister(String username, int departmentId, String name, String password) {
+        User user = new User();
+        user.setId(null);
+        user.setLoginName(username);
+        user.setDepartmentId(departmentId);
+        user.setName(name);
+        user.setLoginPwd(password);
+
+        userMapper.userRegister(user);
+    }
 }

@@ -41,4 +41,8 @@
         FROM [User]
         WHERE LoginName = #{username}
     </select>
+
+    <select id="userRegister" parameterType="User">
+        INSERT INTO [User](Name, DepartmentId, LoginName, LoginPwd) VALUES (#{user.name}, #{user.departmentId}, #{user.loginName}, #{user.loginPwd})
+    </select>
 </mapper>

@@ -41,7 +41,7 @@
 .register{
     height: 484px;
     margin-top: -242px;
-    padding-top: 60px;
+    padding-top: 10px;
     margin-left: 650px;
     display: none;
 }
@@ -79,6 +79,13 @@
     color: #666666;
     font-size: 14px;
 }
+
+.sign-content p{
+    position: absolute;
+    top: 43px;
+    left: 55px;
+}
+
 .remove{
     width: 20px;
     height: 20px;
@@ -110,7 +117,7 @@
     font-size: 14px;
 }
 .register .sign-content{
-    margin-top: 20px;
+    margin-top: 30px;
 }
 .register .sign-btn{
     margin-top: 40px;
@@ -141,4 +148,69 @@
 .drop-down .select-option{
     top:38px;
     left: 1px;
+}
+
+.drop-down .easyui-combobox{
+    padding-left: 15px;
+    color: #666666;
+    width:310px;
+    height: 38px;
+}
+
+.login .login-error-hint-username, .error-hint-password{
+    color: #ff0000;
+    margin: 0px;
+    display: none;
+}
+
+.register .register-error-hint-username, .error-hint-name, .register-error-hint-password, .error-hint-confirmPassword{
+    color: #ff0000;
+    margin: 0px;
+    display: none;
+}
+
+.sign-up .choose .textbox{
+    width: 320px!important;
+    height: 38px;
+    margin-top: -4px;
+    border: 0;
+    border-right: 1px solid #e0e0e0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+.sign-up .choose .textbox .textbox-text{
+    height: 38px!important;
+    line-height: 38px!important;
+    padding: 0 4px 0 15px;
+}
+
+.sign-up .sign-content .textbox .textbox-text{
+    text-align: left;
+    box-shadow: none;
+    -webkit-box-shadow:none;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+.panel-body{
+    border-color: #e0e0e0!important;
+}
+
+.combobox-item{
+    padding: 6px 0 6px 15px!important;
+}
+
+.choose{
+    margin-left: 0;
+}
+
+.choose .combo-arrow, .drop-down .combo-arrow{
+    margin-top: 7px
+}
+
+.choose drop-down{
+    width: 100px;
 }

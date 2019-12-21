@@ -1,6 +1,5 @@
 package com.pingchuan.weather.controller;
 
-import java.util.Map;
 import com.pingchuan.weather.entity.User;
 import com.pingchuan.weather.entity.PageResult;
 import com.pingchuan.weather.service.UserService;
@@ -47,7 +46,12 @@ public class UserController {
         if (exception == null){
             return null;
         }
-
         return "用户名或密码错误";
+    }
+
+    @RequestMapping("/register")
+    public String userRegister(String username, Integer departmentId, String name, String password){
+        userService.userRegister(username, departmentId, name, password);
+        return "注册成功";
     }
 }

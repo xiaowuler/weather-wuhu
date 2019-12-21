@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8" http-equiv="x-ua-compatible" content="IE=edge" >
     <title>登录</title>
+    <link rel="stylesheet" href="plug/easyui.css">
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/login.css">
@@ -21,12 +22,16 @@
                             <label><img src="../images/user.png"></label>
                             <input type="text" id="username" name="username" placeholder="请输入用户名">
                             <i class="remove"></i>
+                            <p class="login-error-hint-username">请输入用户名</p>
                         </div>
+
                         <div class="sign-content">
                             <label><img src="../images/password.png"></label>
                             <input type="password" id="password" name="password" placeholder="请输入密码">
                             <i class="remove"></i>
+                            <p class="error-hint-password">请输入密码</p>
                         </div>
+
                         <div class="sign-btn login-btn">
                             <input type="submit" id="login-button" value="登录">
                             <p style="display: none;color: red" id="error-message"></p>
@@ -39,47 +44,48 @@
             </div>
 
             <div class="sign-up register">
-                <form>
+                <form action="/User/register" method="post" id="register">
                     <div class="sign-content">
                         <label><img src="../images/user.png"></label>
-                        <input type="text" class="user" placeholder="请输入用户名">
+                        <input type="text" id="register-username" name="username" placeholder="请输入用户名">
                         <i class="remove"></i>
+                        <p class="register-error-hint-username">请输入用户名</p>
                     </div>
 
                     <div class="sign-content">
                         <label><img src="../images/unit.png"></label>
-                        <div class="drop-down">
-                            <select>
-                                <option>请选择单位</option>
-                                <option value="芜湖气象局1">芜湖气象局1</option>
-                                <option value="芜湖气象局2">芜湖气象局2</option>
-                                <option value="芜湖气象局3">芜湖气象局3</option>
-                                <option value="芜湖气象局4">芜湖气象局4</option>
-                                <option value="芜湖气象局5">芜湖气象局5</option>
+                        <div class="choose drop-down">
+                            <select id="department" class="easyui-combobox" name="departmentId">
                             </select>
                         </div>
                     </div>
 
                     <div class="sign-content">
                         <label><img src="../images/name.png"></label>
-                        <input type="text" class="username" placeholder="请输入您的姓名">
+                        <input type="text" id="name" name="name" placeholder="请输入您的姓名">
                         <i class="remove"></i>
+                        <p class="error-hint-name">请输入姓名</p>
                     </div>
+
 
                     <div class="sign-content">
                         <label><img src="../images/password.png"></label>
-                        <input type="text" class="password" placeholder="请输入密码">
+                        <input type="password" id="register-password" name="password" placeholder="请输入密码">
                         <i class="remove"></i>
+                        <p class="register-error-hint-password">请输入密码</p>
                     </div>
+
 
                     <div class="sign-content">
                         <label><img src="../images/password.png"></label>
-                        <input type="text" class="rePassword" placeholder="请再次输入密码">
+                        <input type="password" id="register-confirmPassword" placeholder="请再次输入密码">
                         <i class="remove"></i>
+                        <p class="error-hint-confirmPassword">请输入确认密码</p>
                     </div>
 
-                    <div class="sign-btn login-btn">
-                        <input type="button" value="注册">
+                    <div class="sign-btn register-button">
+                        <input type="submit" id="register-button" value="注册">
+                        <p style="display: none;color: red" id="register-error-message"></p>
                     </div>
 
                     <a href="javascript:;" class="switch switch-login">已有账号?</a>
@@ -89,5 +95,7 @@
     </div>
 </body>
 <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="plug/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="plug/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="../js/login.js"></script>
 </html>

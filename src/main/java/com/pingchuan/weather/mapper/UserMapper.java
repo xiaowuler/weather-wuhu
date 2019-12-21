@@ -20,4 +20,6 @@ public interface UserMapper {
     void updateDepartmentIdById(@Param("userId") int userId, @Param("departmentId") int departmentId);
 
     User findUserByLoginName(@Param("username") String username);
+
+    void userRegister(@Param("user") User user);
 }
