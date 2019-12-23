@@ -71,23 +71,25 @@ var App = function () {
         var flag = true;
         var $username = $('#username');
         var $password = $('#password');
+        var errorUsernameMessage = $('.login-error-hint-username');
+        var errorPasswordMessage = $('.error-hint-password');
 
         if ($username.val() === ''){
-            $username.css('borderColor','#ff0000');
-            $('.login-error-hint-username').show();
+            this.SetWarnFontColor($username);
+            errorUsernameMessage.show();
             flag = false;
         } else {
-            $username.css('borderColor','#e0e0e0');
-            $('.login-error-hint-username').hide();
+            this.SetDefaultFontColor($username);
+            errorUsernameMessage.hide();
         }
 
         if ($password.val() === ''){
-            $password.css('borderColor','#ff0000');
-            $('.error-hint-password').show();
+            this.SetWarnFontColor($password);
+            errorPasswordMessage.show();
             flag = false;
         } else {
-            $password.css('borderColor','#e0e0e0');
-            $('.error-hint-password').hide();
+            this.SetDefaultFontColor($password);
+            errorPasswordMessage.hide();
         }
 
         return flag;
@@ -101,10 +103,8 @@ var App = function () {
         var $confirmPassword = $('#register-confirmPassword');
 
         $('#register').on('submit', function(){
-            alert(this.CheckUserRegisterInput($username, $realName, $password, $confirmPassword));
             if (this.CheckUserRegisterInput($username, $realName, $password, $confirmPassword)){
                 this.UserRegister($username, $department, $realName, $password);
-                alert(this.CheckUserRegisterInput($username, $realName, $password, $confirmPassword));
             }
             event.preventDefault();
         }.bind(this));
@@ -121,55 +121,89 @@ var App = function () {
                 password: $password.val()
             },
             success: function (result) {
-                console.log(result)
+                $('#register-state').text(result).show();
             }
         });
     };
 
     this.CheckUserRegisterInput = function ($username, $realName, $password, $confirmPassword) {
         var flag = true;
+        var errorUsernameMessage = $('.register-error-hint-username');
+        var errorNameMessage = $('.error-hint-name');
+        var errorPasswordMessage = $('.register-error-hint-password');
+        var errorConfirmPasswordMessage = $('.error-hint-confirmPassword');
+
         if ($username.val() === ''){
-            $username.css('borderColor','#ff0000');
-            $('.register-error-hint-username').show();
+            this.SetWarnFontColor($username);
+            errorUsernameMessage.show();
             flag = false;
         } else {
-            $username.css('borderColor','#e0e0e0');
-            $('.register-error-hint-username').hide();
+            this.IsExistUsername($username.val(), function (user) {
+                if (user !== null){
+                    this.SetWarnFontColor($username);
+                    errorUsernameMessage.text('用户名重复').show();
+                    flag = false;
+                } else {
+                    this.SetDefaultFontColor($username);
+                    errorUsernameMessage.hide();
+                }
+            }.bind(this));
         }
 
         if ($realName.val() === ''){
-            $realName.css('borderColor','#ff0000');
-            $('.error-hint-name').show();
+            this.SetWarnFontColor($realName);
+            errorNameMessage.show();
             flag = false;
         } else {
-            $realName.css('borderColor','#e0e0e0');
-            $('.error-hint-name').hide();
+            this.SetDefaultFontColor($realName);
+            errorNameMessage.hide();
         }
 
         if ($password.val() === ''){
-            $password.css('borderColor','#ff0000');
-            $('.register-error-hint-password').show();
+            this.SetWarnFontColor($password);
+            errorPasswordMessage.show();
             flag = false;
         } else {
-            $password.css('borderColor','#e0e0e0');
-            $('.register-error-hint-password').hide();
+            this.SetDefaultFontColor($password);
+            errorPasswordMessage.hide();
         }
 
         if ($confirmPassword.val() === ''){
-            $confirmPassword.css('borderColor','#ff0000');
-            $('.error-hint-confirmPassword').show();
+            this.SetWarnFontColor($confirmPassword);
+            errorConfirmPasswordMessage.show();
             flag = false;
         } else {
-            $confirmPassword.css('borderColor','#e0e0e0');
-            $('.error-hint-confirmPassword').hide();
+            this.SetDefaultFontColor($confirmPassword);
+            errorConfirmPasswordMessage.hide();
+
             if ($password.val() !== $confirmPassword.val()){
-                $confirmPassword.css('borderColor','#ff0000');
-                $('.error-hint-confirmPassword').text('两次密码不一致').show();
+                this.SetWarnFontColor($confirmPassword);
+                errorConfirmPasswordMessage.text('两次密码不一致').show();
                 flag = false;
             }
         }
 
         return flag;
+    };
+
+    this.SetWarnFontColor = function (element) {
+        element.css('borderColor','#ff0000');
+    };
+
+    this.SetDefaultFontColor = function (element) {
+        element.css('borderColor','#e0e0e0');
+    };
+
+    this.IsExistUsername = function (username, callback) {
+        $.ajax({
+            type: 'post',
+            url: '/User/isExistUsername',
+            data: {username: username},
+            dataType: 'json',
+            success: function (user) {
+                callback(user);
+            }
+        });
     };
 
     this.AddDepartmentOptions = function () {
@@ -185,7 +219,6 @@ var App = function () {
             }
         });
     };
-
 };
 
 $(document).ready(function () {

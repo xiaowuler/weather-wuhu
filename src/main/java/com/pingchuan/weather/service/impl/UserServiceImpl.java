@@ -68,7 +68,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void userRegister(String username, int departmentId, String name, String password) {
         User user = new User();
-        user.setId(null);
         user.setLoginName(username);
         user.setDepartmentId(departmentId);
         user.setName(name);

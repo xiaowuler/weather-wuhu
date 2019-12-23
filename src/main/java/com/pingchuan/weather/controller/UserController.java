@@ -49,9 +49,20 @@ public class UserController {
         return "用户名或密码错误";
     }
 
+    @RequestMapping("/isExistUsername")
+    public User isExistUsername(String username){
+        User user = userService.findUserByLoginName(username);
+        return user;
+    };
+
     @RequestMapping("/register")
     public String userRegister(String username, Integer departmentId, String name, String password){
         userService.userRegister(username, departmentId, name, password);
-        return "注册成功";
+        User user = userService.findUserByLoginName(username);
+        if (user != null){
+            return "注册成功";
+        } else {
+            return "注册失败";
+        }
     }
 }
