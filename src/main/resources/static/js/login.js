@@ -116,7 +116,7 @@ var App = function () {
             url: '/User/register',
             data: {
                 username: $username.val(),
-                departmentId: $department.val(),
+                departmentId: $department.combobox('getValue'),
                 name: $realName.val(),
                 password: $password.val()
             },
@@ -160,7 +160,10 @@ var App = function () {
             $('.error-hint-confirmPassword').show();
             flag = false;
         } else {
+            $confirmPassword.css('borderColor','#e0e0e0');
+            $('.error-hint-confirmPassword').hide();
             if ($password.val() !== $confirmPassword.val()){
+                $confirmPassword.css('borderColor','#ff0000');
                 $('.error-hint-confirmPassword').text('两次密码不一致').show();
                 flag = false;
             }
@@ -172,8 +175,8 @@ var App = function () {
     this.AddDepartmentOptions = function () {
         $('#department').combobox({
             url:'/Department/getAllDepartment',
-            valueField:'departId',
-            textField:'departName',
+            valueField: 'departId',
+            textField: 'departName',
             onLoadSuccess : function(){
                 var data = $('#department').combobox('getData');
                 if (data.length > 0) {
