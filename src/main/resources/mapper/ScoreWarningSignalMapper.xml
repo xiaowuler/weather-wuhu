@@ -8,4 +8,9 @@
         where IssueTime &gt;= #{startTime} and IssueTime &lt;= #{endTime} and DepartmentId = #{stationId} and warningType = #{warningType}
     </select>
 
+    <!-- 查询预警类型 -->
+    <select id = "findWarningType" resultType = "ScoreWarningSignal">
+        SELECT DISTINCT(WarningType) warningType FROM ScoreWarningSignal
+    </select>
+
 </mapper>

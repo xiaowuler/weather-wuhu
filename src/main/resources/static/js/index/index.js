@@ -3,85 +3,36 @@ var App = function () {
     this.Project = new Project(this);
 
     this.Startup = function () {
+        this.GetCurrentLoginName();
         this.SetCalendar();
         this.SetWarnTypeCombobox();
+        this.InitWarningTypeComboBox();
         this.SetCheckObjectCombobox();
-        $('.tab ul li').on('click', this.OnTabClick.bind(this));
-        $('#query-btn').on('click', this.OnQueryButtonClick.bind(this));
-        $('#query-btn').trigger("click");
 
+        $('.tab ul li').on('click', this.OnTagsSelectedChange.bind(this));
+        $('#query-btn').trigger("click");
+        $('#query-btn').on('click', this.OnQueryButtonClick.bind(this));
         $('#download').on('click', this.Project.OnDownloadButtonClick.bind(this));
     };
 
-    this.OnQueryButtonClick = function () {
-        this.ReloadDepartmentData();
-        this.ReloadProjectData();
-    };
-
-    this.ReloadDepartmentData = function () {
-        var params = this.GetParams();
-        if (params == null)
-            return;
-
+    this.GetCurrentLoginName = function () {
         $.ajax({
-            type: "POST",
-            dataType: 'json',
-            data: params,
-            url: 'ScoreWarningSignal/findAllByTimeAndRegionByDepartment',
-            success: function (data) {
-                this.Department.Reload(data);
-                this.Department.ShowDepartmentTable(data);
-            }.bind(this)
+            type: 'post',
+            url: "/User/getCurrentLoginName",
+            success: function (result) {
+                $('#login-name').text(result);
+            }
         });
     };
 
-    this.ReloadProjectData = function () {
-        var params = this.GetParams();
-        if (params == null)
-            return;
+    this.OnTagsSelectedChange = function (event) {
+        $('.tab ul li').on('click', function () {
+            $('.tab ul li').removeClass("action");
+            $(event.target).addClass("action");
 
-        $.ajax({
-            type: "POST",
-            dataType: 'json',
-            data: params,
-            url: 'ScoreWarningSignal/findAllByTimeAndRegionByProduct',
-            success: function (data) {
-                console.log(data);
-                if (data === null)
-                    return;
-
-                this.Project.Reload(data);
-                this.Project.ShowProjectTable(data);
-            }.bind(this)
+            var index = $(event.target).index();
+            $('.wrap .wrap-content').eq(index).css("display","block").siblings().css("display","none");
         });
-    };
-
-    this.GetParams = function () {
-        var startTime = $("#start-time").datebox('getValue');
-        var endTime = $("#end-time").datebox('getValue');
-        var warningType = $('#warn-type').combobox('getValue');
-        var departmentId = $('#check-object').combobox('getValue');
-        var childDepartmentId = $('#secondary-units').combobox('getValue');
-
-        if (departmentId !== '' || childDepartmentId !== ''){
-            return {
-                startTime: startTime,
-                endTime: endTime,
-                warningType: warningType,
-                departmentId: departmentId,
-                childDepartmentId: childDepartmentId
-            };
-        }
-
-        return null;
-    };
-
-    this.OnTabClick = function (event) {
-        $('.tab ul li').removeClass("action");
-        $(event.target).addClass("action");
-
-        var index = $(event.target).index();
-        $(".wrap .wrap-content").eq(index).css("display","block").siblings().css("display","none");
     };
 
     this.SetCalendar = function () {
@@ -97,7 +48,7 @@ var App = function () {
     };
 
     this.SetWarnTypeCombobox = function () {
-        $('#warn-type').combobox({
+        $('#warning-type').combobox({
             panelHeight: 'auto',
             editable: false,
         });
@@ -112,20 +63,20 @@ var App = function () {
             textField:'county',
             queryParams: { parentDepartId: 58000 },
             loadFilter:function(data){
-                var obj={};
+                var obj = {};
                 obj.departId = 58000;
                 obj.county ='全部单位';
-                data.splice(0,0,obj);
+                data.splice(0, 0, obj);
                 return data;
             },
             onSelect: function (row) {
                 var departId = row.departId;
                 if (departId !== 58000){
                     $('.forbid').hide();
-                    this.SetChildDepart(row.departId);
+                    this.SetChildDepartment(row.departId);
                 } else{
                     $('.forbid').show();
-                    this.SetChildDepart();
+                    this.SetChildDepartment();
                 }
             }.bind(this),
             onLoadSuccess: function (data) {
@@ -141,7 +92,7 @@ var App = function () {
         });
     };
 
-    this.SetChildDepart = function (departId) {
+    this.SetChildDepartment = function (departId) {
         if (departId === undefined)
             return;
 
@@ -167,6 +118,87 @@ var App = function () {
                 }
             }.bind(this),
         });
+    };
+
+    this.InitWarningTypeComboBox = function () {
+        $.ajax({
+            type: 'post',
+            url: '/ScoreWarningSignal/findWaringType',
+            success: function (result) {
+                this.AddWarningTypeComboBoxOption(this.GetWarningType(result));
+            }.bind(this)
+        });
+    };
+
+    this.GetWarningType = function (result) {
+        var data = [];
+        result.forEach(function (item, index) {
+            data.push(JSON.parse(item));
+        });
+        return data;
+    };
+
+    this.AddWarningTypeComboBoxOption = function (result) {
+        var warningType = $('#warning-type');
+        warningType.combobox({
+            valueField: 'code',
+            textField: 'type',
+            data: result,
+            onLoadSuccess : function(){
+                var data = warningType.combobox('getData');
+                if (data.length > 0) {
+                    warningType.combobox('select', data[0].type);
+                }
+            }
+        });
+    };
+
+    this.OnQueryButtonClick = function () {
+        this.ReloadProjectData();
+        this.ReloadDepartmentData();
+    };
+
+    this.ReloadProjectData = function () {
+        var params = this.GetQueryParams();
+
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            data: params,
+            url: 'ScoreWarningSignal/findAllByTimeAndRegionByProduct',
+            success: function (data) {
+                if (data === null)
+                    return;
+
+                this.Project.Reload(data);
+                this.Project.ShowProjectTable(data);
+            }.bind(this)
+        });
+    };
+
+    this.ReloadDepartmentData = function () {
+        var params = this.GetQueryParams();
+
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            data: params,
+            url: 'ScoreWarningSignal/findAllByTimeAndRegionByDepartment',
+            success: function (data) {
+                this.Department.Reload(data);
+                this.Department.ShowDepartmentTable(data);
+            }.bind(this)
+        });
+    };
+
+    this.GetQueryParams = function () {
+        return {
+            startTime: $("#start-time").datebox('getValue'),
+            endTime: $("#end-time").datebox('getValue'),
+            warningType: $('#warning-type').combobox('getValue'),
+            departmentId: $('#check-object').combobox('getValue'),
+            childDepartmentId: $('#secondary-units').combobox('getValue')
+        };
     };
 };
 

@@ -4,18 +4,14 @@ var App = function () {
         window.onresize = this.Relayout.bind(this);
         this.Relayout();
         this.InitCombobox();
+        this.AddDepartmentOptions();
         this.RemoveUserInputInfo();
         this.SwitchRegisterOrLogin();
         this.getSecurityError();
-        this.AddDepartmentOptions();
 
         $('#login-button').one('click', this.OnLoginButtonClick.bind(this));
         $('#register-button').one('click', this.OnRegisterButtonClick.bind(this));
     };
-    
-    this.submitRegister = function (e) {
-        e.preventDefault();
-    }
 
     this.Relayout = function () {
         $(".container").width($(window).width());
@@ -26,6 +22,20 @@ var App = function () {
         $('#department').combobox({
             panelHeight: '249px',
             editable: false,
+        });
+    };
+
+    this.AddDepartmentOptions = function () {
+        $('#department').combobox({
+            url:'/Department/getAllDepartment',
+            valueField: 'departId',
+            textField: 'departName',
+            onLoadSuccess : function(){
+                var data = $('#department').combobox('getData');
+                if (data.length > 0) {
+                    $('#department').combobox('select', data[0].departId);
+                }
+            }
         });
     };
 
@@ -110,24 +120,9 @@ var App = function () {
         }.bind(this));
     };
 
-    this.UserRegister = function ($username, $department, $realName, $password) {
-        $.ajax({
-            type: 'post',
-            url: '/User/register',
-            data: {
-                username: $username.val(),
-                departmentId: $department.combobox('getValue'),
-                name: $realName.val(),
-                password: $password.val()
-            },
-            success: function (result) {
-                $('#register-state').text(result).show();
-            }
-        });
-    };
-
     this.CheckUserRegisterInput = function ($username, $realName, $password, $confirmPassword) {
         var flag = true;
+
         var errorUsernameMessage = $('.register-error-hint-username');
         var errorNameMessage = $('.error-hint-name');
         var errorPasswordMessage = $('.register-error-hint-password');
@@ -135,19 +130,17 @@ var App = function () {
 
         if ($username.val() === ''){
             this.SetWarnFontColor($username);
-            errorUsernameMessage.show();
+            errorUsernameMessage.text('请输入用户名').show();
             flag = false;
         } else {
-            this.IsExistUsername($username.val(), function (user) {
-                if (user !== null){
-                    this.SetWarnFontColor($username);
-                    errorUsernameMessage.text('用户名重复').show();
-                    flag = false;
-                } else {
-                    this.SetDefaultFontColor($username);
-                    errorUsernameMessage.hide();
-                }
-            }.bind(this));
+            if (this.IsExistUsername($username.val()) !== null){
+                this.SetWarnFontColor($username);
+                errorUsernameMessage.text('用户名重复').show();
+                flag = false;
+            } else {
+                this.SetDefaultFontColor($username);
+                errorUsernameMessage.hide();
+            }
         }
 
         if ($realName.val() === ''){
@@ -186,6 +179,24 @@ var App = function () {
         return flag;
     };
 
+    this.UserRegister = function ($username, $department, $realName, $password) {
+        console.log($department.combobox('getValue'));
+
+        $.ajax({
+            type: 'post',
+            url: '/User/register',
+            data: {
+                username: $username.val(),
+                departmentId: $department.combobox('getValue'),
+                name: $realName.val(),
+                password: $password.val()
+            },
+            success: function (result) {
+                $('#register-state').text(result).show();
+            }
+        });
+    };
+
     this.SetWarnFontColor = function (element) {
         element.css('borderColor','#ff0000');
     };
@@ -194,30 +205,19 @@ var App = function () {
         element.css('borderColor','#e0e0e0');
     };
 
-    this.IsExistUsername = function (username, callback) {
+    this.IsExistUsername = function (username) {
+        var user = null;
         $.ajax({
             type: 'post',
             url: '/User/isExistUsername',
             data: {username: username},
+            async: false,
             dataType: 'json',
-            success: function (user) {
-                callback(user);
+            success: function (result) {
+                user = result;
             }
         });
-    };
-
-    this.AddDepartmentOptions = function () {
-        $('#department').combobox({
-            url:'/Department/getAllDepartment',
-            valueField: 'departId',
-            textField: 'departName',
-            onLoadSuccess : function(){
-                var data = $('#department').combobox('getData');
-                if (data.length > 0) {
-                    $('#department').combobox('select', data[0].departName);
-                }
-            }
-        });
+        return user;
     };
 };
 

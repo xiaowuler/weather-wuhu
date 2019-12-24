@@ -1,8 +1,6 @@
 package com.pingchuan.weather.service.impl;
 
-import java.util.Date;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
@@ -207,5 +205,36 @@ public class ScoreWarningSignalServiceImpl implements ScoreWarningSignalService 
             warningCalc.addTotalCount();
             warningCalc.addLeadTimeCount(leadTime.floatValue());
         }
+    }
+
+    @Override
+    public List<String> findWarningType() {
+        List<String> warningTypes = new ArrayList<>();
+        List<ScoreWarningSignal> ScoreWarningSignals = scoreWarningSignalMapper.findWarningType();
+
+        for (ScoreWarningSignal signal : ScoreWarningSignals) {
+            String code = signal.getWarningType();
+            if ("ThunderStormGale".equals(code))
+                warningTypes.add(GetWarningType(code, "雷电暴风"));
+            else if ("Gale".equals(code))
+                warningTypes.add(GetWarningType(code, "大风"));
+            else if ("Rainstorm".equals(code))
+                warningTypes.add(GetWarningType(code, "暴雨"));
+            else if ("Hail".equals(code))
+                warningTypes.add(GetWarningType(code, "冰雹"));
+            else if ("UnKnow".equals(code))
+                warningTypes.add(GetWarningType(code, "未知的"));
+            else if("Thunder".equals(code))
+                warningTypes.add(GetWarningType(code, "雷"));
+            else if ("Fog".equals(code))
+                warningTypes.add(GetWarningType(code, "雾"));
+            else if ("Typhoon".equals(code))
+                warningTypes.add(GetWarningType(code, "台风"));
+        }
+        return warningTypes;
+    }
+
+    public String GetWarningType(String code, String type){
+        return String.format("{\"code\": \"%s\", \"type\": \"%s\"}", code, type);
     }
 }

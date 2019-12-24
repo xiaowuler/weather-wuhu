@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
                 .loginPage("/login.html")
-                .loginProcessingUrl("/userLogin")
+                .loginProcessingUrl("/login")
                 .failureUrl("/login.html")
                 .successHandler(new AuthenticationSuccessHandler() {
                             @Override
@@ -73,6 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login.html").permitAll()
                 .antMatchers("/User/**").permitAll()
                 .antMatchers("/Department/**").permitAll()
+                .antMatchers("/ScoreWarningSignal/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

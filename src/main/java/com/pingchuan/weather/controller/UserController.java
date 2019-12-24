@@ -7,9 +7,12 @@ import com.pingchuan.weather.service.UserService;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 
 @RestController
 @RequestMapping("User")
@@ -64,5 +67,15 @@ public class UserController {
         } else {
             return "注册失败";
         }
+    }
+
+    @RequestMapping("/getCurrentLoginName")
+    public String getCurrentLoginName(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String currentUserName = authentication.getName();
+            return currentUserName;
+        }
+        return null;
     }
 }
