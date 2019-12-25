@@ -1,8 +1,5 @@
 package com.pingchuan.weather.service.impl;
 
-import java.util.Map;
-import java.util.HashMap;
-
 import com.pingchuan.weather.entity.User;
 import com.pingchuan.weather.entity.PageResult;
 import com.pingchuan.weather.mapper.UserMapper;

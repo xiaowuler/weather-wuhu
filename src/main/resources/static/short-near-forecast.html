@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="x-ua-compatible" content="IE=edge" >
+    <meta charset="UTF-8" http-equiv="x-ua-compatible" content="IE=edge" >
     <title>短临预报</title>
     <link rel="stylesheet" href="../plug/easyui.css">
     <link rel="stylesheet" href="../css/reset.css">
@@ -17,6 +16,7 @@
                 <img src="../images/top-logo.png">
             </div>
         </div>
+
         <div class="nav">
             <div class="width1200 clearfix">
                 <ul class="clearfix fl">
@@ -26,12 +26,13 @@
                     <li><a href="system.html">系统管理</a></li>
                 </ul>
                 <div class="top-info fr">
-                    <div class="top-user">欢迎，<span id="name">罗小武</span>[ <span id="level">超级管理员</span> ]</div>
-                    <button class="quit-button">退出</button>
+                    <div class="top-user">欢迎，<span id="login-name"></span> [ <span id="level">超级管理员</span> ]</div>
+                    <button class="quit-button"><a href="/logout" id="exit">退出</a></button>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="content warn-sign">
         <div class="width1200">
             <div class="navigation clearfix">
@@ -49,71 +50,28 @@
                     <span class="subtitle">结束时间</span>
                     <input class="easyui-datebox" id="end-time" data-options="editable:false" value=" ">
                 </div>
-                <button id="query-btn" class="query-btn fr" style="margin-left: 10px">查询</button>
-                <div class="choose fr">
-                    <span class="subtitle fl">单位</span>
-                    <div class="choose-content fl">
-                        <select class="easyui-combobox">
-                            <option>请选择</option>
-                            <option value="">南京气象局</option>
-                            <option value="">常州气象局</option>
-                            <option value="">雷电</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="choose fr">
+
+                <div class="choose choose-type fl">
                     <span class="subtitle fl">天气类型</span>
                     <div class="choose-content fl">
-                        <select class="easyui-combobox">
-                            <option>请选择</option>
-                            <option value="短时强降水">短时强降水</option>
-                            <option value="大风冰雹">大风冰雹</option>
-                            <option value="雷电">雷电</option>
-                        </select>
+                        <select class="easyui-combobox" id="weather-type"></select>
                     </div>
                 </div>
 
-            </div>
-            <div class="wrap">
-                <div class="wrap-content" style="display: block;">
-                    <div class="sheet clearfix">
-                        <div class="sheet-content fl">
-                            <h2>短时预报</h2>
-                            <img src="../images/sheet36.png">
-                        </div>
-                        <div class="sheet-content fr">
-                            <h2>临近预报</h2>
-                            <img src="../images/sheet66.png">
-                        </div>
+                <div class="choose fl">
+                    <span class="subtitle fl">单位</span>
+                    <div class="choose-content fl">
+                        <select class="easyui-combobox" id="station"></select>
                     </div>
-                    <table class="score-table">
-                        <tr>
-                            <th>项目</th>
-                            <th>准确率</th>
-                            <th>命中率</th>
-                            <th>空报率</th>
-                            <th>漏报率</th>
-                            <th>时间前提量</th>
-                        </tr>
-                        <tr>
-                            <td>短时预报</td>
-                            <td>60</td>
-                            <td>98</td>
-                            <td>73</td>
-                            <td>55</td>
-                            <td>/</td>
-                        </tr>
-                        <tr>
-                            <td>临近预报</td>
-                            <td>60</td>
-                            <td>98</td>
-                            <td>73</td>
-                            <td>55</td>
-                            <td>24</td>
-                        </tr>
-                    </table>
                 </div>
-                <div class="wrap-content">
+
+                <div class="choose fl">
+                    <button id="query-btn" class="query-btn fr">查询</button>
+                </div>
+            </div>
+
+            <div class="wrap">
+                <div class="wrap-content" style="display: block">
                     <div class="score">
                         <img src="../images/score12.png">
                     </div>
@@ -162,16 +120,55 @@
                         </tr>
                     </table>
                 </div>
+
+                <div class="wrap-content">
+                    <div class="sheet clearfix">
+                        <div class="sheet-content fl">
+                            <h2>短时预报</h2>
+                            <img src="../images/sheet36.png">
+                        </div>
+                        <div class="sheet-content fr">
+                            <h2>临近预报</h2>
+                            <img src="../images/sheet66.png">
+                        </div>
+                    </div>
+                    <table class="score-table">
+                        <tr>
+                            <th>项目</th>
+                            <th>准确率</th>
+                            <th>命中率</th>
+                            <th>空报率</th>
+                            <th>漏报率</th>
+                            <th>时间前提量</th>
+                        </tr>
+                        <tr>
+                            <td>短时预报</td>
+                            <td>60</td>
+                            <td>98</td>
+                            <td>73</td>
+                            <td>55</td>
+                            <td>/</td>
+                        </tr>
+                        <tr>
+                            <td>临近预报</td>
+                            <td>60</td>
+                            <td>98</td>
+                            <td>73</td>
+                            <td>55</td>
+                            <td>24</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
 </body>
-<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../plug/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../plug/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="../plug/moment.min.js"></script>
 <script type="text/javascript" src="../plug/helper.js"></script>
 <script type="text/javascript" src="../plug/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../plug/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src="../js/short.js"></script>
+<script type="text/javascript" src="../js/short-impending/short-impending.js"></script>
 </html>

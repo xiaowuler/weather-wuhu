@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--客户映射 指定到dao接口 -->
 <mapper namespace="com.pingchuan.weather.mapper.StationMapper">
-
-    <select id="findAllByDepart" resultType="Station">
-        SELECT * FROM Station where DepartmentId = #{departmentId}
+    <!-- 获取父站点 -->
+    <select id="findParentStations" resultType="Station">
+        SELECT StationName AS stationName, DepartmentID AS departmentId FROM Station
+        WHERE StationCode IN('58102', '58116', '58122', '58203', '58221', '58224', '58236', '58311', '58321', '58334', '58336', '58423', '58424', '58427', '58429', '58433', '58437')
     </select>
-
 </mapper>

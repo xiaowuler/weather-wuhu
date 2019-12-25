@@ -71,6 +71,7 @@ var Project = function (parent) {
         var title = {
             text: '颜色'
         };
+
         var subtitle = {
             text: null
         };
@@ -86,14 +87,13 @@ var Project = function (parent) {
         var xAxis = {
             categories: ['准确率', '命中率', '空报率', '漏报率', 'T1', 'T2', 'T3']
         };
+
         var yAxis = {
             min: 0,
             title: {
                 text: null
-            },
+            }
         };
-
-        var colors = ['#00fff5', '#899ff5', '#00b7ee', '#ffc36a', '#f19ec2', '#aa89bd', '#54aefa'];
 
         var tooltip = {
             headerFormat: '{point.x}<br>',
@@ -101,7 +101,7 @@ var Project = function (parent) {
         };
 
         var plotOptions = {
-            pointWidth: 30,
+            pointWidth: 30
         };
 
         var legend = {
@@ -123,7 +123,6 @@ var Project = function (parent) {
         json.chart = chart;
         json.xAxis = xAxis;
         json.yAxis = yAxis;
-        json.colors = colors;
         json.tooltip = tooltip;
         json.plotOptions = plotOptions;
         json.legend = legend;
@@ -144,33 +143,38 @@ var Project = function (parent) {
         this.noLevelChart.highcharts().setTitle( {text: '不分级检验'});
 
         this.blueChart.highcharts().addSeries({
-            data: params.blueValue
+            data: params.blueValue,
+            color: '#3aa2ff'
         });
 
         this.yellowChart.highcharts().addSeries({
-            data: params.yellowValue
+            data: params.yellowValue,
+            color: '#FFF95D'
         });
 
         this.orangeChart.highcharts().addSeries({
-            data: params.orangeValue
+            data: params.orangeValue,
+            color: '#ff9a30'
         });
 
         this.redChart.highcharts().addSeries({
-            data: params.redValue
+            data: params.redValue,
+            color: '#ff3324'
         });
 
         this.levelChart.highcharts().addSeries({
-            data: params.levelValue
+            data: params.levelValue,
+            color: '#B1FFFA'
         });
 
         this.noLevelChart.highcharts().addSeries({
-            data: params.noLevelValue
+            data: params.noLevelValue,
+            color: '#4EFFC7'
         });
-
     };
 
     this.ShowProjectTable = function (data) {
-        $('#type').text($('#warn-type').combobox('getText'));
+        $('#type').text($('#warning-type').combobox('getText'));
         $('#from-time').text(moment($("#start-time").datebox('getValue')).format('YYYY年MM月DD日'));
         $('#to-time').text(moment($("#end-time").datebox('getValue')).format('YYYY年MM月DD日'));
         $('#project-table').find('tr td').not('.table-title').remove();

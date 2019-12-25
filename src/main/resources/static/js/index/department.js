@@ -1,4 +1,5 @@
 var Department = function (parent) {
+    this.Parent = parent;
 
     this.Reload = function (result) {
         this.result = result;
@@ -47,15 +48,18 @@ var Department = function (parent) {
     };
 
     this.ShowDepartmentChart = function (xMarks, elementSeries) {
+        var params = this.Parent.GetQueryParams();
+        var title = '{0} - {1}'.format(params.startTime, params.endTime);
+
         Highcharts.chart('department-chart', {
-            chart: {
-                type: 'column'
-            },
             title: {
-                text: null
+                text: '预警信号'
             },
             subtitle: {
-                text: null
+                text: title
+            },
+            chart: {
+                type: 'column'
             },
             credits: {
                 enabled: false

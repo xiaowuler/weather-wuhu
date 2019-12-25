@@ -10,8 +10,8 @@ var App = function () {
         this.SetCheckObjectCombobox();
 
         $('.tab ul li').on('click', this.OnTagsSelectedChange.bind(this));
-        $('#query-btn').trigger("click");
         $('#query-btn').on('click', this.OnQueryButtonClick.bind(this));
+        $('#query-btn').trigger('click');
         $('#download').on('click', this.Project.OnDownloadButtonClick.bind(this));
     };
 
@@ -26,13 +26,11 @@ var App = function () {
     };
 
     this.OnTagsSelectedChange = function (event) {
-        $('.tab ul li').on('click', function () {
             $('.tab ul li').removeClass("action");
             $(event.target).addClass("action");
 
             var index = $(event.target).index();
             $('.wrap .wrap-content').eq(index).css("display","block").siblings().css("display","none");
-        });
     };
 
     this.SetCalendar = function () {
@@ -54,13 +52,48 @@ var App = function () {
         });
     };
 
+    this.InitWarningTypeComboBox = function () {
+        $.ajax({
+            type: 'post',
+            url: '/ScoreWarningSignal/findWaringType',
+            async: false,
+            success: function (result) {
+                this.AddWarningTypeComboBoxOption(this.GetWarningType(result));
+            }.bind(this)
+        });
+    };
+
+    this.GetWarningType = function (result) {
+        var data = [];
+        result.forEach(function (item, index) {
+            data.push(JSON.parse(item));
+        });
+        return data;
+    };
+
+    this.AddWarningTypeComboBoxOption = function (result) {
+        var warningType = $('#warning-type');
+        warningType.combobox({
+            valueField: 'code',
+            textField: 'type',
+            data: result,
+            onLoadSuccess : function(){
+                var data = warningType.combobox('getData');
+                if (data.length > 0) {
+                    warningType.combobox('select', data[0].type);
+                    warningType.combobox('setValue', data[0].code);
+                }
+            }
+        });
+    };
+
     this.SetCheckObjectCombobox = function () {
         $('#check-object').combobox({
             url : "Department/findAllByParentDepartId",
             panelHeight: 300,
             editable: false,
-            valueField:'departId',
-            textField:'county',
+            valueField: 'departId',
+            textField: 'county',
             queryParams: { parentDepartId: 58000 },
             loadFilter:function(data){
                 var obj = {};
@@ -88,7 +121,7 @@ var App = function () {
 
                 this.ReloadDepartmentData();
                 this.ReloadProjectData();
-            }.bind(this),
+            }.bind(this)
         });
     };
 
@@ -120,39 +153,6 @@ var App = function () {
         });
     };
 
-    this.InitWarningTypeComboBox = function () {
-        $.ajax({
-            type: 'post',
-            url: '/ScoreWarningSignal/findWaringType',
-            success: function (result) {
-                this.AddWarningTypeComboBoxOption(this.GetWarningType(result));
-            }.bind(this)
-        });
-    };
-
-    this.GetWarningType = function (result) {
-        var data = [];
-        result.forEach(function (item, index) {
-            data.push(JSON.parse(item));
-        });
-        return data;
-    };
-
-    this.AddWarningTypeComboBoxOption = function (result) {
-        var warningType = $('#warning-type');
-        warningType.combobox({
-            valueField: 'code',
-            textField: 'type',
-            data: result,
-            onLoadSuccess : function(){
-                var data = warningType.combobox('getData');
-                if (data.length > 0) {
-                    warningType.combobox('select', data[0].type);
-                }
-            }
-        });
-    };
-
     this.OnQueryButtonClick = function () {
         this.ReloadProjectData();
         this.ReloadDepartmentData();
@@ -160,6 +160,8 @@ var App = function () {
 
     this.ReloadProjectData = function () {
         var params = this.GetQueryParams();
+        if (params == null)
+            return;
 
         $.ajax({
             type: "POST",
@@ -178,6 +180,8 @@ var App = function () {
 
     this.ReloadDepartmentData = function () {
         var params = this.GetQueryParams();
+        if (params == null)
+            return;
 
         $.ajax({
             type: "POST",
@@ -192,13 +196,22 @@ var App = function () {
     };
 
     this.GetQueryParams = function () {
-        return {
-            startTime: $("#start-time").datebox('getValue'),
-            endTime: $("#end-time").datebox('getValue'),
-            warningType: $('#warning-type').combobox('getValue'),
-            departmentId: $('#check-object').combobox('getValue'),
-            childDepartmentId: $('#secondary-units').combobox('getValue')
-        };
+        var startTime = $("#start-time").datebox('getValue');
+        var endTime = $("#end-time").datebox('getValue');
+        var warningType = $('#warning-type').combobox('getValue');
+        var departmentId = $('#check-object').combobox('getValue');
+        var childDepartmentId = $('#secondary-units').combobox('getValue');
+
+        if (departmentId !== '' || childDepartmentId !== ''){
+            return {
+                startTime: startTime,
+                endTime: endTime,
+                warningType: warningType,
+                departmentId: departmentId,
+                childDepartmentId: childDepartmentId
+            };
+        }
+        return null;
     };
 };
 
