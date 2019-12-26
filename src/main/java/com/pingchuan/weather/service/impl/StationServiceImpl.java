@@ -16,6 +16,13 @@ public class StationServiceImpl implements StationService {
 
     @Override
     public List<Station> findParentStations() {
-        return stationMapper.findParentStations();
+        Station station = new Station();
+        station.setStationName("全部单位");
+        station.setDepartmentId(58000);
+
+        List<Station> stations = stationMapper.findParentStations();
+        stations.add(0, station);
+
+        return stations;
     }
 }

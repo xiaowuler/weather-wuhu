@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.text.DecimalFormat;
 
 import com.pingchuan.weather.util.CalcRate;
-import com.pingchuan.weather.DTO.DepartmentDTO;
+import com.pingchuan.weather.DTO.scorewarningsignal.DepartmentDTO;
 import com.pingchuan.weather.entity.Department;
 import com.pingchuan.weather.entity.ScoreShortTerm;
 import com.pingchuan.weather.DTO.ScoreShortTermDTO;

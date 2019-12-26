@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pingchuan.weather.mapper.ScoreShortTimeMapper">
+    <!-- 查询所有市级单位短临预报数据 -->
+    <select id="findAll" resultType="ScoreShortTime">
+        select s.StationName, sst.*
+        from ScoreShortTime sst
+        left join Station s on s.StationCode = sst.StationId
+        where sst.HappendTime &gt;= #{startTime} and sst.HappendTime &lt;= #{endTime}
+        and FcstType = #{fcstType} and (SUBSTRING(sst.StationId, 1, 2) = '58' and (s.County is null or LEN(RTRIM(LTRIM(s.County))) = 0))
+    </select>
+</mapper>

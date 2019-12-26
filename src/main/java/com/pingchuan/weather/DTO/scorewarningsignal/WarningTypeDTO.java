@@ -1,4 +1,4 @@
-package com.pingchuan.weather.DTO;
+package com.pingchuan.weather.DTO.scorewarningsignal;
 
 import lombok.Data;
 
@@ -10,6 +10,7 @@ import lombok.Data;
 
 @Data
 public class WarningTypeDTO {
+
     // 准确率
     private float correctRate;
     // 命中率

@@ -81,9 +81,10 @@ var App = function () {
             valueField: 'departmentId',
             onLoadSuccess: function (data) {
                 var options = $('#station').combobox('getData');
-                options.unshift({'stationName': '全部单位', 'departmentId': 'all'});
-                $('#station').combobox('select',options[0].stationName);
-                $('#station').combobox('setValue',options[0].departmentId);
+                if (options.length > 0) {
+                    $('#station').combobox('select',data[0].stationName);
+                    $('#station').combobox('setValue',data[0].departmentId);
+                }
             }
         });
     };

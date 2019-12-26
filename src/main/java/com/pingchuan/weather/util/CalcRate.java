@@ -31,6 +31,7 @@ public class CalcRate {
         this.count += count;
         this.successCount += successCount;
     }
+
     // 计算正确率
     public String getTotalSample(){
         return String.format("%s/%s", this.successCount, this.count);

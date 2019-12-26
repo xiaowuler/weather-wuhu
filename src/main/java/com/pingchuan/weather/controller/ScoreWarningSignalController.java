@@ -3,7 +3,7 @@ package com.pingchuan.weather.controller;
 import java.util.Date;
 import java.util.List;
 
-import com.pingchuan.weather.DTO.ScoreWarningSignalDTO;
+import com.pingchuan.weather.DTO.scorewarningsignal.ScoreWarningSignalDTO;
 import com.pingchuan.weather.service.ScoreWarningSignalService;
 
 import org.springframework.web.bind.annotation.PostMapping;

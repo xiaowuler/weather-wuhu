@@ -12,18 +12,11 @@ import lombok.Data;
 public class Station {
 
     private int departmentId;
-
     private int stationCode;
-
     private String stationName;
-
     private float longitude;
-
     private float latitude;
-
     private float altitude;
-
     private String county;
-
     private int orderId;
 }
