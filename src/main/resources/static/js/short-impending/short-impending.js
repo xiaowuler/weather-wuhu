@@ -1,5 +1,5 @@
 var App = function () {
-    this.Department = new Department(this);
+    this.ShortDepartment = new ShortDepartment(this);
     this.Project = new Project(this);
 
     this.Startup = function () {
@@ -9,6 +9,8 @@ var App = function () {
         this.InitStationComobox();
 
         $('.tab ul li').on('click', this.OnTagsSelectedChange.bind(this));
+        $('#query-btn').on('click', this.OnQueryButtonClick.bind(this));
+        $('#query-btn').trigger('click');
     };
 
     this.GetCurrentLoginName = function () {
@@ -30,18 +32,23 @@ var App = function () {
     };
 
     this.SetCalendar = function () {
-        $('#start-time').datebox({
+        var startTime = $('#start-time');
+        var endTime = $('#end-time');
+
+        startTime.datebox({
             panelWidth: 180,
             panelHeight: 260
         });
+        startTime.datebox('setValue', '2018/05/24')
 
-        $('#end-time').datebox({
+        endTime.datebox({
             panelWidth: 180,
             panelHeight: 260
         });
+        endTime.datebox('setValue', '2018/06/01');
 
-        var startDate = moment().add(-1, 'months').format('YYYY/MM/DD');
-        $("#start-time").datebox("setValue", startDate);
+        // var startDate = moment().add(-1, 'months').format('YYYY/MM/DD');
+        // $("#start-time").datebox("setValue", startDate);
     };
 
     this.SetWeatherTypeCombobox = function () {
@@ -85,8 +92,76 @@ var App = function () {
                     $('#station').combobox('select',data[0].stationName);
                     $('#station').combobox('setValue',data[0].departmentId);
                 }
-            }
+               this.GetDepartmentData();
+            }.bind(this)
         });
+    };
+
+    this.OnQueryButtonClick = function () {
+        var station = $('#station').combobox('getValue');
+        if (station === '' || station === '58000')
+            this.GetDepartmentData();
+        else
+            this.GetDataByDepartmentId();
+
+    };
+
+    this.GetDepartmentData = function () {
+        var parameters = this.GetQueryParameters();
+        if (parameters === null)
+            return;
+
+        $.ajax({
+            type: 'post',
+            url: '/scoreShortTime/findAllByParentDepartment',
+            data: parameters,
+            dataType: 'json',
+            success: function (data) {
+                this.ShortDepartment.Reload(data);
+                this.ShortDepartment.ShowDepartmentTable(data);
+            }.bind(this)
+        });
+    };
+
+    this.GetDataByDepartmentId = function () {
+        var parameters = this.GetQueryParameters();
+        if (parameters === null)
+            return;
+
+        $.ajax({
+            type: 'post',
+            url: '/scoreShortTime/findAllByDepartmentId',
+            data: parameters,
+            dataType: 'json',
+            success: function (data) {
+                this.ShortDepartment.Reload(data);
+                this.ShortDepartment.ShowDepartmentTable(data);
+            }.bind(this)
+        });
+    };
+
+    this.GetQueryParameters = function () {
+        var startTime = $('#start-time').val();
+        var endTime = $('#end-time').val();
+        var weatherType = $('#weather-type').combobox('getValue');
+        var station = $('#station').combobox('getValue');
+
+        if (station === ''){
+            return null;
+        } else if (station === '58000'){
+            return {
+                startTime: startTime,
+                endTime: endTime,
+                fcstType: weatherType
+            }
+        } else {
+            return {
+                startTime: startTime,
+                endTime: endTime,
+                fcstType: weatherType,
+                departmentId: station
+            }
+        }
     };
 };
 

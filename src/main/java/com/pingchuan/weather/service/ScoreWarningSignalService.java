@@ -3,7 +3,7 @@ package com.pingchuan.weather.service;
 import java.util.Date;
 import java.util.List;
 
-import com.pingchuan.weather.DTO.scorewarningsignal.ScoreWarningSignalDTO;
+import com.pingchuan.weather.DTO.warningsignal.ScoreWarningSignalDTO;
 
 public interface ScoreWarningSignalService {
 

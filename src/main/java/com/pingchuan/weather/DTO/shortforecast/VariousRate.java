@@ -1,4 +1,4 @@
-package com.pingchuan.weather.DTO.shortimpendingforecast;
+package com.pingchuan.weather.DTO.shortforecast;
 
 public class VariousRate {
 

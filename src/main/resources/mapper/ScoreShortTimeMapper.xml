@@ -3,10 +3,18 @@
 <mapper namespace="com.pingchuan.weather.mapper.ScoreShortTimeMapper">
     <!-- 查询所有市级单位短临预报数据 -->
     <select id="findAll" resultType="ScoreShortTime">
-        select s.StationName, sst.*
+        select sst.*
         from ScoreShortTime sst
         left join Station s on s.StationCode = sst.StationId
         where sst.HappendTime &gt;= #{startTime} and sst.HappendTime &lt;= #{endTime}
-        and FcstType = #{fcstType} and (SUBSTRING(sst.StationId, 1, 2) = '58' and (s.County is null or LEN(RTRIM(LTRIM(s.County))) = 0))
+        and FcstType = #{fcstType} and (SUBSTRING(sst.StationId, 1, 2) = '58' and (s.County is null or RTRIM(LTRIM(s.County)) = '')) AND sst.StationId = #{stationId}
+    </select>
+
+    <!-- 查询市级单位下面的二级单位短临预报数据 -->
+    <select id="findAllByDepartmentId" resultType="ScoreShortTime">
+        select s.StationName, sst.*
+        from ScoreShortTime sst
+        left join Station s on s.StationCode = sst.StationId
+        where sst.HappendTime &gt;= #{startTime} and sst.HappendTime &lt;= #{endTime} and sst.FcstType = #{fcstType} and (SUBSTRING(sst.StationId, 1, 2) = '58' and (s.County is not null or RTRIM(LTRIM(s.County)) != '')) AND s.DepartmentID = #{departmentId}
     </select>
 </mapper>

@@ -2,6 +2,7 @@ var Department = function (parent) {
     this.Parent = parent;
 
     this.Reload = function (result) {
+        console.log(result)
         this.result = result;
 
         var elementSeries = [];

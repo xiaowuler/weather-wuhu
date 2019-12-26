@@ -1,11 +1,11 @@
 package com.pingchuan.weather.service;
 
-import com.pingchuan.weather.entity.ScoreShortTime;
-
 import java.util.Date;
-import java.util.List;
+import com.pingchuan.weather.DTO.shortforecast.ShortImpendingForecastDTO;
 
 public interface ScoreShortTimeService {
 
-    List<ScoreShortTime> findAllByDepartment(Date startTime, Date endTime, String fcstType, String departmentId);
+    ShortImpendingForecastDTO findAllByDepartment(Date startTime, Date endTime, String fcstType);
+
+    ShortImpendingForecastDTO findAllByDepartmentId(Date startTime, Date endTime, String fcstType, int departmentId);
 }

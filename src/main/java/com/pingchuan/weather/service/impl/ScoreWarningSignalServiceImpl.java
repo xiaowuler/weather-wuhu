@@ -18,9 +18,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.pingchuan.weather.DTO.scorewarningsignal.DepartmentDTO;
-import com.pingchuan.weather.DTO.scorewarningsignal.WarningTypeDTO;
-import com.pingchuan.weather.DTO.scorewarningsignal.ScoreWarningSignalDTO;
+import com.pingchuan.weather.DTO.warningsignal.DepartmentDTO;
+import com.pingchuan.weather.DTO.warningsignal.WarningTypeDTO;
+import com.pingchuan.weather.DTO.warningsignal.ScoreWarningSignalDTO;
 
 @Service
 @Transactional

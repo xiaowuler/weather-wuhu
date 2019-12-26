@@ -3,7 +3,15 @@
 <mapper namespace="com.pingchuan.weather.mapper.StationMapper">
     <!-- 获取父站点 -->
     <select id="findParentStations" resultType="Station">
-        SELECT StationName AS stationName, DepartmentID AS departmentId FROM Station
-        WHERE StationCode IN('58102', '58116', '58122', '58203', '58221', '58224', '58236', '58311', '58321', '58334', '58336', '58423', '58424', '58427', '58429', '58433', '58437')
+	   select StationName as stationName, StationCode stationCode, DepartmentID as departmentId
+       from Station
+       where County is null or RTRIM(LTRIM(County)) = ''
+    </select>
+
+    <!-- 根据departmentId获取站点 -->
+    <select id="findStationByDepartmentId" resultType="Station">
+       select StationName as stationName, StationCode stationCode, DepartmentID as departmentId, County
+       from Station
+	   where (County is not null or County != '') and DepartmentID = #{departmentId}
     </select>
 </mapper>

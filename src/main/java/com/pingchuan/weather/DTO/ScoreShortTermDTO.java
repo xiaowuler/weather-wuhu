@@ -1,6 +1,6 @@
 package com.pingchuan.weather.DTO;
 
-import com.pingchuan.weather.DTO.scorewarningsignal.DepartmentDTO;
+import com.pingchuan.weather.DTO.warningsignal.DepartmentDTO;
 import lombok.Data;
 
 import java.util.List;

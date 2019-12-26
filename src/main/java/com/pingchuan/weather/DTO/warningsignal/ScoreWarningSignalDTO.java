@@ -1,4 +1,4 @@
-package com.pingchuan.weather.DTO.scorewarningsignal;
+package com.pingchuan.weather.DTO.warningsignal;
 
 import lombok.Data;
 import java.util.List;
