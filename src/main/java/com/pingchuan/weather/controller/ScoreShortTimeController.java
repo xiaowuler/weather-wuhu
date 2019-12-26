@@ -1,13 +1,13 @@
 package com.pingchuan.weather.controller;
 
-import com.pingchuan.weather.DTO.shortforecast.ShortImpendingForecastDTO;
-import com.pingchuan.weather.service.ScoreShortTimeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import com.pingchuan.weather.service.ScoreShortTimeService;
+import com.pingchuan.weather.DTO.shortforecast.ShortImpendingForecastDTO;
 
 @RestController
 @RequestMapping("/scoreShortTime")

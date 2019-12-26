@@ -4,6 +4,7 @@ var App = function () {
     this.Project = new Project(this);
 
     this.Startup = function () {
+        this.GetCurrentLoginName();
         this.SetCalendar();
         this.SetAging();
         this.SetCheckObject();
@@ -11,6 +12,70 @@ var App = function () {
         $('.tab ul li').on('click', this.OnTabClick.bind(this));
         $('#query-btn').on('click', this.OnQueryButtonClick.bind(this));
         $('#query-btn').trigger("click");
+    };
+
+    this.GetCurrentLoginName = function () {
+        $.ajax({
+            type: 'post',
+            url: "/User/getCurrentLoginName",
+            success: function (result) {
+                $('#login-name').text(result);
+            }
+        });
+    };
+
+    this.SetCalendar = function () {
+        $('#start-time').datebox({
+            panelWidth: 180,
+            panelHeight: 260
+        }).datebox('setValue', '2019/03/01');
+
+        $('#end-time').datebox({
+            panelWidth: 180,
+            panelHeight: 260
+        }).datebox('setValue', '2019/04/01');
+    };
+
+    this.SetAging = function () {
+        $('#aging').combobox({
+            panelHeight: 'auto',
+            editable: false
+        });
+    };
+
+    this.SetCheckObject = function () {
+        $('#check-object').combobox({
+            panelHeight: 'auto',
+            editable: false
+        });
+    };
+
+    this.SetCheckArea = function () {
+        $('#check-area').combobox({
+            editable: false,
+            url:"Department/findAllByParentDepartId",
+            valueField:'departId',
+            textField:'county',
+            queryParams: { parentDepartId: 58000 },
+            onLoadSuccess: function (data) {
+                var item = $('#check-area').combobox('getData');
+                if (item.length > 0) {
+                    /*$('#check-area').combobox('select',data[0].county);
+                    $('#check-area').combobox('setValue',data[0].departId);*/
+                    $('#check-area').combobox('select', "58000");
+                    $('#check-area').combobox('setValue',"省气象台");
+                }
+            }.bind(this)
+        });
+    };
+
+
+    this.OnTabClick = function (event) {
+        $('.tab ul li').removeClass("action");
+        $(event.target).addClass("action");
+
+        var index = $(event.target).index();
+        $(".wrap .wrap-content").eq(index).css("display", "block").siblings().css("display", "none");
     };
 
     this.OnQueryButtonClick = function () {
@@ -59,59 +124,6 @@ var App = function () {
             examId: $('#check-object').combobox('getValue'),
             departmentId: $('#check-area').combobox('getValue') == "" ? "58000" : $('#check-area').combobox('getValue')
         };
-    };
-
-    this.OnTabClick = function (event) {
-        $('.tab ul li').removeClass("action");
-        $(event.target).addClass("action");
-
-        var index = $(event.target).index();
-        $(".wrap .wrap-content").eq(index).css("display", "block").siblings().css("display", "none");
-    };
-
-    this.SetCalendar = function () {
-        $('#start-time').datebox({
-            panelWidth: 180,
-            panelHeight: 260
-        }).datebox('setValue', '2019/03/01');
-
-        $('#end-time').datebox({
-            panelWidth: 180,
-            panelHeight: 260
-        }).datebox('setValue', '2019/04/01');
-    };
-
-    this.SetAging = function () {
-        $('#aging').combobox({
-            panelHeight: 'auto',
-            editable: false
-        });
-    };
-
-    this.SetCheckObject = function () {
-        $('#check-object').combobox({
-            panelHeight: 'auto',
-            editable: false
-        });
-    };
-
-    this.SetCheckArea = function () {
-        $('#check-area').combobox({
-            editable: false,
-            url:"Department/findAllByParentDepartId",
-            valueField:'departId',
-            textField:'county',
-            queryParams: { parentDepartId: 58000 },
-            onLoadSuccess: function (data) {
-                var item = $('#check-area').combobox('getData');
-                if (item.length > 0) {
-                    /*$('#check-area').combobox('select',data[0].county);
-                    $('#check-area').combobox('setValue',data[0].departId);*/
-                    $('#check-area').combobox('select', "58000");
-                    $('#check-area').combobox('setValue',"省气象台");
-                }
-            }.bind(this)
-        });
     };
 };
 $(document).ready(function () {

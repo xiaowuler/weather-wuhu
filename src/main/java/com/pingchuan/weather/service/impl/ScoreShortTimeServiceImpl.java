@@ -5,10 +5,10 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
 
-import com.pingchuan.weather.DTO.shortforecast.StationDTO;
+import com.pingchuan.weather.util.CalcRate;
 import com.pingchuan.weather.entity.Station;
 import com.pingchuan.weather.mapper.StationMapper;
-import com.pingchuan.weather.util.CalcRate;
+import com.pingchuan.weather.DTO.shortforecast.StationDTO;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;

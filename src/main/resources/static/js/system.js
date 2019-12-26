@@ -3,6 +3,7 @@ var App = function () {
     this.table = $('#system-table');
 
     this.Startup = function () {
+        this.GetCurrentLoginName();
         this.InitUserInformationGrid();
         this.ReloadUserInformationData();
         this.ReloadDepartmentData();
@@ -11,6 +12,16 @@ var App = function () {
         $('.button-confirm').on('click', this.OnConfirmButtonClick.bind(this));
         $('.button-cancel').on('click', this.HideDialog.bind(this));
         $('.sign-content .remove').on('click', this.RemoveInputPassword.bind(this));
+    };
+
+    this.GetCurrentLoginName = function () {
+        $.ajax({
+            type: 'post',
+            url: "/User/getCurrentLoginName",
+            success: function (result) {
+                $('#login-name').text(result);
+            }
+        });
     };
 
     this.InitUserInformationGrid = function () {
@@ -194,6 +205,7 @@ var App = function () {
     };
 
 };
+
 $(document).ready(function () {
     var app = new App();
     app.Startup();

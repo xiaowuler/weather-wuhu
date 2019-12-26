@@ -175,9 +175,23 @@
     font-size: 16px;
     cursor: pointer;
 }
+
 .set input.button-confirm{
     background: url(../images/btn-bg.jpg) repeat-x;
 }
+
 .set input.button-cancel{
     background: #d8d8d8;
+}
+
+.top-info .quit-button{
+    width: 53px;
+    margin: 16px 0 0 20px;
+    padding-left: 12px;
+    color: #ffffff;
+    background: url('../images/icon-quit.png') no-repeat left;
+}
+
+.top-info #exit{
+    color: #ffffff;
 }
