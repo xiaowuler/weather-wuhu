@@ -1,6 +1,9 @@
 var App = function () {
     this.ShortDepartment = new ShortDepartment(this);
-    this.Project = new Project(this);
+    this.ShortProject = new ShortProject(this);
+
+    this.shortTimeForecast = null;
+    this.nowcasting = null;
 
     this.Startup = function () {
         this.GetCurrentLoginName();
@@ -45,10 +48,7 @@ var App = function () {
             panelWidth: 180,
             panelHeight: 260
         });
-        endTime.datebox('setValue', '2018/06/01');
-
-        // var startDate = moment().add(-1, 'months').format('YYYY/MM/DD');
-        // $("#start-time").datebox("setValue", startDate);
+        endTime.datebox('setValue', '2020/06/01');
     };
 
     this.SetWeatherTypeCombobox = function () {
@@ -92,18 +92,22 @@ var App = function () {
                     $('#station').combobox('select',data[0].stationName);
                     $('#station').combobox('setValue',data[0].departmentId);
                 }
-               this.GetDepartmentData();
+                this.GetDepartmentData();
+                this.GetProjectData();
             }.bind(this)
         });
     };
 
     this.OnQueryButtonClick = function () {
         var station = $('#station').combobox('getValue');
-        if (station === '' || station === '58000')
+        if (station === '' || station === '58000'){
             this.GetDepartmentData();
-        else
+            this.GetProjectData();
+        }
+        else{
             this.GetDataByDepartmentId();
-
+            this.GetProjectData();
+        }
     };
 
     this.GetDepartmentData = function () {
@@ -139,6 +143,59 @@ var App = function () {
             }.bind(this)
         });
     };
+
+    this.GetProjectData = function () {
+        var parameters = this.GetQueryParameters();
+        if (parameters === null)
+            return;
+
+        this.GetShortTimeData(parameters);
+        this.GetNowcastingData(parameters);
+    };
+
+    this.GetShortTimeData = function (parameters) {
+        $.ajax({
+            type: 'post',
+            url: '/scoreShortTime/findAllByProject',
+            data: parameters,
+            dataType: 'json',
+            beforeSend: function(){
+                this.shortTimeForecast = null;
+            }.bind(this),
+            success: function (data) {
+                this.shortTimeForecast = data.shortTimeForecast;
+                this.ShortProject.Reload(data);
+                this.fillTable();
+            }.bind(this)
+        });
+    };
+
+    this.GetNowcastingData = function (parameters) {
+        $.ajax({
+            type: 'post',
+            url: '/scoreNowcasting/findAllByProject',
+            data: parameters,
+            dataType: 'json',
+            beforeSend: function(){
+                this.nowcasting = null;
+            }.bind(this),
+            success: function (data) {
+                this.nowcasting = data.nowcasting;
+                this.ShortProject.Reload(data);
+                this.fillTable();
+            }.bind(this)
+        });
+    };
+
+    this.fillTable = function () {
+        if (this.shortTimeForecast == null)
+            return;
+
+        if (this.nowcasting == null)
+            return;
+
+        this.ShortProject.ShowProjectTable(this.shortTimeForecast, this.nowcasting);
+    }
 
     this.GetQueryParameters = function () {
         var startTime = $('#start-time').val();

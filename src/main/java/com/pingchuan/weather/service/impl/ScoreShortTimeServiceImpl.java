@@ -101,9 +101,17 @@ public class ScoreShortTimeServiceImpl implements ScoreShortTimeService {
     }
 
     @Override
-    public ShortImpendingForecastDTO findAllByProject(Date startTime, Date endTime, String fcstType) {
-        List<ScoreShortTime> scoreShortTimes = scoreShortTimeMapper.findAll(startTime, endTime, fcstType);
+    public ShortImpendingForecastDTO findAllByProject(Date startTime, Date endTime, String fcstType, Integer departmentId) {
+        List<ScoreShortTime> scoreShortTimes = scoreShortTimeMapper.findAllByDepartmentId(startTime, endTime, fcstType, departmentId);
+        WarningCalc warningCalc = GetWarningCalc(scoreShortTimes);
 
+        ShortImpendingForecastDTO shortTimeForecast = new ShortImpendingForecastDTO();
+        shortTimeForecast.setShortTimeForecast(calculateRate(warningCalc));
+
+        return shortTimeForecast;
+    }
+
+    public WarningCalc GetWarningCalc(List<ScoreShortTime> scoreShortTimes){
         WarningCalc warningCalc = new WarningCalc();
         for (ScoreShortTime scoreShortTime: scoreShortTimes){
             int result = scoreShortTime.getResult();
@@ -116,10 +124,8 @@ public class ScoreShortTimeServiceImpl implements ScoreShortTimeService {
 
             warningCalc.addTotalCount();
         }
-        ShortImpendingForecastDTO shortTimeForecast = new ShortImpendingForecastDTO();
-        shortTimeForecast.setShortTimeForecast(calculateRate(warningCalc));
 
-        return shortTimeForecast;
+        return warningCalc;
     }
 
     public VariousRate calculateRate(WarningCalc warningCalc){

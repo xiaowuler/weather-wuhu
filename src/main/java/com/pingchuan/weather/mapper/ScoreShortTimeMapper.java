@@ -12,7 +12,5 @@ public interface ScoreShortTimeMapper {
 
     List<ScoreShortTime> findAllByStationId(@Param("startTime") Date startTime,  @Param("endTime") Date endTime, @Param("fcstType") String fcstType, @Param("stationId") String stationId);
 
-    List<ScoreShortTime> findAllByDepartmentId(@Param("startTime") Date startTime, @Param("endTime") Date endTime, @Param("fcstType") String fcstType, @Param("departmentId") int departmentId);
-
-    List<ScoreShortTime> findAll(@Param("startTime") Date startTime, @Param("endTime") Date endTime, @Param("fcstType") String fcstType);
+    List<ScoreShortTime> findAllByDepartmentId(@Param("startTime") Date startTime, @Param("endTime") Date endTime, @Param("fcstType") String fcstType, @Param("departmentId") Integer departmentId);
 }

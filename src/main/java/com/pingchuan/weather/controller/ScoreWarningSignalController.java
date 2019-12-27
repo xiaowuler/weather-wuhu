@@ -1,15 +1,15 @@
 package com.pingchuan.weather.controller;
 
-import java.util.Date;
 import java.util.List;
-
-import com.pingchuan.weather.DTO.warningsignal.ScoreWarningSignalDTO;
-import com.pingchuan.weather.service.ScoreWarningSignalService;
+import java.util.Date;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.pingchuan.weather.service.ScoreWarningSignalService;
+import com.pingchuan.weather.DTO.warningsignal.ScoreWarningSignalDTO;
 
 @RestController
 @RequestMapping("/ScoreWarningSignal")

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pingchuan.weather.mapper.ScoreNowcastingMapper">
+    <select id="findAll" resultType="ScoreNowcasting">
+        select sn.*
+        from ScoreNowcasting sn
+        left join Station s on s.StationCode = sn.StationId
+        where sn.IssueTime &gt;= #{startTime} and sn.IssueTime &lt;= #{endTime} and FcstType = #{fcstType}
+        <if test="departmentId != null and departmentId != ''">
+            and s.DepartmentID = #{departmentId}
+        </if>
+    </select>
+</mapper>

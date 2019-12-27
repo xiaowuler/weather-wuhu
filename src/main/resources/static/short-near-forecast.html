@@ -86,39 +86,28 @@
                 <div class="wrap-content">
                     <div class="sheet clearfix">
                         <div class="sheet-content fl">
-                            <h2>短时预报</h2>
-                            <img src="../images/sheet36.png">
+                            <div class="score" id="short-time-chart"></div>
                         </div>
                         <div class="sheet-content fr">
-                            <h2>临近预报</h2>
-                            <img src="../images/sheet66.png">
+                            <div class="score" id="nowcasting-chart"></div>
                         </div>
                     </div>
                     <table class="score-table">
-                        <tr>
-                            <th>项目</th>
-                            <th>准确率</th>
-                            <th>命中率</th>
-                            <th>空报率</th>
-                            <th>漏报率</th>
-                            <th>时间前提量</th>
-                        </tr>
-                        <tr>
-                            <td>短时预报</td>
-                            <td>60</td>
-                            <td>98</td>
-                            <td>73</td>
-                            <td>55</td>
-                            <td>/</td>
-                        </tr>
-                        <tr>
-                            <td>临近预报</td>
-                            <td>60</td>
-                            <td>98</td>
-                            <td>73</td>
-                            <td>55</td>
-                            <td>24</td>
-                        </tr>
+                        <table class="score-table" id="project-table">
+                            <tr id="project">
+                                <th class="table-title">单位</th>
+                                <th class="table-title">准确率</th>
+                                <th class="table-title">命中率</th>
+                                <th class="table-title">空报率</th>
+                                <th class="table-title">漏报率</th>
+                            </tr>
+                            <tr id="short-time">
+                                <td class="table-title">短时预报</td>
+                            </tr>
+                            <tr id="nowcasting">
+                                <td class="table-title">临近预报</td>
+                            </tr>
+                        </table>
                     </table>
                 </div>
             </div>

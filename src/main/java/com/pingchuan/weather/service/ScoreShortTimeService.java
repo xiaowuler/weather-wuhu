@@ -9,5 +9,5 @@ public interface ScoreShortTimeService {
 
     ShortImpendingForecastDTO findAllByDepartmentId(Date startTime, Date endTime, String fcstType, int departmentId);
 
-    ShortImpendingForecastDTO findAllByProject(Date startTime, Date endTime, String fcstType);
+    ShortImpendingForecastDTO findAllByProject(Date startTime, Date endTime, String fcstType, Integer departmentId);
 }
