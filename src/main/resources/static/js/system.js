@@ -1,14 +1,11 @@
 var App = function () {
-    this.editIndex  = undefined;
-    this.table = $('#system-table');
+    this.EditIndex  = undefined;
+    this.UserTable = $('#system-table');
 
     this.Startup = function () {
         this.GetCurrentLoginName();
         this.InitUserInformationGrid();
-        this.ReloadUserInformationData();
-        this.ReloadDepartmentData();
-
-        $('.cancel').on('click', this.HideDialog.bind(this));
+        $('.close-dialog-box').on('click', this.HideDialog.bind(this));
         $('.button-confirm').on('click', this.OnConfirmButtonClick.bind(this));
         $('.button-cancel').on('click', this.HideDialog.bind(this));
         $('.sign-content .remove').on('click', this.RemoveInputPassword.bind(this));
@@ -25,7 +22,9 @@ var App = function () {
     };
 
     this.InitUserInformationGrid = function () {
-        this.table.datagrid({
+        this.UserTable.datagrid({
+            method: "POST",
+            url: 'User/getUserByPage',
             striped: true,
             singleSelect: true,
             scrollbarSize: 0,
@@ -52,13 +51,13 @@ var App = function () {
                 { field: 'loginPwd', title: '重置密码', width: 240, align: 'center', formatter: this.ResetUserPasswordButton.bind(this)},
                 { field: 'saved', title: '保存修改', width: 238, align: 'center', formatter: this.OnSaveButtonClick.bind(this)}
             ]],
-            onBeforeLoad: this.OnTableGridBeforeLoad.bind(this),
+            onBeforeLoad: this.OnUserTableGridBeforeLoad.bind(this),
             onClickRow: this.OnClickRow.bind(this)
         });
     };
 
-    this.OnTableGridBeforeLoad = function () {
-        this.table.datagrid('getPager').pagination({
+    this.OnUserTableGridBeforeLoad = function () {
+        this.UserTable.datagrid('getPager').pagination({
             beforePageText: '第',
             afterPageText: '页&nbsp;&nbsp;&nbsp;共{pages}页',
             displayMsg: '当前显示{from}-{to}条记录&nbsp;&nbsp;&nbsp;共{total}条记录',
@@ -66,25 +65,31 @@ var App = function () {
         });
     };
 
-    this.ReloadUserInformationData = function () {
-        this.table.datagrid({
-            method: "POST",
-            url: 'User/getUserByPage',
-            onLoadSuccess: function (row) {
-                console.log(row)
+    this.OnClickRow = function (index) {
+        var editIndex = this.EditIndex;
+        if (editIndex !== index){
+            if (this.EndEditing()){
+                this.UserTable.datagrid('selectRow', index)
+                    .datagrid('beginEdit', index);
+                editIndex = index;
+            } else {
+                this.UserTable.datagrid('selectRow', editIndex);
             }
-        });
+        }
     };
 
-    this.ReloadDepartmentData = function () {
-        $.ajax({
-            type: "POST",
-            dataType: 'json',
-            url: 'Department/getAllDepartment',
-            success: function (result) {
-                console.log(result);
-            }.bind(this)
-        });
+    this.EndEditing = function () {
+        var editIndex = this.EditIndex;
+        if (editIndex === undefined)
+            return true;
+
+        if (this.UserTable.datagrid('validateRow', editIndex)){
+            this.UserTable.datagrid('endEdit',editIndex);
+            editIndex = undefined;
+            return true;
+        } else {
+            return false;
+        }
     };
 
     this.ResetUserPasswordButton = function (value, row, index) {
@@ -105,7 +110,7 @@ var App = function () {
     };
 
     this.OnConfirmButtonClick = function () {
-        var selected = this.table.datagrid('getSelected');
+        var selected = this.UserTable.datagrid('getSelected');
         var password = $("#password").val();
         var confirmPassword = $("#confirm-password").val();
         if (password !== confirmPassword){
@@ -176,34 +181,6 @@ var App = function () {
             });
         }
     };
-
-    this.OnClickRow = function (index) {
-        var editIndex = this.editIndex;
-        if (editIndex !== index){
-            if (this.EndEditing()){
-                this.table.datagrid('selectRow', index)
-                    .datagrid('beginEdit', index);
-                editIndex = index;
-            } else {
-                this.table.datagrid('selectRow', editIndex);
-            }
-        }
-    };
-
-    this.EndEditing = function () {
-        var editIndex = this.editIndex;
-        if (editIndex === undefined)
-            return true;
-
-        if (this.table.datagrid('validateRow', editIndex)){
-            this.table.datagrid('endEdit',editIndex);
-            editIndex = undefined;
-            return true;
-        } else {
-            return false;
-        }
-    };
-
 };
 
 $(document).ready(function () {

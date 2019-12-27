@@ -12,15 +12,10 @@ import lombok.Data;
 public class WarningCalc {
 
     private int correctCount;
-
     private int hitCount;
-
     private int emptyCount;
-
     private int missingCount;
-
     private float leadTimeCount;
-
     private int totalCount;
 
     private float correctLeadTimeCount;

@@ -7,6 +7,7 @@ var Project = function (parent) {
     this.noLevelChart = $('#no-level-chart');
 
     this.Reload = function (result) {
+        console.log(result)
         this.result = result;
 
         this.ShowDepartmentChart();

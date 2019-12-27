@@ -6,7 +6,7 @@ import java.util.List;
 @Data
 public class ShortImpendingForecastDTO {
 
-    private ShortTimeForecast shortTimeForecast;
-    private Nowcasting nowcasting;
+    private VariousRate shortTimeForecast;
+    private VariousRate nowcasting;
     private List<StationDTO> stationDTOs;
 }

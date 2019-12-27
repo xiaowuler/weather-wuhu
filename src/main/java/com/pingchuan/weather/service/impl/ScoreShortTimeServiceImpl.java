@@ -5,11 +5,13 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
 
+import com.pingchuan.weather.DTO.shortforecast.VariousRate;
 import com.pingchuan.weather.util.CalcRate;
 import com.pingchuan.weather.entity.Station;
 import com.pingchuan.weather.mapper.StationMapper;
 import com.pingchuan.weather.DTO.shortforecast.StationDTO;
 
+import com.pingchuan.weather.util.WarningCalc;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -34,7 +36,7 @@ public class ScoreShortTimeServiceImpl implements ScoreShortTimeService {
 
         for (Station station: stations) {
             List<ScoreShortTime> scoreShortTimes = new ArrayList<>();
-            scoreShortTimes.addAll(scoreShortTimeMapper.findAll(startTime, endTime, fcstType, String.valueOf(station.getStationCode())));
+            scoreShortTimes.addAll(scoreShortTimeMapper.findAllByStationId(startTime, endTime, fcstType, String.valueOf(station.getStationCode())));
             if (scoreShortTimes.size() == 0)
                 continue;
 
@@ -96,5 +98,44 @@ public class ScoreShortTimeServiceImpl implements ScoreShortTimeService {
         forecastDTO.setStationDTOs(stationDTOS);
 
         return  forecastDTO;
+    }
+
+    @Override
+    public ShortImpendingForecastDTO findAllByProject(Date startTime, Date endTime, String fcstType) {
+        List<ScoreShortTime> scoreShortTimes = scoreShortTimeMapper.findAll(startTime, endTime, fcstType);
+
+        WarningCalc warningCalc = new WarningCalc();
+        for (ScoreShortTime scoreShortTime: scoreShortTimes){
+            int result = scoreShortTime.getResult();
+            if (result == 1)
+                warningCalc.addCorrectCount();
+            else if (result == 2)
+                warningCalc.addEmptyCount();
+            else if (result == 3)
+                warningCalc.addMissingCount();
+
+            warningCalc.addTotalCount();
+        }
+        ShortImpendingForecastDTO shortTimeForecast = new ShortImpendingForecastDTO();
+        shortTimeForecast.setShortTimeForecast(calculateRate(warningCalc));
+
+        return shortTimeForecast;
+    }
+
+    public VariousRate calculateRate(WarningCalc warningCalc){
+        VariousRate rate = new VariousRate();
+        int totalCount = warningCalc.getTotalCount();
+        if (totalCount != 0){
+            int correctCount = warningCalc.getCorrectCount();
+            rate.setCorrectRate(Float.parseFloat(new DecimalFormat("0.00").format((float)correctCount/totalCount)));
+
+            int hitCount = correctCount + warningCalc.getEmptyCount();
+            if (hitCount != 0)
+                rate.setHitRate(Float.parseFloat(new DecimalFormat("0.00").format((float)correctCount/hitCount)));
+
+            rate.setEmptyReportRate(Float.parseFloat(new DecimalFormat("0.00").format((float)warningCalc.getEmptyCount()/totalCount)));
+            rate.setMissingReportRate(Float.parseFloat(new DecimalFormat("0.00").format((float)warningCalc.getMissingCount()/totalCount)));
+        }
+        return rate;
     }
 }

@@ -17,4 +17,13 @@
         left join Station s on s.StationCode = sst.StationId
         where sst.HappendTime &gt;= #{startTime} and sst.HappendTime &lt;= #{endTime} and sst.FcstType = #{fcstType} and (SUBSTRING(sst.StationId, 1, 2) = '58' and (s.County is not null or RTRIM(LTRIM(s.County)) != '')) AND s.DepartmentID = #{departmentId}
     </select>
+
+    <!-- 查询所有短时预报数据 -->
+    <select id="findAll" resultType="ScoreShortTime">
+        select sst.*
+        from ScoreShortTime sst
+        left join Station s on s.StationCode = sst.StationId
+        where sst.HappendTime &gt;= #{startTime} and sst.HappendTime &lt;= {endTime}
+        and FcstType = #{fcstType} and SUBSTRING(sst.StationId, 1, 2) = '58'
+    </select>
 </mapper>
