@@ -163,17 +163,15 @@ var App = function () {
             setTimeout(function(){
                 $(".dialog-save").hide();
             },2000);
-
-            var selected = $('#system-table').datagrid('getSelected');
-
-            alert(selected.id + "======" + selected.departmentName);
-
+       //     var selected = $('#system-table').datagrid('getSelected');
+            var value = $('#system-table').datagrid('getEditor', {index:index,field:'departmentName'});
+            var departmentName = $(value.target).combobox('getText');
             $.ajax({
                 type: "POST",
                 dataType: 'json',
                 data: {
-                    userId: selected.id,
-                    departmentId: selected.departId
+                    userId: row.id,
+                    departmentName: departmentName
                 },
                 url: 'User/updateDepartmentIdById',
                 success: function (result) {

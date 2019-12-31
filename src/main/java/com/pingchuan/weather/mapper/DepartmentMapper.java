@@ -17,4 +17,6 @@ public interface DepartmentMapper {
     Department findOneById(@Param("departId") int departId);
 
     List<Department> getAllDepartment();
+
+    List<Department> findDepartIdByName(@Param("departmentName") String departmentName);
 }

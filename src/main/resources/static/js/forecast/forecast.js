@@ -58,6 +58,7 @@ var App = function () {
             textField:'county',
             queryParams: { parentDepartId: 58000 },
             onLoadSuccess: function (data) {
+                console.log(data);
                 var item = $('#check-area').combobox('getData');
                 if (item.length > 0) {
                     /*$('#check-area').combobox('select',data[0].county);
@@ -105,7 +106,6 @@ var App = function () {
             data: params,
             url: 'ScoreShortTerm/findAllByTimeAndRegionByProject',
             success: function (data) {
-                console.log(data);
                 this.Project.Reload(data);
                 this.Project.ShowProjectTable(data);
             }.bind(this)

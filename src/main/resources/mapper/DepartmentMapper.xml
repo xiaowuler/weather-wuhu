@@ -25,4 +25,9 @@
         SELECT DepartID as departId, DepartName as departName, ParentDepartID as parentDepartId, County as county FROM Department;
     </select>
 
+    <!--查询id-->
+    <select id="findDepartIdByName" resultType="Department">
+        SELECT DepartID from Department where DepartName = #{departmentName};
+    </select>
+
 </mapper>

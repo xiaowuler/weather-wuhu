@@ -23,4 +23,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     public List<Department> findAllByParentDepartId(int parentDepartId) {
         return departmentMapper.findAllByParentId(parentDepartId);
     }
+
+    @Override
+    public List<Department> findDepartIdByName(String departmentName) {
+        return departmentMapper.findDepartIdByName(departmentName);
+    }
 }

@@ -1,9 +1,11 @@
 package com.pingchuan.weather.controller;
 
+import com.pingchuan.weather.entity.Department;
 import com.pingchuan.weather.entity.User;
 import com.pingchuan.weather.entity.PageResult;
 import com.pingchuan.weather.service.UserService;
 
+import com.pingchuan.weather.service.impl.DepartmentServiceImpl;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,12 +16,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("User")
 public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private DepartmentServiceImpl departmentService;
 
     @RequestMapping("/getUserByPage")
     public PageResult<User> getUserByPage(int page, int rows) {
@@ -36,9 +43,13 @@ public class UserController {
         return userService.findOneById(userId);
     }
 
-    @RequestMapping("updateDepartmentIdById")
-    public void updateDepartmentIdById(int userId, int departmentId) {
-        System.out.println("userId：" + userId + "-----departmentId：" + departmentId);
+    @RequestMapping("/updateDepartmentIdById")
+    public void updateDepartmentIdById(int userId, String departmentName) {
+        List<Department> departments=departmentService.findDepartIdByName(departmentName);
+        Integer departmentId=null;
+        for (Department department : departments) {
+            departmentId = department.getDepartId();
+        }
         userService.updateDepartmentIdById(userId, departmentId);
     }
 

@@ -8,4 +8,6 @@ public interface DepartmentService {
     List<Department> getAllDepartment();
 
     List<Department> findAllByParentDepartId(int parentDepartId);
+
+    List<Department> findDepartIdByName(String departmentName);
 }
