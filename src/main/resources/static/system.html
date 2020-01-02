@@ -31,37 +31,133 @@
                 </div>
             </div>
         </div>
-        <div class="system drop-down width1200">
-            <table class="system-table" id="system-table"></table>
+        <div class="width1200">
+            <div class="navigation clearfix">
+                <div class="fl">
+                    <a href="javascript:;" class="operate operate-add">添加</a>
+                    <a href="javascript:;" class="operate operate-edit">编辑</a>
+                    <a href="javascript:;" class="operate operate-delete">删除</a>
+                </div>
+                <a href="javascript:;" class="operate operate-reset fl">重置密码</a>
+                <div class="fr">
+                    <div class="choose fl">
+                        <span class="subtitle fl">单位</span>
+                        <div class="choose-content fl">
+                            <select class="easyui-combobox" id="department"></select>
+                        </div>
+                    </div>
+                    <div class="choose fl">
+                        <span class="subtitle fl">姓名</span>
+                        <div class="choose-content choose-object fl">
+                            <select class="easyui-combobox" id="username">
+                                <option value="202">全部</option>
+                                <option value="201">超级管理员</option>
+                                <option value="201">超级管理员</option>
+                                <option value="201">超级管理员</option>
+                                <option value="201">超级管理员</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button id="query-btn" class="query-btn fr">查询</button>
+                </div>
+            </div>
+            <div class="system drop-down">
+                <table class="system-table" id="system-table"></table>
+            </div>
         </div>
     </div>
-    <div class="dialog dialog-save">保存成功</div>
-    <div class="dialog dialog-reset">设置密码成功</div>
-    <div class="message">
-        <div class="message-content">
-            <div class="message-txt">
-                <h2>信息提示</h2>
-                <i class="close-dialog-box"></i>
+    <div class="message message-save">保存成功</div>
+    <div class="message message-reset">设置密码成功</div>
+    <div class="dialog add-dialog">
+        <div class="dialog-txt">
+            <h2>添加信息</h2>
+            <i class="close-dialog-box"></i>
+        </div>
+        <div class="clearfix">
+            <div class="sign-content fl">
+                <label>登录名</label>
+                <input type="text" id="password" class="password" placeholder="请输入登录名">
             </div>
-            <form>
-                <div class="sign-content clearfix">
-                    <label><img src="../images/password.png"></label>
-                    <input type="password" id="password" class="password" placeholder="请输入密码">
-                    <i class="remove"></i>
-                </div>
-                <div class="sign-content clearfix">
-                    <label><img src="../images/password.png"></label>
-                    <input type="password" id="confirm-password" class="password" placeholder="请再次输入密码">
-                    <i class="remove"></i>
-                </div>
-                <div class="set clearfix">
-                    <input type="button" class="button-confirm fl" value="确定">
-                    <input type="button" class="button-cancel fr" value="取消">
-                </div>
-            </form>
+            <div class="sign-content fr">
+                <label>登录密码</label>
+                <input type="password" id="confirm-password" class="password" placeholder="请输入密码">
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="sign-content fl">
+                <label>姓名</label>
+                <input type="text" id="1" class="password" placeholder="请输入姓名">
+            </div>
+            <div class="sign-content choose fr">
+                <label>单位</label>
+                <select class="easyui-combobox" id="department1">
+                    <option value="24">全部</option>
+                    <option value="48">芜湖气象局</option>
+                    <option value="72">马鞍山市气象局</option>
+                    <option value="96">蚌埠市气象局</option>
+                </select>
+            </div>
+        </div>
+        <div class="btn-group">
+            <button class="btn-sure" id="add-sure">确定</button>
+            <button class="btn-cancel">取消</button>
+        </div>
+    </div>
+    <div class="dialog edit-dialog">
+        <div class="dialog-txt">
+            <h2>编辑信息</h2>
+            <i class="close-dialog-box"></i>
+        </div>
+        <div class="clearfix">
+            <div class="sign-content fl">
+                <label>姓名</label>
+                <input type="text" id="edit-name" class="password" placeholder="请输入姓名">
+            </div>
+            <div class="sign-content choose fr">
+                <label>单位</label>
+                <select class="easyui-combobox" id="edit-department">
+                    <option value="24">全部</option>
+                    <option value="48">芜湖气象局</option>
+                    <option value="72">马鞍山市气象局</option>
+                    <option value="96">蚌埠市气象局</option>
+                </select>
+            </div>
+        </div>
+        <div class="btn-group">
+            <button class="btn-sure" id="edit-sure">确定</button>
+            <button class="btn-cancel">取消</button>
+        </div>
+    </div>
+    <div class="dialog delete-dialog">
+        <div class="dialog-txt">
+            <h2>删除信息</h2>
+            <i class="close-dialog-box"></i>
+        </div>
+        <h2 class="prompt-txt">确定要删除姓名为“张山”的用户吗？</h2>
+        <div class="btn-group">
+            <button class="btn-sure" id="delete-sure">确定</button>
+            <button class="btn-cancel">取消</button>
+        </div>
+    </div>
+    <div class="dialog reset-dialog">
+        <div class="dialog-txt">
+            <h2>重置密码</h2>
+            <i class="close-dialog-box"></i>
+        </div>
+        <div class="sign-content">
+            <input type="password" class="reset-password" placeholder="请输入新密码">
+            <input type="password" class="reset-password" placeholder="请再次输入新密码">
+        </div>
+        <div class="btn-group">
+            <button class="btn-sure" id="reset-sure">确定</button>
+            <button class="btn-cancel">取消</button>
         </div>
     </div>
     <div class="bg"></div>
+</div>
+<div class="foot">
+    <p>主办单位：芜湖气象局&nbsp;&nbsp;&nbsp;地址: 安徽省 芜湖市 张家山 西四幢 </p>
+    <p>版权所有©芜湖气象局</p>
 </div>
 </body>
 <script type="text/javascript" src="../plug/jquery-1.8.3.min.js"></script>

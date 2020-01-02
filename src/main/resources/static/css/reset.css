@@ -55,6 +55,10 @@ select{
     font-family: "Microsoft YaHei UI";
 }
 
+button{
+    cursor: pointer;
+}
+
 textarea {
     resize: none;
 }
@@ -64,6 +68,7 @@ a {
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
     outline: none;
+    color: #666666;
 }
 
 li {
@@ -107,18 +112,25 @@ summary {
 }
 
 input::-webkit-input-placeholder { /* WebKit browsers */
-    color: #666666;
+    color: #d1d1d1;
     font-size: 14px;
 }
 input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color: #666666;
+    color: #d1d1d1;
     font-size: 14px;
 }
 input::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color: #666666;
+    color: #d1d1d1;
     font-size: 14px;
 }
 input:-ms-input-placeholder { /* Internet Explorer 10+ */
-    color: #666666;
+    color: #d1d1d1;
     font-size: 14px;
+}
+
+input:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px white inset !important;
+}
+input:-webkit-autofill:focus {
+    box-shadow: 0 0 0px 1000px white inset !important;
 }

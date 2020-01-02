@@ -6,6 +6,7 @@ var App = function () {
     this.nowcasting = null;
 
     this.Startup = function () {
+        this.SetFooter();
         this.GetCurrentLoginName();
         this.SetCalendar();
         this.SetWeatherTypeCombobox();
@@ -14,6 +15,16 @@ var App = function () {
         $('.tab ul li').on('click', this.OnTagsSelectedChange.bind(this));
         $('#query-btn').on('click', this.OnQueryButtonClick.bind(this));
         $('#query-btn').trigger('click');
+
+        window.onresize = this.SetFooter.bind(this);
+    };
+
+    this.SetFooter = function () {
+        var height = $(window).height();
+        if ((height - 113) > $('.box').height())
+            $('.foot').addClass('foot-post');
+        else
+            $('.foot').removeClass('foot-post');
     };
 
     this.GetCurrentLoginName = function () {

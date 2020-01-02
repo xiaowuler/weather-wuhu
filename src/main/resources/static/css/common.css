@@ -134,6 +134,7 @@ drop-down .textbox{
 }
 .choose .textbox .textbox-text{
     padding: 0 4px 0 10px;
+    color: #666666;
 }
 .drop-down .textbox .textbox-text{
     text-align: center;
@@ -151,7 +152,12 @@ drop-down .textbox{
     background: url("../images/drop-down.png") no-repeat center;
 }
 .combobox-item{
+    color: #666666;
     padding: 6px 0 6px 10px;
+}
+.combobox-item-selected{
+    color: #666666;
+    background: #e9f5ff;
 }
 .choose-content{
     width: 120px;
@@ -251,4 +257,37 @@ drop-down .textbox{
 }
 .wrap-content{
     display: none;
+}
+
+.query-btn{
+    width: 60px;
+    display: block;
+    line-height: 30px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    color: #ffffff;
+    cursor: pointer;
+    background: -webkit-linear-gradient(#0186f5 , #1290fa, #249bff);
+    background: -o-linear-gradient(#0186f5, #1290fa, #249bff);
+    background: -moz-linear-gradient(#0186f5, #1290fa, #249bff);
+    background: linear-gradient(#0186f5 , #1290fa, #249bff);
+}
+
+.foot{
+    width: 100%;
+    padding: 16px 0;
+    margin-top: 35px;
+    text-align: center;
+    color: #ffffff;
+    background: #3269d0;
+}
+
+.foot p{
+    margin-bottom: 5px;
+}
+
+.foot-post{
+    position: fixed;
+    bottom: 0;
 }

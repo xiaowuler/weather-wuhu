@@ -4,6 +4,7 @@ var App = function () {
     this.Project = new Project(this);
 
     this.Startup = function () {
+        this.SetFooter();
         this.GetCurrentLoginName();
         this.SetCalendar();
         this.SetAging();
@@ -12,6 +13,16 @@ var App = function () {
         $('.tab ul li').on('click', this.OnTabClick.bind(this));
         $('#query-btn').on('click', this.OnQueryButtonClick.bind(this));
         $('#query-btn').trigger("click");
+
+        window.onresize = this.SetFooter.bind(this);
+    };
+
+    this.SetFooter = function () {
+        var height = $(window).height();
+        if ((height - 113) > $('.box').height())
+            $('.foot').addClass('foot-post');
+        else
+            $('.foot').removeClass('foot-post');
     };
 
     this.GetCurrentLoginName = function () {
@@ -68,7 +79,6 @@ var App = function () {
             }.bind(this)
         });
     };
-
 
     this.OnTabClick = function (event) {
         $('.tab ul li').removeClass("action");

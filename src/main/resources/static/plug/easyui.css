@@ -714,7 +714,7 @@
     display: inline-block;
     vertical-align: top;
     width: auto;
-    line-height: 28px;
+    line-height: 22px;
     font-size: 14px;
     padding: 0;
     margin: 0 6px;
@@ -788,7 +788,7 @@
 }
 
 .l-btn-left .l-btn-empty {
-    margin: 0 6px;
+    margin: 0;
     width: 16px;
 }
 
@@ -857,9 +857,7 @@
 }
 
     .l-btn:hover {
-        background: #eaf2ff;
-        color: #000000;
-        border: 1px solid #b7d2ff;
+        border: 1px solid rgba(0,0,0,0);
         filter: none;
     }
 
@@ -873,15 +871,6 @@
     border-width: 1px;
     border-color: #b7d2ff;
     padding: 0;
-}
-
-.l-btn-plain:hover {
-    background: #eaf2ff;
-    color: #000000;
-    border: 1px solid #b7d2ff;
-    -moz-border-radius: 5px 5px 5px 5px;
-    -webkit-border-radius: 5px 5px 5px 5px;
-    border-radius: 5px 5px 5px 5px;
 }
 
 .l-btn-disabled,

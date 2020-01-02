@@ -1,3 +1,84 @@
+.nav{
+    margin-bottom: 0;
+}
+
+.navigation {
+    margin: 15px 0;
+}
+
+.operate{
+    float: left;
+    padding: 0 7px 0 28px;
+    line-height: 28px;
+    position: relative;
+    border: 1px solid #e0e0e0;
+    border-right: 0;
+    background: -webkit-linear-gradient(#fefefe , #f0f0f0);
+    background: -o-linear-gradient(#fefefe, #f0f0f0);
+    background: -moz-linear-gradient(#fefefe, #f0f0f0);
+    background: linear-gradient(#fefefe , #f0f0f0);
+}
+
+.operate-add:before,
+.operate-edit:before{
+    content: '';
+    width: 1px;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #e0e0e0;
+}
+
+.operate-edit,
+.operate-delete{
+    border-left: 1px solid #ffffff;
+}
+
+.operate-delete{
+    border-right: 1px solid #e0e0e0;
+}
+
+.operate-reset{
+    margin-left: 10px;
+    border-right: 1px solid #e0e0e0;
+}
+
+.operate:after{
+    content: '';
+    width: 15px;
+    height: 14px;
+    display: block;
+    position: absolute;
+    top: 6px;
+    left: 7px;
+    background: url("../images/operate-add.png") no-repeat center/cover;
+}
+
+.operate-edit:after{
+    width: 14px;
+    background: url("../images/operate-edit.png") no-repeat center/cover;
+}
+
+.operate-delete:after{
+    width: 14px;
+    background: url("../images/operate-delete.png") no-repeat center/cover;
+}
+
+.operate-reset:after{
+    width: 12px;
+    background: url("../images/operate-reset.png") no-repeat center/cover;
+}
+
+.query-btn{
+    margin-left: 10px;
+}
+
+.system{
+    height: 600px;
+}
+
 .system-table{
     width: 100%;
     text-align: center;
@@ -17,13 +98,123 @@
     background: url('../images/nav-bg.jpg') repeat-x;
     background-size: 100% 40px;
 }
+
 .datagrid-header td{
     color: #ffffff;
-    border: 0;
+    border-style: solid;
+    border-color: #0841b1;
 }
+
+.datagrid-header .datagrid-cell{
+    height: 38px;
+    line-height: 38px;
+    position: relative;
+}
+
+.datagrid-header .datagrid-cell:after{
+    content: '';
+    width: 1px;
+    height: 38px;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #538dff;
+}
+
+.datagrid-header-row,
+.datagrid-row{
+    height: 40px;
+}
+
+.datagrid-btable{
+    color: #666666;
+}
+
+.datagrid-body td,
+.pagination-page-list,
+.pagination .pagination-num{
+    border-style: solid;
+    border-color: #e0e0e0;
+}
+
+.datagrid-row-alt{
+    background: #ffffff;
+}
+
+.datagrid-row-over,
+.datagrid-row-selected{
+    color: #666666;
+    background: #e2f3ff;
+}
+
+.datagrid .datagrid-pager{
+    background: #ffffff;
+    border-top: 1px solid #e0e0e0;
+}
+
+.pagination td,
+.pagination-info,
+.pagination-num,
+.pagination-page-list{
+    color: #989898;
+}
+
+.l-btn-icon{
+    width: 6px;
+    height: 10px;
+    margin-top: -5px;
+    background: url('../images/pagination_icons.png') no-repeat center;
+}
+
+.pagination-first{
+    width: 7px;
+    background-position: 0 0;
+}
+
+.pagination-prev{
+    background-position: -9px 0;
+}
+
+.pagination-next{
+    background-position: -17px 0;
+}
+
+.pagination-last{
+    width: 7px;
+    background-position: -25px 0;
+}
+
+.pagination-load{
+    width: 10px;
+    background-position: -34px 0;
+}
+
+.pagination-page-list{
+    width: 38px;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: url('../images/drop-down.png') 25px no-repeat;
+    background-size: 8px;
+}
+
 .textbox{
     width: 90%!important;
 }
+
+.success{
+    padding-left: 17px;
+    color: #20ad3e;
+    background: url("../images/success.png") no-repeat left;
+}
+
+.fail{
+    padding-left: 17px;
+    color: #e60d17;
+    background: url("../images/fail.png") no-repeat left;
+}
+
 .system-btn{
     width: 46px;
     height: 28px;
@@ -62,7 +253,7 @@
     line-height: 22px;
     font-size: 12px;
 }
-.dialog{
+.message{
     width: 130px;
     height: 40px;
     margin: -20px 0 0 -65px;
@@ -78,8 +269,8 @@
     color: #ffffff;
     background: rgba(0,0,0,0.6);
 }
-.dialog-save,
-.dialog-reset{
+.message-save,
+.message-reset{
     display: none;
 }
 .bg{
@@ -93,69 +284,65 @@
     background: rgba(0,0,0,0.5);
     display: none;
 }
-.message{
-    width: 418px;
-    height: 312px;
-    margin: -156px 0 0 -209px;
+.dialog{
+    width: 318px;
+    height: 222px;
+    margin: -111px 0 0 -159px;
+    padding: 12px 15px 15px 15px;
     position: fixed;
     top:50%;
     left:50%;
     z-index: 99;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    background: #ffffff;
     display: none;
+    background: #ffffff;
+    animation: showDialog .3s;
+    transition: transform .3s,opacity .2s,-webkit-transform .3s;
 }
-.message-content{
-    width: 358px;
-    margin: 15px auto 0 auto;
+.edit-dialog,
+.delete-dialog{
+    height: 159px;
+    margin: -80px 0 0 -159px;
 }
-.message-content .sign-content{
-    margin-top: 0;
-    margin-bottom: 20px;
-    position: relative;
+.reset-dialog{
+    height: 188px;
+    margin: -99px 0 0 -159px;
 }
-.message-content .sign-content label{
-    width: 40px;
-    height: 40px;
+.sign-content label{
     display: block;
-    float: left;
-    text-align: center;
-    background: url("../images/btn-bg.jpg") repeat-x;
+    line-height: 32px;
 }
-.message-content .sign-content label img{
-    margin-top: 6px;
-}
-.message-content .sign-content input{
-    width: 317px;
+.sign-content input{
+    width: 138px;
     padding: 0 15px;
-    line-height: 38px;
+    line-height: 28px;
     border: 1px solid #e0e0e0;
-    border-left: 0;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
 }
-.message-content .sign-content .remove{
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    background: url("../images/close.png") no-repeat center/cover;
+.sign-content input.reset-password{
+    width: 100%;
+    margin-top: 15px;
 }
-.message-txt{
-    margin-bottom: 40px;
-    padding-bottom: 15px;
+.sign-content .textbox{
+    width: 138px!important;
+}
+.dialog-txt{
+    padding-bottom: 10px;
     position: relative;
     border-bottom: 1px solid #e0e0e0;
 }
-.message-txt h2{
-    font-size: 16px;
+
+.prompt-txt{
+    margin: 23px 0;
+    padding-left: 48px;
+    line-height: 30px;
+    background: url("../images/prompt.png") no-repeat 10px center;
 }
 
 .close-dialog-box {
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
     display: block;
     cursor: pointer;
     position: absolute;
@@ -164,25 +351,25 @@
     background: url("../images/cancel.png") no-repeat;
 }
 
-.set input{
-    width: 170px;
-    height: 40px;
-    margin-top: 20px;
-    display: block;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+.btn-group{
+    margin-top: 15px;
+    text-align: right;
+}
+
+.btn-group button{
+    width: 56px;
+    margin-left: 12px;
+    line-height: 30px;
+    text-align: center;
     color: #ffffff;
-    font-size: 16px;
-    cursor: pointer;
+    background: #d0d0d0;
 }
 
-.set input.button-confirm{
-    background: url(../images/btn-bg.jpg) repeat-x;
-}
-
-.set input.button-cancel{
-    background: #d8d8d8;
+.btn-group button.btn-sure{
+    background: -webkit-linear-gradient(#0186f5 , #249bff);
+    background: -o-linear-gradient(#0186f5, #249bff);
+    background: -moz-linear-gradient(#0186f5, #249bff);
+    background: linear-gradient(#0186f5 , #249bff);
 }
 
 .top-info .quit-button{
@@ -195,4 +382,33 @@
 
 .top-info #exit{
     color: #ffffff;
+}
+
+@-webkit-keyframes showDialog {
+    0% {
+        transform: scale(0.7);
+        -webkit-transform: scale(0.7); }
+    45% {
+        transform: scale(1.05);
+        -webkit-transform: scale(1.05); }
+    80% {
+        transform: scale(0.95);
+        -webkit-transform: scale(0.95); }
+    100% {
+        transform: scale(1);
+        -webkit-transform: scale(1); } }
+
+@keyframes showDialog {
+    0% {
+        transform: scale(0.7);
+        -webkit-transform: scale(0.7); }
+    45% {
+        transform: scale(1.05);
+        -webkit-transform: scale(1.05); }
+    80% {
+        transform: scale(0.95);
+        -webkit-transform: scale(0.95); }
+    100% {
+        transform: scale(1);
+        -webkit-transform: scale(1); }
 }
