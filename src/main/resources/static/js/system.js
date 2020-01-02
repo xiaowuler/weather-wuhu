@@ -24,8 +24,6 @@ var App = function () {
         $('#reset-sure').on('click', this.OnResetSureButtonClick.bind(this));
         $('#pass-sure').on('click', this.OnPassSureButtonClick.bind(this));
         $('#no-pass-sure').on('click', this.OnNoPassSureButtonClick.bind(this));
-        //$('#add-sure').on('click', this.OnConfirmButtonClick.bind(this));
-        //$('.sign-content .remove').on('click', this.RemoveInputPassword.bind(this));
         window.onresize = this.SetFooter.bind(this);
     };
 
@@ -280,37 +278,37 @@ var App = function () {
         return row.departmentName;
     };
 
-    window.SaveDialog = function (index) {
-        $('#system-table').datagrid('selectRow',index);
-        var row = $('#system-table').datagrid('getSelected');
-
-        var edit = $('#system-table').datagrid('getEditor', {index:index,field:'departmentName'});
-        var value = $(edit.target).combobox('getText');
-        console.log(value);
-
-        if (row){
-            $(".dialog-save").show();
-            setTimeout(function(){
-                $(".dialog-save").hide();
-            },2000);
-
-            var selected = $('#system-table').datagrid('getSelected');
-
-            alert(selected.id + "======" + selected.departmentName);
-
-            $.ajax({
-                type: "POST",
-                dataType: 'json',
-                data: {
-                    userId: selected.id,
-                    departmentId: selected.departId
-                },
-                url: 'User/updateDepartmentIdById',
-                success: function (result) {
-                }.bind(this)
-            });
-        }
-    };
+    // window.SaveDialog = function (index) {
+    //     $('#system-table').datagrid('selectRow',index);
+    //     var row = $('#system-table').datagrid('getSelected');
+    //
+    //     var edit = $('#system-table').datagrid('getEditor', {index:index,field:'departmentName'});
+    //     var value = $(edit.target).combobox('getText');
+    //     console.log(value);
+    //
+    //     if (row){
+    //         $(".dialog-save").show();
+    //         setTimeout(function(){
+    //             $(".dialog-save").hide();
+    //         },2000);
+    //
+    //         var selected = $('#system-table').datagrid('getSelected');
+    //
+    //         alert(selected.id + "======" + selected.departmentName);
+    //
+    //         $.ajax({
+    //             type: "POST",
+    //             dataType: 'json',
+    //             data: {
+    //                 userId: selected.id,
+    //                 departmentId: selected.departId
+    //             },
+    //             url: 'User/updateDepartmentIdById',
+    //             success: function (result) {
+    //             }.bind(this)
+    //         });
+    //     }
+    // };
 };
 
 $(document).ready(function () {
