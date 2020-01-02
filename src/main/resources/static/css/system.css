@@ -8,7 +8,7 @@
 
 .operate{
     float: left;
-    padding: 0 7px 0 28px;
+    padding: 0 7px 0 26px;
     line-height: 28px;
     position: relative;
     border: 1px solid #e0e0e0;
@@ -17,6 +17,18 @@
     background: -o-linear-gradient(#fefefe, #f0f0f0);
     background: -moz-linear-gradient(#fefefe, #f0f0f0);
     background: linear-gradient(#fefefe , #f0f0f0);
+}
+
+.operate:first-child{
+    -webkit-border-radius: 5px 0 0 5px;
+    -moz-border-radius: 5px 0 0 5px;
+    border-radius: 5px 0 0 5px;
+}
+
+.operate:last-child{
+    -webkit-border-radius: 0 5px 5px 0;
+    -moz-border-radius: 0 5px 5px 0;
+    border-radius: 0 5px 5px 0;
 }
 
 .operate-add:before,
@@ -36,13 +48,17 @@
     border-left: 1px solid #ffffff;
 }
 
-.operate-delete{
+.operate-delete,
+.no-pass{
     border-right: 1px solid #e0e0e0;
 }
 
 .operate-reset{
     margin-left: 10px;
     border-right: 1px solid #e0e0e0;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
 .operate:after{
@@ -51,7 +67,7 @@
     height: 14px;
     display: block;
     position: absolute;
-    top: 6px;
+    top: 7px;
     left: 7px;
     background: url("../images/operate-add.png") no-repeat center/cover;
 }
@@ -69,6 +85,20 @@
 .operate-reset:after{
     width: 12px;
     background: url("../images/operate-reset.png") no-repeat center/cover;
+}
+
+.pass:after{
+    width: 14px;
+    background: url("../images/pass.png") no-repeat center/cover;
+}
+
+.no-pass:after{
+    width: 14px;
+    background: url("../images/no-pass.png") no-repeat center/cover;
+}
+
+.audit-state{
+    margin-left: 10px;
 }
 
 .query-btn{
@@ -192,10 +222,11 @@
 
 .pagination-page-list{
     width: 38px;
+    height: 24px;
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
-    background: url('../images/drop-down.png') 25px no-repeat;
+    background: url('../images/drop-down.png') 25px 9px no-repeat;
     background-size: 8px;
 }
 
@@ -299,7 +330,9 @@
     transition: transform .3s,opacity .2s,-webkit-transform .3s;
 }
 .edit-dialog,
-.delete-dialog{
+.delete-dialog,
+.pass-dialog,
+.no-pass-dialog{
     height: 159px;
     margin: -80px 0 0 -159px;
 }
@@ -311,10 +344,16 @@
     display: block;
     line-height: 32px;
 }
-.sign-content input{
+
+.query-name{
+    margin-left: 10px;
+}
+.sign-content input,
+.query-name{
     width: 138px;
     padding: 0 15px;
     line-height: 28px;
+    color: #666666;
     border: 1px solid #e0e0e0;
     -moz-border-radius: 5px 5px 5px 5px;
     -webkit-border-radius: 5px 5px 5px 5px;

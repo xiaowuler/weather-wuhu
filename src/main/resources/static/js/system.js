@@ -10,6 +10,8 @@ var App = function () {
         this.InitUsernameCombobox();
         this.GetCurrentLoginName();
         this.InitUserInformationGrid();
+        //$('.pass').on('click', this.ShowPassDialog.bind(this));
+        //$('.no-pass').on('click', this.ShowNoPassDialog.bind(this));
         $('.operate-add').on('click', this.ShowAddDialog.bind(this));
         $('.operate-edit').on('click', this.ShowEditDialog.bind(this));
         $('.operate-delete').on('click', this.ShowDeleteDialog.bind(this));
@@ -20,6 +22,8 @@ var App = function () {
         $('#edit-sure').on('click', this.OnEditSureButtonClick.bind(this));
         $('#delete-sure').on('click', this.OnDeleteSureButtonClick.bind(this));
         $('#reset-sure').on('click', this.OnResetSureButtonClick.bind(this));
+        $('#pass-sure').on('click', this.OnPassSureButtonClick.bind(this));
+        $('#no-pass-sure').on('click', this.OnNoPassSureButtonClick.bind(this));
         //$('#add-sure').on('click', this.OnConfirmButtonClick.bind(this));
         //$('.sign-content .remove').on('click', this.RemoveInputPassword.bind(this));
         window.onresize = this.SetFooter.bind(this);
@@ -100,7 +104,7 @@ var App = function () {
             pageList: [10, 20, 30],
             loadMsg: '正在加载数据，请稍后...',
             columns: [[
-                { field: 'loginName', title: '登录名', width: 240, align: 'center'},
+                { field: 'loginName', title: '登录账号', width: 240, align: 'center'},
                 { field: 'name', title: '姓名', width: 240, align: 'center'},
                 { field: 'departmentName', title: '单位', width: 240, align: 'center', formatter: this.SetDepartment.bind(this),},
                 { field: 'state', title: '审核结果', width: 240, align: 'center', formatter: this.ResetState.bind(this)}
@@ -199,6 +203,16 @@ var App = function () {
         });
     };
 
+    this.ShowPassDialog = function () {
+        $('.pass-dialog').show();
+        $(".bg").show();
+    };
+
+    this.ShowNoPassDialog = function () {
+        $('.no-pass-dialog').show();
+        $(".bg").show();
+    };
+
     this.ShowAddDialog = function () {
         $('.add-dialog').show();
         $(".bg").show();
@@ -216,6 +230,10 @@ var App = function () {
     this.ShowDeleteDialog = function () {
         $('.delete-dialog').show();
         $(".bg").show();
+
+        var selected = $('#system-table').datagrid('getSelected');
+        //selected.name
+        $('#name').text(selected.name);
     };
 
     this.ShowResetDialog = function () {
@@ -244,6 +262,16 @@ var App = function () {
     };
 
     this.OnResetSureButtonClick = function (event) {
+        $(event.target).parent().parent().hide();
+        $(".bg").hide();
+    };
+
+    this.OnPassSureButtonClick = function () {
+        $(event.target).parent().parent().hide();
+        $(".bg").hide();
+    };
+
+    this.OnNoPassSureButtonClick = function () {
         $(event.target).parent().parent().hide();
         $(".bg").hide();
     };

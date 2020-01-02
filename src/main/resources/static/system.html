@@ -34,11 +34,15 @@
         <div class="width1200">
             <div class="navigation clearfix">
                 <div class="fl">
-                    <a href="javascript:;" class="operate operate-add">添加</a>
-                    <a href="javascript:;" class="operate operate-edit">编辑</a>
-                    <a href="javascript:;" class="operate operate-delete">删除</a>
+                    <a href="javascript:;" class="operate operate-add">添加...</a>
+                    <a href="javascript:;" class="operate operate-edit">编辑...</a>
+                    <a href="javascript:;" class="operate operate-delete">删除...</a>
                 </div>
-                <a href="javascript:;" class="operate operate-reset fl">重置密码</a>
+                <div class="audit-state fl">
+                    <a href="javascript:;" class="operate pass">审核通过</a>
+                    <a href="javascript:;" class="operate no-pass">审核不通过</a>
+                </div>
+                <a href="javascript:;" class="operate operate-reset fl">重置密码...</a>
                 <div class="fr">
                     <div class="choose fl">
                         <span class="subtitle fl">单位</span>
@@ -48,15 +52,7 @@
                     </div>
                     <div class="choose fl">
                         <span class="subtitle fl">姓名</span>
-                        <div class="choose-content choose-object fl">
-                            <select class="easyui-combobox" id="username">
-                                <option value="202">全部</option>
-                                <option value="201">超级管理员</option>
-                                <option value="201">超级管理员</option>
-                                <option value="201">超级管理员</option>
-                                <option value="201">超级管理员</option>
-                            </select>
-                        </div>
+                        <input type="text" class="query-name" placeholder="请输入姓名">
                     </div>
                     <button id="query-btn" class="query-btn fr">查询</button>
                 </div>
@@ -133,7 +129,7 @@
             <h2>删除信息</h2>
             <i class="close-dialog-box"></i>
         </div>
-        <h2 class="prompt-txt">确定要删除姓名为“张山”的用户吗？</h2>
+        <h2 class="prompt-txt">确定要删除姓名为“<span id="name">张山</span>”的用户吗？</h2>
         <div class="btn-group">
             <button class="btn-sure" id="delete-sure">确定</button>
             <button class="btn-cancel">取消</button>
@@ -150,6 +146,28 @@
         </div>
         <div class="btn-group">
             <button class="btn-sure" id="reset-sure">确定</button>
+            <button class="btn-cancel">取消</button>
+        </div>
+    </div>
+    <div class="dialog pass-dialog">
+        <div class="dialog-txt">
+            <h2>审核信息</h2>
+            <i class="close-dialog-box"></i>
+        </div>
+        <h2 class="prompt-txt">确定审核通过吗？</h2>
+        <div class="btn-group">
+            <button class="btn-sure" id="pass-sure">确定</button>
+            <button class="btn-cancel">取消</button>
+        </div>
+    </div>
+    <div class="dialog no-pass-dialog">
+        <div class="dialog-txt">
+            <h2>审核信息</h2>
+            <i class="close-dialog-box"></i>
+        </div>
+        <h2 class="prompt-txt">确定审核不通过吗</h2>
+        <div class="btn-group">
+            <button class="btn-sure" id="no-pass-sure">确定</button>
             <button class="btn-cancel">取消</button>
         </div>
     </div>
