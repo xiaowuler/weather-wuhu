@@ -86,6 +86,7 @@ var App = function () {
 
         var index = $(event.target).index();
         $(".wrap .wrap-content").eq(index).css("display", "block").siblings().css("display", "none");
+        this.SetFooter();
     };
 
     this.OnQueryButtonClick = function () {
