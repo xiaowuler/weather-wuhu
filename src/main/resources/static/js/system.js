@@ -5,6 +5,7 @@ var App = function () {
     this.Startup = function () {
         this.SetFooter();
         this.InitDepartmentCombobox('#department');
+        this.InitDepartmentCombobox('#add-department');
         this.InitDepartmentCombobox('#edit-department');
         this.InitUsernameCombobox();
         this.GetCurrentLoginName();
@@ -53,9 +54,10 @@ var App = function () {
                     data: newData,
                     editable: false,
                     onLoadSuccess: function (result) {
+                        console.log(result);
                         var item = $(id).combobox('getData');
                         if (item.length > 0)
-                            $(id).combobox('select', result[0].departName);
+                            $(id).combobox('select', result[0].departId);
                     }
                 });
             }.bind(this)
@@ -68,9 +70,8 @@ var App = function () {
             editable: false,
             valueField:'departId',
             textField:'departName',
-            onLoadSuccess: function (data) {
-                console.log(data)
-            }.bind(this)
+            // onLoadSuccess: function (data) {
+            // }.bind(this)
         });
     };
 
@@ -106,7 +107,8 @@ var App = function () {
             ]],
             onBeforeLoad: this.OnUserTableGridBeforeLoad.bind(this),
             onClickRow: this.OnClickRow.bind(this),
-            onLoadSuccess: function () {
+            onLoadSuccess: function (data) {
+                console.log(data);
                 this.UserTable.datagrid('selectRow', 0);
             }.bind(this)
         });
