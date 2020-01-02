@@ -5,10 +5,10 @@ var App = function () {
         this.Relayout();
         this.InitCombobox();
         this.AddDepartmentOptions();
-        this.RemoveUserInputInfo();
-        this.SwitchRegisterOrLogin();
         this.getSecurityError();
-
+        $('.remove').on('click', this.RemoveUserInputInfo.bind(this));
+        $('.switch-login').on('click', this.OnEnterLoginPanel.bind(this));
+        $('.switch-register').on('click', this.OnEnterRegisterPanel.bind(this));
         $('#login-button').one('click', this.OnLoginButtonClick.bind(this));
         $('#register-button').one('click', this.OnRegisterButtonClick.bind(this));
     };
@@ -39,26 +39,19 @@ var App = function () {
         });
     };
 
-    this.RemoveUserInputInfo = function () {
-        $('.remove').click(function(){
-            $(this).prev().val('');
-            $(this).prev().focus();
-        });
+    this.RemoveUserInputInfo = function (event) {
+        $(event.target).prev().val('');
+        $(event.target).prev().focus();
     };
 
-    this.SwitchRegisterOrLogin = function () {
-        var login = $('.login');
-        var register = $('.register');
+    this.OnEnterRegisterPanel = function () {
+        $('.login').hide();
+        $('.register').show();
+    };
 
-        $('.switch-register').click(function(){
-            login.hide();
-            register.show();
-        });
-
-        $('.switch-login').click(function(){
-            register.hide();
-            login.show();
-        });
+    this.OnEnterLoginPanel = function () {
+        $('.login').show();
+        $('.register').hide();
     };
 
     this.getSecurityError = function () {

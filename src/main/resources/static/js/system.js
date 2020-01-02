@@ -3,12 +3,75 @@ var App = function () {
     this.UserTable = $('#system-table');
 
     this.Startup = function () {
+        this.SetFooter();
+        this.InitDepartmentCombobox('#department');
+        this.InitDepartmentCombobox('#edit-department');
+        this.InitUsernameCombobox();
         this.GetCurrentLoginName();
         this.InitUserInformationGrid();
+        $('.operate-add').on('click', this.ShowAddDialog.bind(this));
+        $('.operate-edit').on('click', this.ShowEditDialog.bind(this));
+        $('.operate-delete').on('click', this.ShowDeleteDialog.bind(this));
+        $('.operate-reset').on('click', this.ShowResetDialog.bind(this));
+        $('.btn-cancel').on('click', this.HideDialog.bind(this));
         $('.close-dialog-box').on('click', this.HideDialog.bind(this));
-        $('.button-confirm').on('click', this.OnConfirmButtonClick.bind(this));
-        $('.button-cancel').on('click', this.HideDialog.bind(this));
-        $('.sign-content .remove').on('click', this.RemoveInputPassword.bind(this));
+        $('#add-sure').on('click', this.OnAddSureButtonClick.bind(this));
+        $('#edit-sure').on('click', this.OnEditSureButtonClick.bind(this));
+        $('#delete-sure').on('click', this.OnDeleteSureButtonClick.bind(this));
+        $('#reset-sure').on('click', this.OnResetSureButtonClick.bind(this));
+        //$('#add-sure').on('click', this.OnConfirmButtonClick.bind(this));
+        //$('.sign-content .remove').on('click', this.RemoveInputPassword.bind(this));
+        window.onresize = this.SetFooter.bind(this);
+    };
+
+    this.SetFooter = function () {
+        var height = $(window).height();
+        if ((height - 113) > $('.box').height())
+            $('.foot').addClass('foot-post');
+        else
+            $('.foot').removeClass('foot-post');
+    };
+
+    this.InitDepartmentCombobox = function (id) {
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            async: false,
+            url: '/Department/getAllDepartment',
+            success: function (data) {
+                var newData = [];
+                newData.push({ "departId": 0, "departName": "全部" });
+
+                for (var i = 0; i < data.length; i++) {
+                    newData.push({ "departId": data[i].departId, "departName": data[i].departName });
+                }
+
+                $(id).combobox({
+                    panelHeight: 300,
+                    valueField: 'departId',
+                    textField: 'departName',
+                    data: newData,
+                    editable: false,
+                    onLoadSuccess: function (result) {
+                        var item = $(id).combobox('getData');
+                        if (item.length > 0)
+                            $(id).combobox('select', result[0].departName);
+                    }
+                });
+            }.bind(this)
+        });
+    };
+
+    this.InitUsernameCombobox = function () {
+        $('#username').combobox({
+            panelHeight: 300,
+            editable: false,
+            valueField:'departId',
+            textField:'departName',
+            onLoadSuccess: function (data) {
+                console.log(data)
+            }.bind(this)
+        });
     };
 
     this.GetCurrentLoginName = function () {
@@ -27,6 +90,8 @@ var App = function () {
             url: 'User/getUserByPage',
             striped: true,
             singleSelect: true,
+            fitColumns: true,
+            fit: true,
             scrollbarSize: 0,
             pagination: true,
             pageNumber: 1,
@@ -34,25 +99,16 @@ var App = function () {
             pageList: [10, 20, 30],
             loadMsg: '正在加载数据，请稍后...',
             columns: [[
-                { field: 'loginName', title: '用户名', width: 240, align: 'center'},
+                { field: 'loginName', title: '登录名', width: 240, align: 'center'},
                 { field: 'name', title: '姓名', width: 240, align: 'center'},
-                { field: 'departmentName', title: '单位', width: 240, align: 'center', formatter: this.SetDepartment.bind(this),
-                    editor:{
-                        type:'combobox',
-                        options:{
-                            valueField:'departId',
-                            textField:'departName',
-                            url:'/Department/getAllDepartment',
-                            required:true,
-                            editable:false
-                        }
-                    }
-                },
-                { field: 'loginPwd', title: '重置密码', width: 240, align: 'center', formatter: this.ResetUserPasswordButton.bind(this)},
-                { field: 'saved', title: '保存修改', width: 238, align: 'center', formatter: this.OnSaveButtonClick.bind(this)}
+                { field: 'departmentName', title: '单位', width: 240, align: 'center', formatter: this.SetDepartment.bind(this),},
+                { field: 'state', title: '审核结果', width: 240, align: 'center', formatter: this.ResetState.bind(this)}
             ]],
             onBeforeLoad: this.OnUserTableGridBeforeLoad.bind(this),
-            onClickRow: this.OnClickRow.bind(this)
+            onClickRow: this.OnClickRow.bind(this),
+            onLoadSuccess: function () {
+                this.UserTable.datagrid('selectRow', 0);
+            }.bind(this)
         });
     };
 
@@ -92,8 +148,11 @@ var App = function () {
         }
     };
 
-    this.ResetUserPasswordButton = function (value, row, index) {
-        return '<a class="system-btn reset" href="javascript:void(0)" onclick= "window.ResetUserPasswordDialog(\''+index+'\')">重置</a>';
+    this.ResetState = function (value, row, index) {
+        if (value === 1)
+            return '<span class="success">通过</span>';
+        else
+            return '<span class="fail">未通过</span>';
     };
 
     window.ResetUserPasswordDialog = function(index) {
@@ -136,28 +195,69 @@ var App = function () {
                 this.ReloadUserInformationData();
             }.bind(this)
         });
-    }
+    };
 
-    this.HideDialog = function () {
-        $(".message").hide();
+    this.ShowAddDialog = function () {
+        $('.add-dialog').show();
+        $(".bg").show();
+    };
+
+    this.ShowEditDialog = function () {
+        $('.edit-dialog').show();
+        $(".bg").show();
+        var selected = $('#system-table').datagrid('getSelected');
+        console.log(selected);
+        $('#edit-name').val(selected.name);
+        $('#edit-department').combobox("setValue", selected.departmentName);
+    };
+
+    this.ShowDeleteDialog = function () {
+        $('.delete-dialog').show();
+        $(".bg").show();
+    };
+
+    this.ShowResetDialog = function () {
+        $('.reset-dialog').show();
+        $(".bg").show();
+    };
+
+    this.HideDialog = function (event) {
+        $(event.target).parent().parent().hide();
         $(".bg").hide();
     };
 
-    this.RemoveInputPassword = function (event) {
-        $(event.target).prev().val('');
+    this.OnAddSureButtonClick = function (event) {
+        $(event.target).parent().parent().hide();
+        $(".bg").hide();
+    };
+
+    this.OnEditSureButtonClick = function (event) {
+        $(event.target).parent().parent().hide();
+        $(".bg").hide();
+    };
+
+    this.OnDeleteSureButtonClick = function (event) {
+        $(event.target).parent().parent().hide();
+        $(".bg").hide();
+    };
+
+    this.OnResetSureButtonClick = function (event) {
+        $(event.target).parent().parent().hide();
+        $(".bg").hide();
     };
 
     this.SetDepartment = function (val,row) {
         return row.departmentName;
     };
 
-    this.OnSaveButtonClick = function (value, row, index) {
-        return '<a class="system-btn save" href="javascript:void(0)" onclick="window.SaveDialog(\''+index+'\')">保存</a>';
-    };
-
     window.SaveDialog = function (index) {
         $('#system-table').datagrid('selectRow',index);
         var row = $('#system-table').datagrid('getSelected');
+
+        var edit = $('#system-table').datagrid('getEditor', {index:index,field:'departmentName'});
+        var value = $(edit.target).combobox('getText');
+        console.log(value);
+
         if (row){
             $(".dialog-save").show();
             setTimeout(function(){

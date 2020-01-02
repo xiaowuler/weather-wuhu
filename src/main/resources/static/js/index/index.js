@@ -10,9 +10,21 @@ var App = function () {
         this.SetCheckObjectCombobox();
 
         $('.tab ul li').on('click', this.OnTagsSelectedChange.bind(this));
+        $('.tab ul').find('li').eq(0).trigger('click');
         $('#query-btn').on('click', this.OnQueryButtonClick.bind(this));
         $('#query-btn').trigger('click');
         $('#download').on('click', this.Project.OnDownloadButtonClick.bind(this));
+
+        window.onresize = this.SetFooter.bind(this);
+    };
+
+    this.SetFooter = function () {
+        var height = $(window).height();
+        console.log(height)
+        if ((height - 113) > $('.box').height())
+            $('.foot').addClass('foot-post');
+        else
+            $('.foot').removeClass('foot-post');
     };
 
     this.GetCurrentLoginName = function () {
@@ -25,12 +37,29 @@ var App = function () {
         });
     };
 
+    this.OnProjectSelected = function (event) {
+        $('.tab ul li').removeClass("action");
+        $(event.target).addClass("action");
+        $('.wrap .wrap-content').eq(1).css("display","block").siblings().css("display","none");
+
+        this.SetFooter();
+    };
+
+    this.OnDepartmentSelected = function (event) {
+        $('.tab ul li').removeClass("action");
+        $(event.target).addClass("action");
+        $('.wrap .wrap-content').eq(0).css("display","block").siblings().css("display","none");
+
+        this.SetFooter();
+    };
+
     this.OnTagsSelectedChange = function (event) {
             $('.tab ul li').removeClass("action");
             $(event.target).addClass("action");
 
             var index = $(event.target).index();
             $('.wrap .wrap-content').eq(index).css("display","block").siblings().css("display","none");
+        this.SetFooter();
     };
 
     this.SetCalendar = function () {
