@@ -22,4 +22,8 @@ public interface UserMapper {
     User findUserByLoginName(@Param("username") String username);
 
     void userRegister(@Param("user") User user);
+
+    void deleteOneById(int userId);
+
+    void insertOne(@Param("user") User user);
 }

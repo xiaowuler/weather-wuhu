@@ -6,6 +6,7 @@ import com.pingchuan.weather.entity.PageResult;
 import com.pingchuan.weather.service.UserService;
 
 import com.pingchuan.weather.service.impl.DepartmentServiceImpl;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -89,4 +90,28 @@ public class UserController {
         }
         return null;
     }
+
+
+    @PostMapping("/deleteOneById")
+    public void deleteOneById(int userId){
+        userService.deleteOneById(userId);
+    }
+
+    @PostMapping("/insertOne")
+    public void insertOne(String loginName,String loginPwd,String name,String departName){
+        User user=new User();
+        List<Department> departments=departmentService.findDepartIdByName(departName);
+        for (Department department : departments) {
+           user.setDepartmentId(department.getDepartId());
+        }
+        user.setLoginName(loginName);
+        user.setLoginPwd(loginPwd);
+        user.setName(name);
+        userService.insertOne(user);
+    }
+
+    /*@PostMapping("/hierarchicalDisplay")
+    public List<String> display(){
+        List<String> provinces=userService.selectProvince();
+    }*/
 }

@@ -15,6 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -73,4 +75,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userMapper.userRegister(user);
     }
 
+    @Override
+    public void deleteOneById(int userId) {
+        userMapper.deleteOneById(userId);
+    }
+
+    @Override
+    public void insertOne(User user) {
+        userMapper.insertOne(user);
+    }
 }

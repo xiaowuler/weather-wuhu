@@ -4,9 +4,9 @@
 <mapper namespace="com.pingchuan.weather.mapper.UserMapper">
 
     <select id="getUserByPage" resultType="User">
-        SELECT U.Id id, U.Name name, D.DepartName departmentName, U.LoginName loginName, U.LoginPwd loginPwd, U.State state, U.PROVINCE province, U.CITY city, U.COUNTY county
+        SELECT U.Id id, U.Name name,U.DepartmentId departmentId,D.DepartName departmentName, U.LoginName loginName, U.LoginPwd loginPwd, U.State state, U.PROVINCE province, U.CITY city, U.COUNTY county
         FROM(SELECT *, ROW_NUMBER() OVER( ORDER BY Id ASC) AS RowNumber FROM  [User] WHERE 1=1) AS U LEFT JOIN Department D ON U.DepartmentId = D.DepartID
-        WHERE U.RowNumber > (#{pageSize} *(#{pageIndex}-1)) AND (#{pageSize} * #{pageIndex}) >= U.RowNumber
+        WHERE U.RowNumber > (#{pageSize} *(#{pageIndex}-1)) AND (#{pageSize} * #{pageIndex}) >= U.RowNumber AND U.State != 1
     </select>
 
     <select id="getUserTotalCount" resultType="int">
@@ -44,5 +44,17 @@
 
     <select id="userRegister" parameterType="User">
         INSERT INTO [User](Name, DepartmentId, LoginName, LoginPwd) VALUES (#{user.name}, #{user.departmentId}, #{user.loginName}, #{user.loginPwd})
+    </select>
+
+    <delete id="deleteOneById" parameterType="User">
+        delete from [User] where id=#{userId}
+    </delete>
+
+    <insert id="insertOne">
+        insert into [User](Name, DepartmentId, LoginName, LoginPwd) values(#{user.name},#{user.departmentId},#{user.loginName},#{user.loginPwd})
+    </insert>
+
+    <select id="selectProvince" resultType="User">
+        SELECT DepartName
     </select>
 </mapper>

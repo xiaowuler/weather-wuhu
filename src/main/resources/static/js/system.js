@@ -19,7 +19,8 @@ var App = function () {
         $('#edit-sure').on('click', this.OnEditSureButtonClick.bind(this));
         $('#delete-sure').on('click', this.OnDeleteSureButtonClick.bind(this));
         $('#reset-sure').on('click', this.OnResetSureButtonClick.bind(this));
-        //$('#add-sure').on('click', this.OnConfirmButtonClick.bind(this));
+        $('#reset-sure').on('click', this.OnConfirmButtonClick.bind(this));
+        $('#edit-sure').on('click',this.SaveDialog.bind(this));
         //$('.sign-content .remove').on('click', this.RemoveInputPassword.bind(this));
         window.onresize = this.SetFooter.bind(this);
     };
@@ -37,7 +38,7 @@ var App = function () {
             type: "POST",
             dataType: 'json',
             async: false,
-            url: '/Department/getAllDepartment',
+                url: '/Department/getAllDepartment',
             success: function (data) {
                 var newData = [];
                 newData.push({ "departId": 0, "departName": "全部" });
@@ -170,14 +171,14 @@ var App = function () {
 
     this.OnConfirmButtonClick = function () {
         var selected = this.UserTable.datagrid('getSelected');
-        var password = $("#password").val();
-        var confirmPassword = $("#confirm-password").val();
+        var password = $("#password-one").val();
+        var confirmPassword = $("#password-two").val();
         if (password !== confirmPassword){
             alert("两次输入的密码必须一致")
             return;
         }
 
-        this.HideDialog();
+        //this.HideDialog();
         $(".dialog-reset").show();
         setTimeout(function(){
             $(".dialog-reset").hide();
@@ -188,11 +189,11 @@ var App = function () {
             dataType: 'json',
             data: {
                 userId: selected.id,
-                password: $('#password').val()
+                password: $('#password-one').val()
             },
             url: 'User/updatePasswordById',
             success: function (result) {
-                this.ReloadUserInformationData();
+                //this.ReloadUserInformationData();
             }.bind(this)
         });
     };
@@ -250,8 +251,8 @@ var App = function () {
         return row.departmentName;
     };
 
-    window.SaveDialog = function (index) {
-        $('#system-table').datagrid('selectRow',index);
+    this.SaveDialog = function (index) {
+        //$('#system-table').datagrid('selectRow',index);
         var row = $('#system-table').datagrid('getSelected');
 
         var edit = $('#system-table').datagrid('getEditor', {index:index,field:'departmentName'});
