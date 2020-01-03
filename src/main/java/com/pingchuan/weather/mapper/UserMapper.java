@@ -26,4 +26,6 @@ public interface UserMapper {
     void deleteOneById(int userId);
 
     void insertOne(@Param("user") User user);
+
+    List<User> findByDepartNameAndName(int departmentId, String name);
 }

@@ -6,7 +6,7 @@
     <select id="getUserByPage" resultType="User">
         SELECT U.Id id, U.Name name,U.DepartmentId departmentId,D.DepartName departmentName, U.LoginName loginName, U.LoginPwd loginPwd, U.State state, U.PROVINCE province, U.CITY city, U.COUNTY county
         FROM(SELECT *, ROW_NUMBER() OVER( ORDER BY Id ASC) AS RowNumber FROM  [User] WHERE 1=1) AS U LEFT JOIN Department D ON U.DepartmentId = D.DepartID
-        WHERE U.RowNumber > (#{pageSize} *(#{pageIndex}-1)) AND (#{pageSize} * #{pageIndex}) >= U.RowNumber AND U.State != 1
+        WHERE U.RowNumber > (#{pageSize} *(#{pageIndex}-1)) AND (#{pageSize} * #{pageIndex}) >= U.RowNumber AND U.Name != '超级管理员'
     </select>
 
     <select id="getUserTotalCount" resultType="int">
@@ -54,7 +54,7 @@
         insert into [User](Name, DepartmentId, LoginName, LoginPwd) values(#{user.name},#{user.departmentId},#{user.loginName},#{user.loginPwd})
     </insert>
 
-    <select id="selectProvince" resultType="User">
-        SELECT DepartName
+    <select id="findByDepartNameAndName" resultType="User">
+        SELECT * FROM [User] WHERE DepartmentId LIKE '%${departmentId}%' and Name like '%${name}%'
     </select>
 </mapper>

@@ -84,4 +84,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void insertOne(User user) {
         userMapper.insertOne(user);
     }
+
+    @Override
+    public List<User> findByDepartNameAndName(Integer departmentId, String name) {
+        return userMapper.findByDepartNameAndName(departmentId,name);
+    }
 }

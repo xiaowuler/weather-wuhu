@@ -110,8 +110,13 @@ public class UserController {
         userService.insertOne(user);
     }
 
-    /*@PostMapping("/hierarchicalDisplay")
-    public List<String> display(){
-        List<String> provinces=userService.selectProvince();
-    }*/
+    @PostMapping("/findByDepartNameAndName")
+    public List<User> findByDepartNameAndName(String departName,String name){
+        List<Department> departments=departmentService.findDepartIdByName(departName);
+        Integer departmentId=null;
+        for (Department department : departments) {
+            departmentId=department.getDepartId();
+        }
+        return userService.findByDepartNameAndName(departmentId,name);
+    }
 }

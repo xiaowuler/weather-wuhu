@@ -30,4 +30,14 @@
         SELECT DepartID from Department where DepartName = #{departmentName};
     </select>
 
+    <select id="findAllCounty" resultType="Department">
+        SELECT * FROM Department where ParentDepartID = #{departId}
+    </select>
+
+    <select id="findAllProvince" resultType="Department">
+        SELECT DepartID as departId, DepartName as departName, ParentDepartID as parentDepartId, County as county
+        FROM Department
+        where Property = 1;
+    </select>
+
 </mapper>

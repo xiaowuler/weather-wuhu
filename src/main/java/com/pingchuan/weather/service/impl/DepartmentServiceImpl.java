@@ -28,4 +28,19 @@ public class DepartmentServiceImpl implements DepartmentService {
     public List<Department> findDepartIdByName(String departmentName) {
         return departmentMapper.findDepartIdByName(departmentName);
     }
+
+    @Override
+    public List<Department> findAllCity() {
+        return departmentMapper.findAllCity();
+    }
+
+    @Override
+    public List<Department> findAllCounty(Integer departId) {
+        return departmentMapper.findAllCounty(departId);
+    }
+
+    @Override
+    public List<Department> findAllProvince() {
+        return departmentMapper.findAllProvince();
+    }
 }

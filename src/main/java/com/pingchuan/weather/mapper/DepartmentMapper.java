@@ -19,4 +19,8 @@ public interface DepartmentMapper {
     List<Department> getAllDepartment();
 
     List<Department> findDepartIdByName(@Param("departmentName") String departmentName);
+
+    List<Department> findAllCounty(@Param("departId")Integer departId);
+
+    List<Department> findAllProvince();
 }

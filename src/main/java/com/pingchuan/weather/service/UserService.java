@@ -22,4 +22,6 @@ public interface UserService {
     void deleteOneById(int userId);
 
     void insertOne(User user);
+
+    List<User> findByDepartNameAndName(Integer departmentId, String name);
 }
