@@ -52,7 +52,7 @@
                     </div>
                     <div class="choose fl">
                         <span class="subtitle fl">姓名</span>
-                        <input type="text" class="query-name" placeholder="请输入姓名">
+                        <input type="text" class="query-name" id="query-name" placeholder="请输入姓名">
                     </div>
                     <button id="query-btn" class="query-btn fr">查询</button>
                 </div>
@@ -62,8 +62,7 @@
             </div>
         </div>
     </div>
-    <div class="message message-save">保存成功</div>
-    <div class="message message-reset">设置密码成功</div>
+    <div class="message">保存成功</div>
     <div class="dialog add-dialog">
         <div class="dialog-txt">
             <h2>添加信息</h2>
@@ -71,27 +70,22 @@
         </div>
         <div class="clearfix">
             <div class="sign-content fl">
-                <label>登录名</label>
-                <input type="text" id="password" class="password" placeholder="请输入登录名">
+                <label>登录账号</label>
+                <input type="text" id="login-account" placeholder="请输入登录名">
             </div>
             <div class="sign-content fr">
                 <label>登录密码</label>
-                <input type="password" id="confirm-password" class="password" placeholder="请输入密码">
+                <input type="password" id="password" placeholder="请输入密码">
             </div>
         </div>
         <div class="clearfix">
             <div class="sign-content fl">
                 <label>姓名</label>
-                <input type="text" id="1" class="password" placeholder="请输入姓名">
+                <input type="text" id="add-name" placeholder="请输入姓名">
             </div>
             <div class="sign-content choose fr">
                 <label>单位</label>
-                <select class="easyui-combobox" id="add-department">
-                    <option value="24">全部</option>
-                    <option value="48">芜湖气象局</option>
-                    <option value="72">马鞍山市气象局</option>
-                    <option value="96">蚌埠市气象局</option>
-                </select>
+                <select class="easyui-combobox" id="add-department"></select>
             </div>
         </div>
         <div class="btn-group">
@@ -107,16 +101,11 @@
         <div class="clearfix">
             <div class="sign-content fl">
                 <label>姓名</label>
-                <input type="text" id="edit-name" class="password" placeholder="请输入姓名">
+                <input type="text" id="edit-name" placeholder="请输入姓名">
             </div>
             <div class="sign-content choose fr">
                 <label>单位</label>
-                <select class="easyui-combobox" id="edit-department">
-                    <option value="24">全部</option>
-                    <option value="48">芜湖气象局</option>
-                    <option value="72">马鞍山市气象局</option>
-                    <option value="96">蚌埠市气象局</option>
-                </select>
+                <select class="easyui-combobox" id="edit-department"></select>
             </div>
         </div>
         <div class="btn-group">
@@ -129,7 +118,10 @@
             <h2>删除信息</h2>
             <i class="close-dialog-box"></i>
         </div>
-        <h2 class="prompt-txt">确定要删除姓名为“<span id="name">张山</span>”的用户吗？</h2>
+        <div class="prompt-txt">
+            <img src="images/prompt.png">
+            <p>确定要删除姓名为“<span id="name">张山</span>”的用户吗？</p>
+        </div>
         <div class="btn-group">
             <button class="btn-sure" id="delete-sure">确定</button>
             <button class="btn-cancel">取消</button>

@@ -234,18 +234,6 @@
     width: 90%!important;
 }
 
-.success{
-    padding-left: 17px;
-    color: #20ad3e;
-    background: url("../images/success.png") no-repeat left;
-}
-
-.fail{
-    padding-left: 17px;
-    color: #e60d17;
-    background: url("../images/fail.png") no-repeat left;
-}
-
 .system-btn{
     width: 46px;
     height: 28px;
@@ -298,11 +286,8 @@
     -moz-border-radius: 5px;
     border-radius: 5px;
     color: #ffffff;
-    background: rgba(0,0,0,0.6);
-}
-.message-save,
-.message-reset{
     display: none;
+    background: rgba(0,0,0,0.6);
 }
 .bg{
     width: 100%;
@@ -374,9 +359,20 @@
 
 .prompt-txt{
     margin: 23px 0;
-    padding-left: 48px;
-    line-height: 30px;
-    background: url("../images/prompt.png") no-repeat 10px center;
+    padding: 0 8px;
+    display: table;
+}
+
+.prompt-txt img,
+.prompt-txt p{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.prompt-txt p{
+    padding-left: 8px;
+    position: relative;
+    top: -3px;
 }
 
 .close-dialog-box {
