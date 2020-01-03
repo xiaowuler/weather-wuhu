@@ -27,7 +27,7 @@ public interface UserMapper {
 
     void insertOne(@Param("user") User user);
 
-    List<User> findByDepartNameAndName(@Param("departmentId")int departmentId,@Param("name") String name);
+    List<User> findByDepartNameAndName(@Param("departmentId")Integer departmentId,@Param("name") String name);
 
     void updateStateById(@Param("id") int id, @Param("state") int state);
 }

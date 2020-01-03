@@ -6,7 +6,7 @@
     <select id="getUserByPage" resultType="User">
         SELECT U.Id id, U.Name name,U.DepartmentId departmentId,D.DepartName departmentName, U.LoginName loginName, U.LoginPwd loginPwd, U.State state, U.PROVINCE province, U.CITY city, U.COUNTY county
         FROM(SELECT *, ROW_NUMBER() OVER( ORDER BY Id ASC) AS RowNumber FROM  [User] WHERE 1=1) AS U LEFT JOIN Department D ON U.DepartmentId = D.DepartID
-        WHERE U.RowNumber > (#{pageSize} *(#{pageIndex}-1)) AND (#{pageSize} * #{pageIndex}) >= U.RowNumber AND U.Name != '超级管理员'
+        WHERE U.RowNumber >= (#{pageSize} *(#{pageIndex}-1)) AND (#{pageSize} * #{pageIndex}) >= U.RowNumber AND U.Name != '超级管理员'
     </select>
 
     <select id="getUserTotalCount" resultType="int">
@@ -33,7 +33,7 @@
     </update>
 
     <update id="updateNameAndDepartmentIdById">
-        UPDATE [User] SET DepartmentId = #{departmentId} AND Name=#{name} WHERE Id = #{userId}
+        UPDATE [User] SET DepartmentId = #{departmentId} , Name=#{name} WHERE Id = #{userId}
     </update>
 
     <select id="findUserByLoginName" resultType="User">
@@ -55,7 +55,7 @@
     </insert>
 
     <select id="findByDepartNameAndName" resultType="User">
-        SELECT * FROM [User] WHERE DepartmentId LIKE '%${departmentId}%' and Name like '%${name}%'
+        SELECT * FROM [User] WHERE DepartmentId LIKE '%${departmentId}%' and Name like '%${name}%' and Name != '超级管理员'
     </select>
 
     <update id="updateStateById">

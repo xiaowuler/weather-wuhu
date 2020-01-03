@@ -1,11 +1,11 @@
 package com.pingchuan.weather.controller;
 
-import com.pingchuan.weather.entity.Department;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.pingchuan.weather.entity.User;
 import com.pingchuan.weather.entity.PageResult;
 import com.pingchuan.weather.service.UserService;
 
-import com.pingchuan.weather.service.impl.DepartmentServiceImpl;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +26,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private DepartmentServiceImpl departmentService;
-
     @RequestMapping("/getUserByPage")
-    public PageResult<User> getUserByPage(int page, int rows) {
-        return userService.getUserByPage(page, rows);
+    public  PageInfo<User> getUserByPage(int page, int rows,Integer departId,String name) {
+        PageHelper.startPage(page,rows);
+        List<User> list=userService.findByDepartNameAndName(departId,name);
+        PageInfo<User> pageInfo = new PageInfo<User>(list);
+        return pageInfo;
     }
 
     @RequestMapping("updatePasswordById")
@@ -103,14 +103,8 @@ public class UserController {
     }
 
     @PostMapping("/findByDepartNameAndName")
-    public List<User> findByDepartNameAndName(int departId,String name){
-
+    public List<User> findByDepartNameAndName(Integer departId,String name){
         return userService.findByDepartNameAndName(departId,name);
     }
 
-
-    @PostMapping("/updateStateById")
-    public void updateStateById(int id,int state){
-        userService.updateStateById(id,state);
-    }
 }
