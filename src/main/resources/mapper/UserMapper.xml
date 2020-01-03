@@ -32,8 +32,8 @@
         UPDATE [User] SET LoginPwd = #{password} WHERE Id = #{userId}
     </update>
 
-    <update id="updateDepartmentIdById">
-        UPDATE [User] SET DepartmentId = #{departmentId} WHERE Id = #{userId}
+    <update id="updateNameAndDepartmentIdById">
+        UPDATE [User] SET DepartmentId = #{departmentId} AND Name=#{name} WHERE Id = #{userId}
     </update>
 
     <select id="findUserByLoginName" resultType="User">
@@ -57,4 +57,8 @@
     <select id="findByDepartNameAndName" resultType="User">
         SELECT * FROM [User] WHERE DepartmentId LIKE '%${departmentId}%' and Name like '%${name}%'
     </select>
+
+    <update id="updateStateById">
+        UPDATE [User] SET State =#{state} WHERE id=#{id}
+    </update>
 </mapper>

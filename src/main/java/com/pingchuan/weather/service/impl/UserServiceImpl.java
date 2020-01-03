@@ -48,8 +48,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void updateDepartmentIdById(int userId, int departmentId) {
-        userMapper.updateDepartmentIdById(userId, departmentId);
+    public void updateNameAndDepartmentIdById(int userId, int departmentId ,String name) {
+        userMapper.updateNameAndDepartmentIdById(userId, departmentId,name);
     }
 
     @Override
@@ -92,6 +92,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void updateStateById(int id, int state) {
-
+        userMapper.updateStateById(id,state);
     }
 }

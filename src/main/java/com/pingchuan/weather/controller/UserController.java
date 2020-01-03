@@ -44,14 +44,9 @@ public class UserController {
         return userService.findOneById(userId);
     }
 
-    @RequestMapping("/updateDepartmentIdById")
-    public void updateDepartmentIdById(int userId, String departmentName) {
-        List<Department> departments=departmentService.findDepartIdByName(departmentName);
-        Integer departmentId=null;
-        for (Department department : departments) {
-            departmentId = department.getDepartId();
-        }
-        userService.updateDepartmentIdById(userId, departmentId);
+    @RequestMapping("/updateNameAndDepartmentIdById")
+    public void updateNameAndDepartmentIdById(int userId, int departmentId,String name) {
+        userService.updateNameAndDepartmentIdById(userId, departmentId,name);
     }
 
     @RequestMapping("/getError")
@@ -98,12 +93,9 @@ public class UserController {
     }
 
     @PostMapping("/insertOne")
-    public void insertOne(String loginName,String loginPwd,String name,String departName){
+    public void insertOne(String loginName,String loginPwd,String name,int departId){
         User user=new User();
-        List<Department> departments=departmentService.findDepartIdByName(departName);
-        for (Department department : departments) {
-           user.setDepartmentId(department.getDepartId());
-        }
+        user.setDepartmentId(departId);
         user.setLoginName(loginName);
         user.setLoginPwd(loginPwd);
         user.setName(name);
@@ -111,13 +103,9 @@ public class UserController {
     }
 
     @PostMapping("/findByDepartNameAndName")
-    public List<User> findByDepartNameAndName(String departName,String name){
-        List<Department> departments=departmentService.findDepartIdByName(departName);
-        Integer departmentId=null;
-        for (Department department : departments) {
-            departmentId=department.getDepartId();
-        }
-        return userService.findByDepartNameAndName(departmentId,name);
+    public List<User> findByDepartNameAndName(int departId,String name){
+
+        return userService.findByDepartNameAndName(departId,name);
     }
 
 

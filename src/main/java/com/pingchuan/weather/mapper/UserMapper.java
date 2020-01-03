@@ -17,7 +17,7 @@ public interface UserMapper {
 
     void updatePasswordById(@Param("userId") int userId, @Param("password") String password);
 
-    void updateDepartmentIdById(@Param("userId") int userId, @Param("departmentId") int departmentId);
+    void updateNameAndDepartmentIdById(@Param("userId") int userId, @Param("departmentId") int departmentId,@Param("name") String name);
 
     User findUserByLoginName(@Param("username") String username);
 
@@ -28,4 +28,6 @@ public interface UserMapper {
     void insertOne(@Param("user") User user);
 
     List<User> findByDepartNameAndName(@Param("departmentId")int departmentId,@Param("name") String name);
+
+    void updateStateById(@Param("id") int id, @Param("state") int state);
 }
