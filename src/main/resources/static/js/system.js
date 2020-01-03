@@ -5,10 +5,12 @@ var App = function () {
     this.Startup = function () {
         this.SetFooter();
         this.InitDepartmentCombobox('#department');
+        this.InitDepartmentCombobox('#add-department');
         this.InitDepartmentCombobox('#edit-department');
         this.InitUsernameCombobox();
         this.GetCurrentLoginName();
         this.InitUserInformationGrid();
+        this.ReloadTable();
         $('.operate-add').on('click', this.ShowAddDialog.bind(this));
         $('.operate-edit').on('click', this.ShowEditDialog.bind(this));
         $('.operate-delete').on('click', this.ShowDeleteDialog.bind(this));
@@ -19,8 +21,6 @@ var App = function () {
         $('#edit-sure').on('click', this.OnEditSureButtonClick.bind(this));
         $('#delete-sure').on('click', this.OnDeleteSureButtonClick.bind(this));
         $('#reset-sure').on('click', this.OnResetSureButtonClick.bind(this));
-        //$('#add-sure').on('click', this.OnConfirmButtonClick.bind(this));
-        //$('.sign-content .remove').on('click', this.RemoveInputPassword.bind(this));
         window.onresize = this.SetFooter.bind(this);
     };
 
@@ -84,10 +84,15 @@ var App = function () {
         });
     };
 
-    this.InitUserInformationGrid = function () {
+    this.ReloadTable = function () {
         this.UserTable.datagrid({
             method: "POST",
-            url: 'User/getUserByPage',
+            url: 'User/getUserByPage'
+        });
+    };
+
+    this.InitUserInformationGrid = function () {
+        this.UserTable.datagrid({
             striped: true,
             singleSelect: true,
             fitColumns: true,
@@ -97,16 +102,17 @@ var App = function () {
             pageNumber: 1,
             pageSize: 10,
             pageList: [10, 20, 30],
-            loadMsg: '正在加载数据，请稍后...',
+            loadMsg: 0,
             columns: [[
                 { field: 'loginName', title: '登录名', width: 240, align: 'center'},
                 { field: 'name', title: '姓名', width: 240, align: 'center'},
-                { field: 'departmentName', title: '单位', width: 240, align: 'center', formatter: this.SetDepartment.bind(this),},
+                { field: 'departmentName', title: '单位', width: 240, align: 'center'},
                 { field: 'state', title: '审核结果', width: 240, align: 'center', formatter: this.ResetState.bind(this)}
             ]],
             onBeforeLoad: this.OnUserTableGridBeforeLoad.bind(this),
             onClickRow: this.OnClickRow.bind(this),
-            onLoadSuccess: function () {
+            onLoadSuccess: function (data) {
+                console.log(data);
                 this.UserTable.datagrid('selectRow', 0);
             }.bind(this)
         });
@@ -150,56 +156,19 @@ var App = function () {
 
     this.ResetState = function (value, row, index) {
         if (value === 1)
-            return '<span class="success">通过</span>';
+            return '<img src="../images/success.png" style="margin-top:3px;">';
         else
-            return '<span class="fail">未通过</span>';
-    };
-
-    window.ResetUserPasswordDialog = function(index) {
-        $('#system-table').datagrid('selectRow',index);
-        var row = $('#system-table').datagrid('getSelected');
-        if (row){
-            $('.message').show();
-            $('.bg').show();
-
-            var selected = $('#system-table').datagrid('getSelected');
-            $('#password').attr("value",selected.loginPwd);
-            $('#confirm-password').attr("value",selected.loginPwd);
-        }
-    };
-
-    this.OnConfirmButtonClick = function () {
-        var selected = this.UserTable.datagrid('getSelected');
-        var password = $("#password").val();
-        var confirmPassword = $("#confirm-password").val();
-        if (password !== confirmPassword){
-            alert("两次输入的密码必须一致")
-            return;
-        }
-
-        this.HideDialog();
-        $(".dialog-reset").show();
-        setTimeout(function(){
-            $(".dialog-reset").hide();
-        },1500);
-
-        $.ajax({
-            type: "POST",
-            dataType: 'json',
-            data: {
-                userId: selected.id,
-                password: $('#password').val()
-            },
-            url: 'User/updatePasswordById',
-            success: function (result) {
-                this.ReloadUserInformationData();
-            }.bind(this)
-        });
+            return '<img src="../images/fail.png" style="margin-top:3px;">';
     };
 
     this.ShowAddDialog = function () {
         $('.add-dialog').show();
         $(".bg").show();
+
+        $('#login-account').val('');
+        $('#password').val('');
+        $('#add-name').val('');
+        $('#add-department').combobox("setValue", '全部');
     };
 
     this.ShowEditDialog = function () {
@@ -214,6 +183,9 @@ var App = function () {
     this.ShowDeleteDialog = function () {
         $('.delete-dialog').show();
         $(".bg").show();
+
+        var selected = $('#system-table').datagrid('getSelected');
+        $('#name').text(selected.name);
     };
 
     this.ShowResetDialog = function () {
@@ -226,59 +198,101 @@ var App = function () {
         $(".bg").hide();
     };
 
+    this.ShowPromptMessage = function () {
+        $(".message").text('操作成功~').fadeIn();
+        setTimeout(function(){
+            $(".message").fadeOut();
+        },1500);
+    };
+
     this.OnAddSureButtonClick = function (event) {
         $(event.target).parent().parent().hide();
         $(".bg").hide();
+
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            data: this.GetAddParams(),
+            url: 'User/insertOne',
+            success: function () {
+                this.ReloadTable();
+                this.ShowPromptMessage();
+            }.bind(this)
+        });
     };
 
     this.OnEditSureButtonClick = function (event) {
         $(event.target).parent().parent().hide();
         $(".bg").hide();
+
+        var row = this.UserTable.datagrid('getSelected');
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            data: {
+                userId: row.id,
+                departmentName: $('#edit-department').combobox('getText')
+            },
+            url: 'User/updateDepartmentIdById',
+            success: function () {
+                this.ReloadTable();
+                this.ShowPromptMessage();
+            }.bind(this)
+        });
     };
 
     this.OnDeleteSureButtonClick = function (event) {
         $(event.target).parent().parent().hide();
         $(".bg").hide();
+
+        var row = this.UserTable.datagrid('getSelected');
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            data: {
+                userId: row.id
+            },
+            url: 'User/deleteOneById',
+            success: function () {
+                this.ReloadTable();
+                this.ShowPromptMessage();
+            }.bind(this)
+        });
     };
 
     this.OnResetSureButtonClick = function (event) {
+        var selected = this.UserTable.datagrid('getSelected');
+        var password = $("#password-one").val();
+        var confirmPassword = $("#password-two").val();
+        if (password !== confirmPassword){
+            alert("两次输入的密码必须一致");
+            return;
+        }
+
         $(event.target).parent().parent().hide();
         $(".bg").hide();
+
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            data: {
+                userId: selected.id,
+                password: $('#password-two').val()
+            },
+            url: 'User/updatePasswordById',
+            success: function () {
+                this.ReloadTable();
+                this.ShowPromptMessage();
+            }.bind(this)
+        });
     };
 
-    this.SetDepartment = function (val,row) {
-        return row.departmentName;
-    };
-
-    window.SaveDialog = function (index) {
-        $('#system-table').datagrid('selectRow',index);
-        var row = $('#system-table').datagrid('getSelected');
-
-        var edit = $('#system-table').datagrid('getEditor', {index:index,field:'departmentName'});
-        var value = $(edit.target).combobox('getText');
-        console.log(value);
-
-        if (row){
-            $(".dialog-save").show();
-            setTimeout(function(){
-                $(".dialog-save").hide();
-            },2000);
-
-            var selected = $('#system-table').datagrid('getSelected');
-
-            alert(selected.id + "======" + selected.departmentName);
-
-            $.ajax({
-                type: "POST",
-                dataType: 'json',
-                data: {
-                    userId: selected.id,
-                    departmentId: selected.departId
-                },
-                url: 'User/updateDepartmentIdById',
-                success: function (result) {
-                }.bind(this)
-            });
+    this.GetAddParams = function () {
+        return{
+            loginName: $('#login-account').val(),
+            loginPwd: $('#password').val(),
+            name: $('#add-name').val(),
+            departName: $('#add-department').combobox('getText')
         }
     };
 };
