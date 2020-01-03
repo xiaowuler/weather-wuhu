@@ -1,5 +1,7 @@
 package com.pingchuan.weather.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.pingchuan.weather.entity.Department;
 import com.pingchuan.weather.entity.User;
 import com.pingchuan.weather.entity.PageResult;
@@ -30,12 +32,16 @@ public class UserController {
     private DepartmentServiceImpl departmentService;
 
     @RequestMapping("/getUserByPage")
-    public PageResult<User> getUserByPage(int page, int rows) {
-        return userService.getUserByPage(page, rows);
+    public PageInfo<User> getUserByPage(int page, int rows,Integer departId,String name) {
+        PageHelper.startPage(page,rows);
+        List<User> list=userService.findByDepartNameAndName(departId,name);
+        PageInfo<User> pageInfo = new PageInfo<User>(list);
+        return pageInfo;
     }
 
     @RequestMapping("updatePasswordById")
     public void updatePasswordById(int userId, String password) {
+
         userService.updatePasswordById(userId, password);
     }
 
@@ -101,13 +107,6 @@ public class UserController {
         user.setName(name);
         userService.insertOne(user);
     }
-
-    @PostMapping("/findByDepartNameAndName")
-    public List<User> findByDepartNameAndName(int departId,String name){
-
-        return userService.findByDepartNameAndName(departId,name);
-    }
-
 
     @PostMapping("/updateStateById")
     public void updateStateById(int id,int state){
