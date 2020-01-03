@@ -28,21 +28,21 @@ public class DepartmentController {
        for(Department province:departmentService.findAllProvince()){
            DepartmentGradeDTO depart=new DepartmentGradeDTO();
            depart.setId(province.getDepartId());
-           depart.setName(province.getDepartName());
+           depart.setText(province.getDepartName());
            List<DepartmentGradeDTO> cities=new ArrayList<>();
            for (Department city:departmentService.findAllCity()){
                DepartmentGradeDTO cityDto=new DepartmentGradeDTO();
-               cityDto.setName(city.getDepartName());
+               cityDto.setText(city.getDepartName());
                cityDto.setId(city.getDepartId());
                cities.add(cityDto);
-               depart.setChilds(cities);
+               depart.setChildren(cities);
                List<DepartmentGradeDTO> counties=new ArrayList<>();
                for (Department county:departmentService.findAllCounty(city.getDepartId())) {
                    DepartmentGradeDTO countyDto=new DepartmentGradeDTO();
                    countyDto.setId(county.getDepartId());
-                   countyDto.setName(county.getDepartName());
+                   countyDto.setText(county.getDepartName());
                    counties.add(countyDto);
-                   cityDto.setChilds(counties);
+                   cityDto.setChildren(counties);
                }
            }
            list.add(depart);

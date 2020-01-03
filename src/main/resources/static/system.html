@@ -39,15 +39,15 @@
                     <a href="javascript:;" class="operate operate-delete">删除...</a>
                 </div>
                 <div class="audit-state fl">
-                    <a href="javascript:;" class="operate pass">审核通过</a>
-                    <a href="javascript:;" class="operate no-pass">审核不通过</a>
+                    <a href="javascript:;" class="operate pass" state="pass">审核通过</a>
+                    <a href="javascript:;" class="operate no-pass" state="no-pass">审核不通过</a>
                 </div>
                 <a href="javascript:;" class="operate operate-reset fl">重置密码...</a>
                 <div class="fr">
                     <div class="choose fl">
                         <span class="subtitle fl">单位</span>
                         <div class="choose-content fl">
-                            <select class="easyui-combobox" id="department"></select>
+                            <select class="easyui-combotree" id="department"></select>
                         </div>
                     </div>
                     <div class="choose fl">
@@ -71,7 +71,8 @@
         <div class="clearfix">
             <div class="sign-content fl">
                 <label>登录账号</label>
-                <input type="text" id="login-account" placeholder="请输入登录名">
+                <input type="text" id="login-account" placeholder="请输入登录账号">
+                <i id="error-msg">登录账号重复</i>
             </div>
             <div class="sign-content fr">
                 <label>登录密码</label>
@@ -85,7 +86,7 @@
             </div>
             <div class="sign-content choose fr">
                 <label>单位</label>
-                <select class="easyui-combobox" id="add-department"></select>
+                <select class="easyui-combotree" id="add-department"></select>
             </div>
         </div>
         <div class="btn-group">
@@ -105,7 +106,7 @@
             </div>
             <div class="sign-content choose fr">
                 <label>单位</label>
-                <select class="easyui-combobox" id="edit-department"></select>
+                <select class="easyui-combotree" id="edit-department"></select>
             </div>
         </div>
         <div class="btn-group">

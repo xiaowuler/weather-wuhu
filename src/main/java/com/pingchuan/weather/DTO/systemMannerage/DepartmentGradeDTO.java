@@ -9,7 +9,7 @@ public class DepartmentGradeDTO {
 
     private Integer id;
 
-    private String name;
+    private String text;
 
-    private List<DepartmentGradeDTO> childs;
+    private List<DepartmentGradeDTO> children;
 }
