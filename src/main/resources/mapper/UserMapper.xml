@@ -33,7 +33,7 @@
     </update>
 
     <update id="updateNameAndDepartmentIdById">
-        UPDATE [User] SET DepartmentId = #{departmentId} AND Name=#{name} WHERE Id = #{userId}
+        UPDATE [User] SET DepartmentId = #{departmentId} , Name=#{name} WHERE Id = #{userId}
     </update>
 
     <select id="findUserByLoginName" resultType="User">

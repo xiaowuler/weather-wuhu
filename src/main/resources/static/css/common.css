@@ -155,7 +155,8 @@ drop-down .textbox{
     color: #666666;
     padding: 6px 0 6px 10px;
 }
-.combobox-item-selected{
+.combobox-item-selected,
+.tree-node-selected{
     color: #666666;
     background: #e9f5ff;
 }
@@ -290,4 +291,24 @@ drop-down .textbox{
 .foot-post{
     position: fixed;
     bottom: 0;
+}
+
+.tree-expanded {
+    background: url('../images/tree_icons.png') no-repeat -18px 0;
+}
+
+.tree-folder {
+    background: url('../images/tree_icons.png') no-repeat -208px 0;
+}
+
+.tree-folder-open {
+    background: url('../images/tree_icons.png') no-repeat -224px 0;
+}
+
+.tree-file {
+    background: url('../images/tree_icons.png') no-repeat -240px 0;
+}
+
+.tree-collapsed {
+    background: url('../images/tree_icons.png') no-repeat 0px 0px;
 }

@@ -6,6 +6,11 @@
     margin: 15px 0;
 }
 
+.navigation .choose-content,
+.choose .textbox{
+    width: 138px!important;
+}
+
 .operate{
     float: left;
     padding: 0 7px 0 26px;
@@ -332,6 +337,17 @@
 
 .query-name{
     margin-left: 10px;
+}
+.sign-content{
+    position: relative;
+}
+.sign-content i{
+    position: absolute;
+    left: 65px;
+    top: 8px;
+    color: #ff0000;
+    font-size: 12px;
+    display: none;
 }
 .sign-content input,
 .query-name{

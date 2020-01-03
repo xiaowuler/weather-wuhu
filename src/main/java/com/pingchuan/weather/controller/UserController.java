@@ -103,7 +103,7 @@ public class UserController {
     }
 
     @PostMapping("/findByDepartNameAndName")
-    public List<User> findByDepartNameAndName(int departId,String name){
+    public List<User> findByDepartNameAndName(Integer departId,String name){
 
         return userService.findByDepartNameAndName(departId,name);
     }
