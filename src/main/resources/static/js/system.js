@@ -21,6 +21,7 @@ var App = function () {
         $('#edit-sure').on('click', this.OnEditSureButtonClick.bind(this));
         $('#delete-sure').on('click', this.OnDeleteSureButtonClick.bind(this));
         $('#reset-sure').on('click', this.OnResetSureButtonClick.bind(this));
+        $('#query-btn').on('click', this.OnQueryButtonClick.bind(this));
         window.onresize = this.SetFooter.bind(this);
     };
 
@@ -32,25 +33,57 @@ var App = function () {
             $('.foot').removeClass('foot-post');
     };
 
+    this.OnQueryButtonClick = function () {
+        this.Reload();
+    };
+
+    this.Reload = function () {
+        $.ajax({
+            type: "post",
+            dataType: 'json',
+            data:{
+                departName:'合肥',
+                name: $('#query-name').val()
+            },
+            url: '/User/findByDepartNameAndName',
+            success: function (data) {
+                console.log(data);
+            }.bind(this)
+        });
+    };
+
     this.InitDepartmentCombobox = function (id) {
+        // $(id).combotree({
+        //     url: '/Department/getAllDepartment',
+        //     method: 'post',
+        //     labelPosition: 'top',
+        //     onBeforeSelect: function (node) {
+        //         // 只能选中叶子节点
+        //         if (!$(this).tree('isLeaf', node.target)) {
+        //             return false;
+        //         }
+        //     },
+        //     onSelect: function () {
+        //         alert('selcet!')
+        //     },
+        //     onClick: function () {
+        //         alert('click');
+        //     },
+        //     onLoadSuccess: function (data) {
+        //         console.log(data)
+        //     }
+        // });
         $.ajax({
             type: "POST",
             dataType: 'json',
             async: false,
             url: '/Department/getAllDepartment',
             success: function (data) {
-                var newData = [];
-                newData.push({ "departId": 0, "departName": "全部" });
-
-                for (var i = 0; i < data.length; i++) {
-                    newData.push({ "departId": data[i].departId, "departName": data[i].departName });
-                }
-
-                $(id).combobox({
+                $(id).combotree({
                     panelHeight: 300,
                     valueField: 'departId',
                     textField: 'departName',
-                    data: newData,
+                    data: data,
                     editable: false,
                     onLoadSuccess: function (result) {
                         var item = $(id).combobox('getData');
@@ -104,7 +137,7 @@ var App = function () {
             pageList: [10, 20, 30],
             loadMsg: 0,
             columns: [[
-                { field: 'loginName', title: '登录名', width: 240, align: 'center'},
+                { field: 'loginName', title: '登录账号', width: 240, align: 'center'},
                 { field: 'name', title: '姓名', width: 240, align: 'center'},
                 { field: 'departmentName', title: '单位', width: 240, align: 'center'},
                 { field: 'state', title: '审核结果', width: 240, align: 'center', formatter: this.ResetState.bind(this)}
@@ -175,7 +208,6 @@ var App = function () {
         $('.edit-dialog').show();
         $(".bg").show();
         var selected = $('#system-table').datagrid('getSelected');
-        console.log(selected);
         $('#edit-name').val(selected.name);
         $('#edit-department').combobox("setValue", selected.departmentName);
     };
@@ -206,13 +238,32 @@ var App = function () {
     };
 
     this.OnAddSureButtonClick = function (event) {
+        var params = this.GetAddParams();
+        if (params.loginName.trim().length === 0){
+            $('#login-account').css({ 'borderColor': '#ff2828' });
+            return;
+        }  else
+            $('#login-account').css({ 'borderColor': '#e0e0e0' });
+
+        if (params.loginPwd.trim().length === 0) {
+            $('#password').css({ 'borderColor': '#ff2828' });
+            return;
+        } else
+            $('#password').css({ 'borderColor': '#e0e0e0' });
+
+        if (params.name.trim().length === 0) {
+            $('#add-name').css({ 'borderColor': '#ff2828' });
+            return;
+        } else
+            $('#add-name').css({ 'borderColor': '#e0e0e0' });
+
         $(event.target).parent().parent().hide();
         $(".bg").hide();
 
         $.ajax({
             type: "POST",
             dataType: 'json',
-            data: this.GetAddParams(),
+            data: params,
             url: 'User/insertOne',
             success: function () {
                 this.ReloadTable();
@@ -222,6 +273,12 @@ var App = function () {
     };
 
     this.OnEditSureButtonClick = function (event) {
+        if ($('#edit-name').val().trim().length === 0){
+            $('#edit-name').css({ 'borderColor': '#ff2828' });
+            return;
+        } else
+            $('#edit-name').css({ 'borderColor': '#e0e0e0' });
+
         $(event.target).parent().parent().hide();
         $(".bg").hide();
 
