@@ -24,4 +24,6 @@ public interface UserService {
     void insertOne(User user);
 
     List<User> findByDepartNameAndName(Integer departmentId, String name);
+
+    void updateStateById(int id, int state);
 }

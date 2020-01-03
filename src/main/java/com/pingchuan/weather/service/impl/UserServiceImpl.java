@@ -89,4 +89,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public List<User> findByDepartNameAndName(Integer departmentId, String name) {
         return userMapper.findByDepartNameAndName(departmentId,name);
     }
+
+    @Override
+    public void updateStateById(int id, int state) {
+
+    }
 }

@@ -119,4 +119,10 @@ public class UserController {
         }
         return userService.findByDepartNameAndName(departmentId,name);
     }
+
+
+    @PostMapping("/updateStateById")
+    public void updateStateById(int id,int state){
+        userService.updateStateById(id,state);
+    }
 }

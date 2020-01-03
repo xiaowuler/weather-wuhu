@@ -39,6 +39,8 @@ var App = function () {
             async: false,
             url: '/Department/getAllDepartment',
             success: function (data) {
+                console.log(data);
+
                 var newData = [];
                 newData.push({ "departId": 0, "departName": "全部" });
 
