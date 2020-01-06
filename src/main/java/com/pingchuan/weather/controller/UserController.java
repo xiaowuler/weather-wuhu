@@ -44,7 +44,7 @@ public class UserController {
     public String updatePasswordById(int userId, String password) {
         userService.updatePasswordById(userId, password);
         User user=userService.findOneById(userId);
-        if(user.getLoginPwd()==password){
+        if(user.getLoginPwd().equals(password)){
             return "操作成功";
         }else {
             return "操作失败";
@@ -60,7 +60,7 @@ public class UserController {
     public String updateNameAndDepartmentIdById(int userId, int departmentId,String name) {
         userService.updateNameAndDepartmentIdById(userId, departmentId,name);
         User user=userService.findUserById(userId);
-        if(user.getDepartmentId()!=departmentId || !user.getLoginName().equals(name)){
+        if(user.getDepartmentId()==departmentId && user.getName().equals(name)){
             return "编辑成功";
         }else {
             return "编辑失败";

@@ -137,7 +137,6 @@ var App = function () {
             onBeforeLoad: this.OnUserTableGridBeforeLoad.bind(this),
             onClickRow: this.OnClickRow.bind(this),
             onLoadSuccess: function (data) {
-                console.log(data)
                 this.UserTable.datagrid('selectRow', 0);
             }.bind(this)
         });
@@ -192,19 +191,18 @@ var App = function () {
 
         var selected = this.UserTable.datagrid('getSelected');
         var state = $('.audit-state a.action').attr('state');
-
         $.ajax({
             type: 'post',
+            dataType: 'text',
             url: '/User/updateStateById',
             data: {
                 id: selected.id,
                 state: state === 'pass' ? 1 : 0
             },
             async: false,
-            dataType: 'json',
             success: function (data) {
-                console.log(data)
                 this.ReloadTable();
+                this.ShowPromptMessage(data);
             }.bind(this)
         });
     };
@@ -280,6 +278,7 @@ var App = function () {
                 console.log(this.IsExistUsername(params.loginName));
                 $('#error-msg').show();
                 $('#login-account').css({ 'borderColor': '#ff2828' });
+                return;
             } else {
                 $('#error-msg').hide();
                 $('#login-account').css({ 'borderColor': '#e0e0e0' });
@@ -379,6 +378,7 @@ var App = function () {
             },
             url: 'User/updatePasswordById',
             success: function (data) {
+                console.log(data);
                 this.ReloadTable();
                 this.ShowPromptMessage(data);
             }.bind(this)
