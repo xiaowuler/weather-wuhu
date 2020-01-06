@@ -32,11 +32,25 @@ public class UserController {
     private DepartmentServiceImpl departmentService;
 
     @RequestMapping("/getUserByPage")
-    public PageInfo<User> getUserByPage(int page, int rows,Integer departId,String name) {
+//    public PageInfo<User> getUserByPage(int page, int rows,Integer departId,String name) {
+//        PageHelper.startPage(page,rows);
+//        if(departId==-1) {
+//            departId = null;
+//        }
+//        List<User> list=userService.findByDepartNameAndName(departId,name);
+//        PageInfo<User> pageInfo = new PageInfo<User>(list);
+//        return pageInfo;
+//    }
+    public  PageResult<User> getUserByPage(int page, int rows,Integer departId,String name) {
         PageHelper.startPage(page,rows);
-        List<User> list=userService.findByDepartNameAndName(departId,name);
-        PageInfo<User> pageInfo = new PageInfo<User>(list);
-        return pageInfo;
+        if(departId==-1) {
+            departId = null;
+        }
+        PageInfo<User> pageInfo = new PageInfo<User>(userService.findByDepartNameAndName(departId,name));
+        PageResult<User> pageResult = new PageResult<>();
+        pageResult.setRows(pageInfo.getList());
+        pageResult.setTotal(pageInfo.getTotal());
+        return pageResult;
     }
 
     @RequestMapping("updatePasswordById")

@@ -25,6 +25,10 @@ public class DepartmentController {
     @PostMapping("/getAllDepartment")
     public List<DepartmentGradeDTO> getAllDepartment(){
        List<DepartmentGradeDTO> list=new ArrayList<>();
+        DepartmentGradeDTO departs=new DepartmentGradeDTO();
+        departs.setId(-1);
+        departs.setText("全部");
+        list.add(departs);
        for(Department province:departmentService.findAllProvince()){
            DepartmentGradeDTO depart=new DepartmentGradeDTO();
            depart.setId(province.getDepartId());
@@ -47,6 +51,7 @@ public class DepartmentController {
            }
            list.add(depart);
        }
+
        return list;
     }
     @PostMapping("/findAllByParentDepartId")

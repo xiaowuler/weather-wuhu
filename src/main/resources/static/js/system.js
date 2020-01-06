@@ -23,6 +23,7 @@ var App = function () {
         $('#delete-sure').on('click', this.OnDeleteSureButtonClick.bind(this));
         $('#reset-sure').on('click', this.OnResetSureButtonClick.bind(this));
         $('#query-btn').on('click', this.OnQueryButtonClick.bind(this));
+        $('#query-btn').trigger('click');
         window.onresize = this.SetFooter.bind(this);
     };
 
@@ -39,17 +40,23 @@ var App = function () {
     };
 
     this.Reload = function () {
+        var name = $('#query-name').val();
+        var departId = parseInt($("#department").combotree("getValue"));
         $.ajax({
             type: "post",
             dataType: 'json',
             data:{
-                departId: parseInt($("#department").combotree("getValue")),
-                name: $('#query-name').val()
+                departId: departId,
+                name: name,
+                page: 1,
+                rows: 10
             },
-            url: '/User/findByDepartNameAndName',
+            url: '/User/getUserByPage',
             success: function (data) {
                 console.log(data);
                 this.ReloadTable();
+                //this.ReloadTable(departId, name);
+                //this.UserTable.datagrid('loadData',data.list);
             }.bind(this)
         });
     };
@@ -101,7 +108,11 @@ var App = function () {
     this.ReloadTable = function () {
         this.UserTable.datagrid({
             method: "POST",
-            url: 'User/getUserByPage'
+            url: 'User/getUserByPage',
+            queryParams: {
+                departId: parseInt($("#department").combotree("getValue")),
+                name: $('#query-name').val()
+            }
         });
     };
 
@@ -126,6 +137,7 @@ var App = function () {
             onBeforeLoad: this.OnUserTableGridBeforeLoad.bind(this),
             onClickRow: this.OnClickRow.bind(this),
             onLoadSuccess: function (data) {
+                console.log(data)
                 this.UserTable.datagrid('selectRow', 0);
             }.bind(this)
         });
