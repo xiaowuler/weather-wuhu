@@ -116,6 +116,17 @@ var App = function () {
         });
     };
 
+    this.ReloadTable1 = function () {
+        this.UserTable.datagrid({
+            method: "POST",
+            url: 'User/getUserByPage',
+            queryParams: {
+                departId: -1,
+                name: null
+            }
+        });
+    };
+
     this.InitUserInformationGrid = function () {
         this.UserTable.datagrid({
             striped: true,
@@ -202,7 +213,7 @@ var App = function () {
             },
             async: false,
             success: function (data) {
-                this.ReloadTable();
+                this.ReloadTable1();
                 this.ShowPromptMessage(data);
             }.bind(this)
         });
@@ -306,7 +317,7 @@ var App = function () {
             data: params,
             url: '/User/insertOne',
             success: function (data) {
-                this.ReloadTable();
+                this.ReloadTable1();
                 this.ShowPromptMessage(data);
             }.bind(this)
         });
@@ -333,7 +344,7 @@ var App = function () {
             },
             url: '/User/updateNameAndDepartmentIdById',
             success: function (data) {
-                this.ReloadTable();
+                this.ReloadTable1();
                 this.ShowPromptMessage(data);
             }.bind(this)
         });
@@ -352,7 +363,7 @@ var App = function () {
             },
             url: 'User/deleteOneById',
             success: function (data) {
-                this.ReloadTable();
+                this.ReloadTable1();
                 this.ShowPromptMessage(data);
             }.bind(this)
         });
@@ -380,7 +391,7 @@ var App = function () {
             url: 'User/updatePasswordById',
             success: function (data) {
                 console.log(data);
-                this.ReloadTable();
+                this.ReloadTable1();
                 this.ShowPromptMessage(data);
             }.bind(this)
         });
