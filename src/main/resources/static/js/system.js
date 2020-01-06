@@ -202,7 +202,8 @@ var App = function () {
             },
             async: false,
             dataType: 'json',
-            success: function () {
+            success: function (data) {
+                console.log(data)
                 this.ReloadTable();
             }.bind(this)
         });
@@ -216,13 +217,13 @@ var App = function () {
         $('#password').val('');
         $('#add-name').val('');
         $('#add-department').combotree("setValue", '58000');
+        $('.sign-content input').css({ 'borderColor': '#e0e0e0' });
     };
 
     this.ShowEditDialog = function () {
         $('.edit-dialog').show();
         $(".bg").show();
         var selected = $('#system-table').datagrid('getSelected');
-        console.log(selected);
         var status = $('#edit-department').combotree('tree').tree('getRoots');
         //$(id).combotree('setValue',status[0].id);
         $('#edit-name').val(selected.name);
@@ -247,8 +248,8 @@ var App = function () {
         $(".bg").hide();
     };
 
-    this.ShowPromptMessage = function () {
-        $(".message").text('操作成功~').fadeIn();
+    this.ShowPromptMessage = function (text) {
+        $(".message").text(text+'~').fadeIn();
         setTimeout(function(){
             $(".message").fadeOut();
         },1500);
@@ -276,6 +277,7 @@ var App = function () {
             return;
         } else{
             if (this.IsExistUsername(params.loginName) !== null){
+                console.log(this.IsExistUsername(params.loginName));
                 $('#error-msg').show();
                 $('#login-account').css({ 'borderColor': '#ff2828' });
             } else {
@@ -300,13 +302,12 @@ var App = function () {
 
         $.ajax({
             type: "POST",
-            dataType: 'json',
+            dataType: 'text',
             data: params,
             url: '/User/insertOne',
-            success: function () {
-
+            success: function (data) {
                 this.ReloadTable();
-                this.ShowPromptMessage();
+                this.ShowPromptMessage(data);
             }.bind(this)
         });
     };
@@ -324,16 +325,16 @@ var App = function () {
         var row = this.UserTable.datagrid('getSelected');
         $.ajax({
             type: "POST",
-            dataType: 'json',
+            dataType: 'text',
             data: {
                 userId: row.id,
                 departmentId: parseInt($('#edit-department').combotree('getValue')),
                 name: $('#edit-name').val()
             },
             url: '/User/updateNameAndDepartmentIdById',
-            success: function () {
+            success: function (data) {
                 this.ReloadTable();
-                this.ShowPromptMessage();
+                this.ShowPromptMessage(data);
             }.bind(this)
         });
     };
@@ -345,14 +346,14 @@ var App = function () {
         var row = this.UserTable.datagrid('getSelected');
         $.ajax({
             type: "POST",
-            dataType: 'json',
+            dataType: 'text',
             data: {
                 userId: row.id
             },
             url: 'User/deleteOneById',
-            success: function () {
+            success: function (data) {
                 this.ReloadTable();
-                this.ShowPromptMessage();
+                this.ShowPromptMessage(data);
             }.bind(this)
         });
     };
@@ -371,15 +372,15 @@ var App = function () {
 
         $.ajax({
             type: "POST",
-            dataType: 'json',
+            dataType: 'text',
             data: {
                 userId: selected.id,
                 password: $('#password-two').val()
             },
             url: 'User/updatePasswordById',
-            success: function () {
+            success: function (data) {
                 this.ReloadTable();
-                this.ShowPromptMessage();
+                this.ShowPromptMessage(data);
             }.bind(this)
         });
     };

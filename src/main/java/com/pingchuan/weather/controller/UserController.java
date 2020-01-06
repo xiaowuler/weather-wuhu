@@ -2,13 +2,13 @@ package com.pingchuan.weather.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.pingchuan.weather.entity.Department;
 import com.pingchuan.weather.entity.User;
 import com.pingchuan.weather.entity.PageResult;
 import com.pingchuan.weather.service.UserService;
 
 import com.pingchuan.weather.service.impl.DepartmentServiceImpl;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +19,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("User")
 public class UserController {
@@ -28,8 +26,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private DepartmentServiceImpl departmentService;
 
     @RequestMapping("/getUserByPage")
     public  PageResult<User> getUserByPage(int page, int rows,Integer departId,String name) {
@@ -120,6 +116,7 @@ public class UserController {
         }
     }
 
+    @ResponseBody
     @PostMapping("/insertOne")
     public String insertOne(String loginName,String loginPwd,String name,int departId){
         User user=new User();
