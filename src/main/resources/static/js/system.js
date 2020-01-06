@@ -274,7 +274,7 @@ var App = function () {
         if (params.loginName.trim().length === 0){
             $('#login-account').css({ 'borderColor': '#ff2828' });
             return;
-        }  else{
+        } else{
             if (this.IsExistUsername(params.loginName) !== null){
                 $('#error-msg').show();
                 $('#login-account').css({ 'borderColor': '#ff2828' });
@@ -304,6 +304,7 @@ var App = function () {
             data: params,
             url: '/User/insertOne',
             success: function () {
+
                 this.ReloadTable();
                 this.ShowPromptMessage();
             }.bind(this)

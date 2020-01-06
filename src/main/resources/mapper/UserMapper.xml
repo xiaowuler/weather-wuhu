@@ -55,7 +55,24 @@
     </insert>
 
     <select id="findByDepartNameAndName" resultType="User">
-        SELECT * FROM [User] WHERE DepartmentId LIKE '%${departmentId}%' and Name like '%${name}%' and Name != '超级管理员'
+    SELECT
+        U.Id id,
+        U.Name name,
+        U.DepartmentId departmentId,
+        D.DepartName departmentName,
+        U.LoginName loginName,
+        U.LoginPwd loginPwd,
+        U.State state,
+        U.PROVINCE province,
+        U.CITY city,
+        U.COUNTY county
+    FROM
+        [User] U
+        LEFT JOIN Department D ON U.DepartmentId = D.DepartID
+    WHERE
+        DepartmentId LIKE '%${departmentId}%'
+        AND Name LIKE '%${name}%'
+        AND Name != '超级管理员'
     </select>
 
     <update id="updateStateById">
