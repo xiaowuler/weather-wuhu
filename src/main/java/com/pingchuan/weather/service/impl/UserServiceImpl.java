@@ -94,4 +94,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void updateStateById(int id, int state) {
         userMapper.updateStateById(id,state);
     }
+
+    @Override
+    public User findUserById(int id) {
+        return userMapper.findUserById(id);
+    }
 }

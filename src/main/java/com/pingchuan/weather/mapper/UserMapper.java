@@ -30,4 +30,6 @@ public interface UserMapper {
     List<User> findByDepartNameAndName(@Param("departmentId")Integer departmentId,@Param("name") String name);
 
     void updateStateById(@Param("id") int id, @Param("state") int state);
+
+    User findUserById(@Param("id") int id);
 }

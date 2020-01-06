@@ -26,4 +26,6 @@ public interface UserService {
     List<User> findByDepartNameAndName(Integer departmentId, String name);
 
     void updateStateById(int id, int state);
+
+    User findUserById(int id);
 }

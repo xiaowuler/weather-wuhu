@@ -15,13 +15,7 @@
 
     <select id="findOneById" resultType="User">
         SELECT
-            Id AS id,
-            Name AS name,
-            DepartId AS departId,
-            LoginName AS loginName,
-            LoginPwd AS loginPwd,
-            State AS state,
-            DepartName AS departName
+            *
         FROM
             [User]
         WHERE
@@ -55,27 +49,31 @@
     </insert>
 
     <select id="findByDepartNameAndName" resultType="User">
-    SELECT
-        U.Id id,
-        U.Name name,
-        U.DepartmentId departmentId,
-        D.DepartName departmentName,
-        U.LoginName loginName,
-        U.LoginPwd loginPwd,
-        U.State state,
-        U.PROVINCE province,
-        U.CITY city,
-        U.COUNTY county
-    FROM
-        [User] U
-        LEFT JOIN Department D ON U.DepartmentId = D.DepartID
-    WHERE
-        DepartmentId LIKE '%${departmentId}%'
-        AND Name LIKE '%${name}%'
-        AND Name != '超级管理员'
+        SELECT
+            U.Id id,
+            U.Name name,
+            U.DepartmentId departmentId,
+            D.DepartName departmentName,
+            U.LoginName loginName,
+            U.LoginPwd loginPwd,
+            U.State state,
+            U.PROVINCE province,
+            U.CITY city,
+            U.COUNTY county
+        FROM
+            [User] U
+            LEFT JOIN Department D ON U.DepartmentId = D.DepartID
+        WHERE
+            DepartmentId LIKE '%${departmentId}%'
+            AND Name LIKE '%${name}%'
+            AND Name != '超级管理员'
     </select>
 
     <update id="updateStateById">
         UPDATE [User] SET State =#{state} WHERE id=#{id}
     </update>
+    
+    <select id="findUserById" resultType="User">
+        SELECT * FROM [User] WHERE id=#{id}
+    </select>
 </mapper>

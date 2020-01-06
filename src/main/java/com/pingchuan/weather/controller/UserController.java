@@ -32,15 +32,6 @@ public class UserController {
     private DepartmentServiceImpl departmentService;
 
     @RequestMapping("/getUserByPage")
-//    public PageInfo<User> getUserByPage(int page, int rows,Integer departId,String name) {
-//        PageHelper.startPage(page,rows);
-//        if(departId==-1) {
-//            departId = null;
-//        }
-//        List<User> list=userService.findByDepartNameAndName(departId,name);
-//        PageInfo<User> pageInfo = new PageInfo<User>(list);
-//        return pageInfo;
-//    }
     public  PageResult<User> getUserByPage(int page, int rows,Integer departId,String name) {
         PageHelper.startPage(page,rows);
         if(departId==-1) {
@@ -54,9 +45,14 @@ public class UserController {
     }
 
     @RequestMapping("updatePasswordById")
-    public void updatePasswordById(int userId, String password) {
-
+    public String updatePasswordById(int userId, String password) {
         userService.updatePasswordById(userId, password);
+        User user=userService.findOneById(userId);
+        if(user.getLoginPwd()==password){
+            return "操作成功";
+        }else {
+            return "操作失败";
+        }
     }
 
     @RequestMapping("findOneById")
@@ -65,8 +61,14 @@ public class UserController {
     }
 
     @RequestMapping("/updateNameAndDepartmentIdById")
-    public void updateNameAndDepartmentIdById(int userId, int departmentId,String name) {
+    public String updateNameAndDepartmentIdById(int userId, int departmentId,String name) {
         userService.updateNameAndDepartmentIdById(userId, departmentId,name);
+        User user=userService.findUserById(userId);
+        if(user.getDepartmentId()!=departmentId || !user.getLoginName().equals(name)){
+            return "编辑成功";
+        }else {
+            return "编辑失败";
+        }
     }
 
     @RequestMapping("/getError")
@@ -108,22 +110,40 @@ public class UserController {
 
 
     @PostMapping("/deleteOneById")
-    public void deleteOneById(int userId){
+    public String deleteOneById(int userId){
         userService.deleteOneById(userId);
+        User user=userService.findOneById(userId);
+        if(user==null){
+            return "删除成功";
+        }else {
+            return "删除失败";
+        }
     }
 
     @PostMapping("/insertOne")
-    public void insertOne(String loginName,String loginPwd,String name,int departId){
+    public String insertOne(String loginName,String loginPwd,String name,int departId){
         User user=new User();
         user.setDepartmentId(departId);
         user.setLoginName(loginName);
         user.setLoginPwd(loginPwd);
         user.setName(name);
         userService.insertOne(user);
+        User user1=userService.findUserByLoginName(name);
+        if(user1 != null){
+            return "添加成功";
+        }else {
+            return "添加失败";
+        }
     }
 
     @PostMapping("/updateStateById")
-    public void updateStateById(int id,int state){
+    public String updateStateById(int id,int state){
         userService.updateStateById(id,state);
+        User user=userService.findOneById(id);
+        if(user.getState() == state){
+            return "操作成功";
+        }else {
+            return "操作失败";
+        }
     }
 }
