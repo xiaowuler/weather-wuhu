@@ -138,6 +138,12 @@ var App = function () {
             onClickRow: this.OnClickRow.bind(this),
             onLoadSuccess: function (data) {
                 this.UserTable.datagrid('selectRow', 0);
+                var selected = this.UserTable.datagrid('getSelected');
+                if (selected.state === 1){
+                    $('.audit-state i').css({'width': 90,'left':0,'display':'block'});
+                } else {
+                    $('.audit-state i').css({'width': 105,'left':90,'display':'block'});
+                }
             }.bind(this)
         });
     };
@@ -151,16 +157,11 @@ var App = function () {
         });
     };
 
-    this.OnClickRow = function (index) {
-        var editIndex = this.EditIndex;
-        if (editIndex !== index){
-            if (this.EndEditing()){
-                this.UserTable.datagrid('selectRow', index)
-                    .datagrid('beginEdit', index);
-                editIndex = index;
-            } else {
-                this.UserTable.datagrid('selectRow', editIndex);
-            }
+    this.OnClickRow = function (index, row) {
+        if (row.state === 1){
+            $('.audit-state i').css({'width': 90,'left':0,'display':'block'});
+        } else {
+            $('.audit-state i').css({'width': 105,'left':90,'display':'block'});
         }
     };
 

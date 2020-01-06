@@ -27,7 +27,7 @@ public class DepartmentController {
        List<DepartmentGradeDTO> list=new ArrayList<>();
         DepartmentGradeDTO departs=new DepartmentGradeDTO();
         departs.setId(-1);
-        departs.setText("全部");
+        departs.setText("全部单位");
         list.add(departs);
        for(Department province:departmentService.findAllProvince()){
            DepartmentGradeDTO depart=new DepartmentGradeDTO();

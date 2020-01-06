@@ -102,8 +102,35 @@
     background: url("../images/no-pass.png") no-repeat center/cover;
 }
 
+.pass-toggle:before,
+.no-pass-toggle:before{
+    content: '';
+    width: 100%;
+    height: 28px;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    cursor: no-drop;
+    background: rgba(255,255,255,0.5);
+}
+
 .audit-state{
     margin-left: 10px;
+    position: relative;
+}
+
+.audit-state i{
+    width: 100%;
+    height: 30px;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    cursor: no-drop;
+    background: rgba(255,255,255,0.5);
 }
 
 .query-btn{
