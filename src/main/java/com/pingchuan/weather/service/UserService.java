@@ -21,7 +21,7 @@ public interface UserService {
 
     void deleteOneById(int userId);
 
-    void insertOne(User user);
+    void insertOne(String loginName,String loginPwd,String name,int departId);
 
     List<User> findByDepartNameAndName(Integer departmentId, String name);
 

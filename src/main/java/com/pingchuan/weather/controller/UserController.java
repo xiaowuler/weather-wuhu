@@ -119,14 +119,9 @@ public class UserController {
     @ResponseBody
     @PostMapping("/insertOne")
     public String insertOne(String loginName,String loginPwd,String name,int departId){
-        User user=new User();
-        user.setDepartmentId(departId);
-        user.setLoginName(loginName);
-        user.setLoginPwd(loginPwd);
-        user.setName(name);
-        userService.insertOne(user);
-        User user1=userService.findUserByLoginName(name);
-        if(user1 != null){
+        userService.insertOne(loginName,loginPwd,name,departId);
+        User user=userService.findUserByLoginName(loginName);
+        if(user != null){
             return "添加成功";
         }else {
             return "添加失败";

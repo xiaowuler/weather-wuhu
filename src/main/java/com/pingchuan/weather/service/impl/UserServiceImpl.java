@@ -81,7 +81,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void insertOne(User user) {
+    public void insertOne(String loginName,String loginPwd,String name,int departId) {
+        User user = new User();
+        user.setLoginName(loginName);
+        user.setDepartmentId(departId);
+        user.setName(name);
+        user.setLoginPwd(loginPwd);
         userMapper.insertOne(user);
     }
 
