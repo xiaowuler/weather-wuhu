@@ -181,19 +181,23 @@ var App = function () {
     };
 
     this.UserRegister = function ($username, $department, $realName, $password) {
-        console.log($department.combobox('getValue'));
+        console.log($department.combotree('getValue'));
 
         $.ajax({
             type: 'post',
             url: '/User/register',
             data: {
                 username: $username.val(),
-                departmentId: $department.combobox('getValue'),
+                departmentId: $department.combotree('getValue'),
                 name: $realName.val(),
                 password: $password.val()
             },
             success: function (result) {
-                $('#register-state').text(result).show();
+                $('#register-state').text(result + '，即将跳转到登录界面').show();
+                setTimeout(function(){
+                    $('.login').show();
+                    $('.register').hide();
+                },2000);
             }
         });
     };
