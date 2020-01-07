@@ -105,7 +105,13 @@ var App = function () {
             success: function (data) {
                 this.Department.Reload(data);
                 this.Department.ShowDepartmentTable(data);
-            }.bind(this)
+            }.bind(this),
+            beforeSend: function () {
+                $('#loading').show();
+            }.bind(this),
+            complete: function () {
+                $('#loading').remove();
+            }
         });
     };
 

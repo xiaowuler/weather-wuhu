@@ -120,9 +120,8 @@
             <h2>删除信息</h2>
             <i class="close-dialog-box"></i>
         </div>
-        <div class="prompt-txt">
-            <img src="images/prompt.png">
-            <p>确定要删除姓名为“<span id="name">张山</span>”的用户吗？</p>
+        <div class="prompt-txt" id="delete-msg">
+            确定要删除姓名为“<span id="name">张山</span>”的用户吗？
         </div>
         <div class="btn-group">
             <button class="btn-sure" id="delete-sure">确定</button>
@@ -139,6 +138,7 @@
             <input type="password" class="reset-password" id="password-two" placeholder="请再次输入新密码">
         </div>
         <div class="btn-group">
+            <i id="reset-msg">两次输入的密码必须一致</i>
             <button class="btn-sure" id="reset-sure">确定</button>
             <button class="btn-cancel">取消</button>
         </div>

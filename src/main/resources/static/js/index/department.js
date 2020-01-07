@@ -2,7 +2,6 @@ var Department = function (parent) {
     this.Parent = parent;
 
     this.Reload = function (result) {
-        console.log(result)
         this.result = result;
 
         var elementSeries = [];
@@ -88,11 +87,11 @@ var Department = function (parent) {
 
             var name = '<th>{0}</th>';
             var score = '<td>{0}</td>';
-            var sample = '<td>{0}</td>';
+            //var sample = '<td>{0}</td>';
 
             $('#city').append(name.format(item.county));
             $('#score').append(score.format(item.totalRate));
-            $('#sample').append(sample.format(item.totalSample));
+            //$('#sample').append(sample.format(item.totalSample));
 
         }.bind(this));
     };

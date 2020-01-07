@@ -26,16 +26,24 @@ var App = function () {
     };
 
     this.AddDepartmentOptions = function () {
-        $('#department').combobox({
-            url:'/Department/getAllDepartment',
-            valueField: 'departId',
-            textField: 'departName',
-            onLoadSuccess : function(){
-                var data = $('#department').combobox('getData');
-                if (data.length > 0) {
-                    $('#department').combobox('select', data[0].departId);
-                }
-            }
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            async: false,
+            url: '/Department/RegisterDepartment',
+            success: function (data) {
+                $('#department').combotree({
+                    panelHeight: 300,
+                    valueField: 'id',
+                    textField: 'text',
+                    data: data,
+                    editable: false,
+                    onLoadSuccess: function () {
+                        var status = $('#department').combotree('tree').tree('getRoots');
+                        $('#department').combotree('setValue',status[0].id);
+                    }
+                });
+            }.bind(this)
         });
     };
 

@@ -333,9 +333,9 @@
     display: none;
 }
 .dialog{
-    width: 318px;
+    width: 368px;
     height: 222px;
-    margin: -111px 0 0 -159px;
+    margin: -111px 0 0 -184px;
     padding: 12px 15px 15px 15px;
     position: fixed;
     top:50%;
@@ -378,7 +378,7 @@
 }
 .sign-content input,
 .query-name{
-    width: 138px;
+    width: 163px;
     padding: 0 15px;
     line-height: 28px;
     color: #666666;
@@ -392,7 +392,7 @@
     margin-top: 15px;
 }
 .sign-content .textbox{
-    width: 138px!important;
+    width: 163px!important;
 }
 .dialog-txt{
     padding-bottom: 10px;
@@ -402,20 +402,10 @@
 
 .prompt-txt{
     margin: 23px 0;
-    padding: 0 8px;
-    display: table;
-}
-
-.prompt-txt img,
-.prompt-txt p{
-    display: table-cell;
-    vertical-align: middle;
-}
-
-.prompt-txt p{
-    padding-left: 8px;
-    position: relative;
-    top: -3px;
+    padding-left: 40px;
+    line-height: 30px;
+    display: inline-block;
+    background: url("../images/prompt.png") no-repeat left;
 }
 
 .close-dialog-box {
@@ -432,6 +422,7 @@
 .btn-group{
     margin-top: 15px;
     text-align: right;
+    position: relative;
 }
 
 .btn-group button{
@@ -451,6 +442,18 @@
     background: -o-linear-gradient(#0186f5, #249bff);
     background: -moz-linear-gradient(#0186f5, #249bff);
     background: linear-gradient(#0186f5 , #249bff);
+}
+
+.btn-group i{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    color: #ff0000;
+}
+
+.delete-dialog .btn-group{
+    margin-top: 0;
 }
 
 .top-info .quit-button{

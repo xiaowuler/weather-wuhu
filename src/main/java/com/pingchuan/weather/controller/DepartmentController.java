@@ -54,6 +54,36 @@ public class DepartmentController {
 
        return list;
     }
+
+    @PostMapping("/RegisterDepartment")
+    public List<DepartmentGradeDTO> RegisterDepartment(){
+        List<DepartmentGradeDTO> list=new ArrayList<>();
+        for(Department province:departmentService.findAllProvince()){
+            DepartmentGradeDTO depart=new DepartmentGradeDTO();
+            depart.setId(province.getDepartId());
+            depart.setText(province.getDepartName());
+            List<DepartmentGradeDTO> cities=new ArrayList<>();
+            for (Department city:departmentService.findAllCity()){
+                DepartmentGradeDTO cityDto=new DepartmentGradeDTO();
+                cityDto.setText(city.getDepartName());
+                cityDto.setId(city.getDepartId());
+                cities.add(cityDto);
+                depart.setChildren(cities);
+                List<DepartmentGradeDTO> counties=new ArrayList<>();
+                for (Department county:departmentService.findAllCounty(city.getDepartId())) {
+                    DepartmentGradeDTO countyDto=new DepartmentGradeDTO();
+                    countyDto.setId(county.getDepartId());
+                    countyDto.setText(county.getDepartName());
+                    counties.add(countyDto);
+                    cityDto.setChildren(counties);
+                }
+            }
+            list.add(depart);
+        }
+
+        return list;
+    }
+
     @PostMapping("/findAllByParentDepartId")
     public List<Department> findAllByParentDepartId(int parentDepartId){
         return departmentService.findAllByParentDepartId(parentDepartId);

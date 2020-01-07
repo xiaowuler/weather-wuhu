@@ -135,7 +135,13 @@ var App = function () {
             success: function (data) {
                 this.ShortDepartment.Reload(data);
                 this.ShortDepartment.ShowDepartmentTable(data);
-            }.bind(this)
+            }.bind(this),
+            beforeSend: function () {
+                $('#loading').show();
+            }.bind(this),
+            complete: function () {
+                $('#loading').remove();
+            }
         });
     };
 

@@ -260,6 +260,9 @@ drop-down .textbox{
     display: none;
 }
 
+.score{
+    height: 400px;
+}
 .query-btn{
     width: 60px;
     display: block;
@@ -311,4 +314,90 @@ drop-down .textbox{
 
 .tree-collapsed {
     background: url('../images/tree_icons.png') no-repeat 0px 0px;
+}
+
+.loading{
+    width: 170px;
+    margin: 0 auto;
+    padding-top: 117px;
+    text-align: center;
+    display: none;
+}
+
+.load-animate {
+    width: 70px;
+    display: flex;
+    margin: 10px auto 0 auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.animate {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #000000;
+}
+
+.animate:nth-child(1){
+    animation: pulse .4s ease 0s infinite alternate;
+    -webkit-animation: pulse .4s ease 0s infinite alternate;
+}
+
+.animate:nth-child(2) {
+    animation: pulse .4s ease .2s infinite alternate;
+    -webkit-animation: pulse .4s ease .2s infinite alternate;
+}
+
+.animate:nth-child(3) {
+    animation: pulse .4s ease .4s infinite alternate;
+    -webkit-animation: pulse .4s ease .4s infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: .25;
+        transform: scale(.75);
+    }
+}
+
+@-moz-keyframes pulse {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: .25;
+        transform: scale(.75);
+    }
+}
+
+@-webkit-keyframes pulse {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: .25;
+        transform: scale(.75);
+    }
+}
+
+@-o-keyframes pulse {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: .25;
+        transform: scale(.75);
+    }
 }

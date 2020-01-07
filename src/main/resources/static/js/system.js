@@ -147,16 +147,18 @@ var App = function () {
             ]],
             onBeforeLoad: this.OnUserTableGridBeforeLoad.bind(this),
             onClickRow: this.OnClickRow.bind(this),
-            onLoadSuccess: function (data) {
-                this.UserTable.datagrid('selectRow', 0);
-                var selected = this.UserTable.datagrid('getSelected');
-                if (selected.state === 1){
-                    $('.audit-state i').css({'width': 90,'left':0,'display':'block'});
-                } else {
-                    $('.audit-state i').css({'width': 105,'left':90,'display':'block'});
-                }
-            }.bind(this)
+            onLoadSuccess: this.OnUserTableGridSuccess.bind(this)
         });
+    };
+
+    this.OnUserTableGridSuccess = function () {
+        this.UserTable.datagrid('selectRow', 0);
+        var selected = this.UserTable.datagrid('getSelected');
+        if (selected.state === 1){
+            $('.audit-state i').css({'width': 90,'left':0,'display':'block'});
+        } else {
+            $('.audit-state i').css({'width': 105,'left':90,'display':'block'});
+        }
     };
 
     this.OnUserTableGridBeforeLoad = function () {
@@ -240,17 +242,27 @@ var App = function () {
         $('#edit-department').combotree("setValue", selected.departmentId);
     };
 
+    this.SetDeleteDialog = function () {
+        var dialog = $('.delete-dialog');
+        dialog.width($('#name').width() + 235);
+        dialog.css({'marginLeft': -((dialog.width() + 30) / 2)})
+    };
+
     this.ShowDeleteDialog = function () {
         $('.delete-dialog').show();
         $(".bg").show();
 
         var selected = $('#system-table').datagrid('getSelected');
         $('#name').text(selected.name);
+        this.SetDeleteDialog();
     };
 
     this.ShowResetDialog = function () {
         $('.reset-dialog').show();
         $(".bg").show();
+        $('#reset-msg').hide();
+        $('.reset-password').val('');
+        $('.reset-password').css({ 'borderColor': '#e0e0e0' });
     };
 
     this.HideDialog = function (event) {
@@ -373,8 +385,20 @@ var App = function () {
         var selected = this.UserTable.datagrid('getSelected');
         var password = $("#password-one").val();
         var confirmPassword = $("#password-two").val();
+        if (password.trim().length === 0) {
+            $('#password-one').css({ 'borderColor': '#ff2828' });
+            return;
+        } else
+            $('#password-one').css({ 'borderColor': '#e0e0e0' });
+
+        if (confirmPassword.trim().length === 0) {
+            $('#password-two').css({ 'borderColor': '#ff2828' });
+            return;
+        } else
+            $('#password-two').css({ 'borderColor': '#e0e0e0' });
+
         if (password !== confirmPassword){
-            alert("两次输入的密码必须一致");
+            $('#reset-msg').show();
             return;
         }
 
