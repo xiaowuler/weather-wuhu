@@ -5,8 +5,8 @@ var App = function () {
     this.Startup = function () {
         this.SetFooter();
         this.InitDepartmentCombobox('#department');
-        this.InitDepartmentCombobox('#add-department');
-        this.InitDepartmentCombobox('#edit-department');
+        this.InitDepartmentCombobox1('#add-department');
+        this.InitDepartmentCombobox1('#edit-department');
         this.InitUsernameCombobox();
         this.GetCurrentLoginName();
         this.InitUserInformationGrid();
@@ -67,6 +67,28 @@ var App = function () {
             dataType: 'json',
             async: false,
             url: '/Department/getAllDepartment',
+            success: function (data) {
+                $(id).combotree({
+                    panelHeight: 300,
+                    valueField: 'id',
+                    textField: 'text',
+                    data: data,
+                    editable: false,
+                    onLoadSuccess: function () {
+                        var status = $(id).combotree('tree').tree('getRoots');
+                        $(id).combotree('setValue',status[0].id);
+                    }
+                });
+            }.bind(this)
+        });
+    };
+
+    this.InitDepartmentCombobox1 = function (id) {
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            async: false,
+            url: '/Department/RegisterDepartment',
             success: function (data) {
                 $(id).combotree({
                     panelHeight: 300,
@@ -414,7 +436,6 @@ var App = function () {
             },
             url: 'User/updatePasswordById',
             success: function (data) {
-                console.log(data);
                 this.ReloadTable1();
                 this.ShowPromptMessage(data);
             }.bind(this)
@@ -426,7 +447,7 @@ var App = function () {
             loginName: $('#login-account').val(),
             loginPwd: $('#password').val(),
             name: $('#add-name').val(),
-            departId: parseInt($('#add-department').combotree('getValue'))
+            departId: parseInt($('#add-department').combotree('getValue')),
         }
     };
 };

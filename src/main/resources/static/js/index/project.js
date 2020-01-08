@@ -196,7 +196,7 @@ var Project = function (parent) {
             $('#red').append(param.format(data.redWarningType.correctRate, data.redWarningType.hitRate, data.redWarningType.emptyReportRate, data.redWarningType.missingReportRate, data.redWarningType.t1, data.redWarningType.t2, data.redWarningType.t3));
 
         if (data.levelWarningType !== null)
-        $('#all').append(param.format(data.levelWarningType.correctRate, data.levelWarningType.hitRate, data.levelWarningType.emptyReportRate, data.levelWarningType.missingReportRate, data.levelWarningType.t1, data.levelWarningType.t2, data.levelWarningType.t3));
+            $('#all').append(param.format(data.levelWarningType.correctRate, data.levelWarningType.hitRate, data.levelWarningType.emptyReportRate, data.levelWarningType.missingReportRate, data.levelWarningType.t1, data.levelWarningType.t2, data.levelWarningType.t3));
 
         if (data.noLevelWarningType !== null)
             $('#no-level').append(param.format(data.noLevelWarningType.correctRate, data.noLevelWarningType.hitRate, data.noLevelWarningType.emptyReportRate, data.noLevelWarningType.missingReportRate, data.noLevelWarningType.t1, data.noLevelWarningType.t2, data.noLevelWarningType.t3));
